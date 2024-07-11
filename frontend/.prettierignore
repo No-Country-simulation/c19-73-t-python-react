@@ -1,0 +1,11 @@
+# Ignore artifacts:
+build
+coverage
+package-lock.json
+public
+node_modules
+.storybook
+*.yml
+.k8s/
+# Ignore all HTML files:
+**/*.html

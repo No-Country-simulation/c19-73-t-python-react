@@ -1,4 +1,4 @@
-import { ThemesTester } from "./components/ui/themes-tester";
+import { ThemesTester } from './components/ui/themes-tester';
 
 function App() {
   return (
