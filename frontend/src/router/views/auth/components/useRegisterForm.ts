@@ -1,4 +1,5 @@
 import { useForm } from 'react-hook-form';
+import { isValidPhoneNumber } from 'react-phone-number-input';
 import { useSubmit } from 'react-router-dom';
 
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -20,12 +21,25 @@ export const useRegisterForm = () => {
   const submit = useSubmit();
   const formSchema = z
     .object({
-      email: z.string().email(),
-      password: z.string().min(6).max(50),
-      confirmPassword: z.string().min(6).max(50),
-      phone: z.string(),
-      address: z.string(),
-      displayName: z.string().min(6).max(50),
+      email: z.string().email('Correo electronico invalido'),
+      password: z
+        .string()
+        .min(6, 'Contraseña debe ser mayor a 6 caracteres')
+        .max(50, 'Contraseña debe ser menor a 50 caracteres'),
+      confirmPassword: z
+        .string()
+        .min(6, 'Contraseña debe ser mayor a 6 caracteres')
+        .max(50, 'Contraseña debe ser menor a 50 caracteres'),
+      phone: z
+        .string()
+        .refine(isValidPhoneNumber, { message: 'Número teléfonico no válido' }),
+      address: z.string({
+        required_error: 'La dirección es requerida',
+      }),
+      displayName: z
+        .string()
+        .min(6, 'Nombre debe ser mayor a 6 caracteres')
+        .max(50, 'Nombre debe ser menor a 50 caracteres'),
     })
     .superRefine(({ password, confirmPassword }, ctx) => {
       if (confirmPassword !== password) {

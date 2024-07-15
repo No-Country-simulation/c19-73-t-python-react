@@ -10,6 +10,7 @@ import {
   FormMessage,
 } from '../../../../components/ui/form';
 import { Input } from '../../../../components/ui/input';
+import { PhoneInput } from '../../../../components/ui/phone-input';
 import { useRegisterForm } from './useRegisterForm';
 
 export const RegisterForm = () => {
@@ -24,7 +25,7 @@ export const RegisterForm = () => {
   return (
     <div>
       <Form {...form}>
-        <form className='flex flex-col gap-3 mt-6'>
+        <form className='mt-6 flex flex-col gap-3'>
           <FormField
             control={form.control}
             name='displayName'
@@ -45,7 +46,7 @@ export const RegisterForm = () => {
               <FormItem>
                 <FormLabel>Teléfono</FormLabel>
                 <FormControl>
-                  <Input {...field} />
+                  <PhoneInput {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -105,7 +106,7 @@ export const RegisterForm = () => {
           />
         </form>
       </Form>
-      <div className='flex my-4 md:justify-end'>
+      <div className='my-4 flex md:justify-end'>
         <Button
           type='submit'
           className='w-full rounded-full md:w-auto'
