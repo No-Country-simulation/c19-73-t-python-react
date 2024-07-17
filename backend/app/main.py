@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from backend.app.routes import administrator, user, seller
+from app.routes import administrator, user, seller
 
 app = FastAPI()
 
