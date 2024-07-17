@@ -3,13 +3,13 @@ from mysql.connector import Error
 from dotenv import load_dotenv
 import os
 
-# Cargar variables de entorno desde el archivo .env
+# Load environment variables from file .env
 load_dotenv()
 
-def crear_conexion():
+def create_connection_db():
     conexion = None
     try:
-        # Obtener valores desde el archivo .env
+        # Get values ​​from file .env
         host_name = os.getenv("DB_HOST")
         user_name = os.getenv("DB_USER")
         user_password = os.getenv("DB_PASSWORD")
@@ -21,10 +21,10 @@ def crear_conexion():
             passwd=user_password,
             database=db_name
         )
-        print("Conexión a MySQL exitosa")
+        print("Connection to MySQL successful")
     except Error as e:
-        print(f"Error al conectar a MySQL: {e}")
+        print(f"Error connecting to MySQL: {e}")
     return conexion
 
-# Crear la conexión
-conexion = crear_conexion()
+# create database connection
+conexion = create_connection_db()

@@ -84,14 +84,21 @@ CREATE TABLE pedidos (
 		id_usuario INT NOT NULL,
 		id_tienda INT NOT NULL,
 		id_producto INT NOT NULL,
+        id_estado_pedido INT NOT NULL,
         cantidad INT NOT NULL,
         fecha_y_hora VARCHAR(256) NOT NULL,
         total INT NOT NULL,
         FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario),
         FOREIGN KEY (id_tienda) REFERENCES tiendas(id_tienda),
-        FOREIGN KEY (id_producto) REFERENCES productos(id_producto)
+        FOREIGN KEY (id_producto) REFERENCES productos(id_producto),
+        FOREIGN KEY (id_estado_pedido) REFERENCES estados_pedidos(id_estado_pedido)
 );
 
+DROP TABLE IF EXISTS estados_pedidos;
+CREATE TABLE estados_pedidos (
+		id_estado_pedido INT AUTO_INCREMENT PRIMARY KEY,
+        nombre_estado VARCHAR(256) NOT NULL
+);
 
 ---------------- DELETE ALL TABLES IN THIS ORDER -------------------
 
