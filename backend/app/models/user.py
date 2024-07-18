@@ -5,6 +5,7 @@ class UserBase(BaseModel):
     telefono: str
     direccion: str
     correo: str
+    rol_id: int
 
 class UserCreate(UserBase):
     contrasenna: str
