@@ -9,12 +9,12 @@ load_dotenv()
 def create_connection_db():
     conexion = None
     try:
-        # Get values ​​from file .env
+        # Get values from file .env
         host_name = os.getenv("DB_HOST")
         user_name = os.getenv("DB_USER")
         user_password = os.getenv("DB_PASSWORD")
         db_name = os.getenv("DB_NAME")
-        
+
         conexion = mysql.connector.connect(
             host=host_name,
             user=user_name,
@@ -26,5 +26,9 @@ def create_connection_db():
         print(f"Error connecting to MySQL: {e}")
     return conexion
 
-# create database connection
-conexion = create_connection_db()
+def get_db():
+    conexion = create_connection_db()
+    try:
+        yield conexion
+    finally:
+        conexion.close()
