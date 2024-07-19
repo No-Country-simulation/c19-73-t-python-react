@@ -1,8 +1,9 @@
-from fastapi import HTTPException, status, Depends
-from app.models.user import UserCreate, User
+from fastapi import HTTPException, status, Depends, HTTPException
+from app.models.user import UserCreate, User, UserUpdate
 from app.db.db_conexion import get_db
 from app.utils.security import get_password_hash, verify_password
 from app.auth.jwt_handler import create_access_token
+import mysql.connector
 
 def register_user(user_in: UserCreate, db = Depends(get_db)):
     cursor = db.cursor()
@@ -44,3 +45,28 @@ def login(correo: str, contrasenna: str, db = Depends(get_db)):
         "rol_id": db_user["rol_id"]
         })
     return {"access_token": access_token, "token_type": "bearer"}
+
+
+def update_profile(user_update: UserUpdate, current_user: dict, db: mysql.connector.connect):
+    cursor = db.cursor(dictionary=True)
+    update_data = user_update.dict(exclude_unset=True)
+    
+    if 'contrasenna' in update_data:
+        update_data['contrasenna'] = get_password_hash(update_data['contrasenna'])
+    
+    for key, value in update_data.items():
+        query = f"UPDATE usuarios SET {key} = %s WHERE id_usuario = %s"
+        cursor.execute(query, (value, current_user['id_usuario']))
+    
+    db.commit()
+    cursor.close()
+    
+    cursor = db.cursor(dictionary=True)
+    cursor.execute("SELECT * FROM usuarios WHERE id_usuario = %s", (current_user['id_usuario'],))
+    updated_user = cursor.fetchone()
+    cursor.close()
+    
+    if not updated_user:
+        raise HTTPException(status_code=404, detail="User not found")
+    
+    return updated_user
