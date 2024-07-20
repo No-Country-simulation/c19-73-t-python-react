@@ -7,6 +7,7 @@ import {
 import { ThemesTester } from '../components/ui/themes-tester';
 import { registerUserAction } from './actions/auth';
 import { LayoutAuth, LoginPage, RegisterPage } from './views/auth';
+import { Menu } from '../components/menu';
 
 export const Router = () => {
   /**
@@ -32,6 +33,10 @@ export const Router = () => {
           action: registerUserAction(),
         },
       ],
+    },
+    {
+      path: 'menu',
+      element: <Menu />,
     },
     {
       path: '*',
