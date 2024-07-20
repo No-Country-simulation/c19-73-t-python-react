@@ -21,8 +21,8 @@ export const registerUserAction =
       startRegisterUser({
         address: formData.address.toString(),
         email: formData.email.toString(),
-        password: formData.address.toString(),
-        displayName: formData.password.toString(),
+        password: formData.password.toString(),
+        displayName: formData.displayName.toString(),
         phone: formData.phone.toString(),
       }),
     );
