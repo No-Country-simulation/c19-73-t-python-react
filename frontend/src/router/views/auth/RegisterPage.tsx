@@ -2,6 +2,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { Button } from '../../../components/ui/button';
 import { RegisterForm } from './components/RegisterForm';
+import { Menu } from '../../../components/menu';
 
 export const RegisterPage = () => {
   /**
@@ -11,6 +12,9 @@ export const RegisterPage = () => {
   const navigate = useNavigate();
   return (
     <>
+    <header>
+      <Menu></Menu>
+    </header>
       <div className='w-full p-6 m-4 max-w-prose rounded-xl bg-primary text-primary-foreground md:hidden'>
         <h1 className='text-5xl'>Registrate</h1>
         <RegisterForm />
@@ -23,8 +27,7 @@ export const RegisterPage = () => {
         <div className='flex flex-col justify-center w-3/6 gap-4 p-6 align-middle'>
           <h2 className='text-2xl'>¿Ya posees una cuenta?</h2>
           <p>
-            Para poder realizar compras y revisar sus pedidos es esencial que
-            posea una cuenta en esta plataforma.
+          Inicia sesión para comprar y vender artesanías únicas, y gestionar tus pedidos fácilmente.
           </p>
           <div className='flex justify-end'>
             <Button
