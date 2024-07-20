@@ -7,6 +7,7 @@ import {
 import { ThemesTester } from '../components/ui/themes-tester';
 import { registerUserAction } from './actions/auth';
 import { LayoutAuth, LoginPage, RegisterPage } from './views/auth';
+import { LayoutMain } from './views/main/Layout';
 
 export const Router = () => {
   /**
@@ -16,7 +17,13 @@ export const Router = () => {
   const router = createBrowserRouter([
     {
       path: '/',
-      element: <ThemesTester />,
+      element: <LayoutMain />,
+      children: [
+        {
+          index: true,
+          element: <ThemesTester />,
+        },
+      ],
     },
     {
       path: 'auth',

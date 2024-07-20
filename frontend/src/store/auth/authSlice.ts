@@ -28,9 +28,19 @@ const initialState: AuthState = {
   errorMessage: null,
 };
 
+const initialStateLogged: AuthState = {
+  status: 'authenticated',
+  uid: '1',
+  displayName: 'John Doe',
+  email: 'john@doe.com',
+  phone: '+50378724055',
+  address: 'BINAES',
+  errorMessage: null,
+};
+
 export const authSlice = createSlice({
   name: 'auth',
-  initialState,
+  initialState: initialState,
   reducers: {
     login: (
       state,
