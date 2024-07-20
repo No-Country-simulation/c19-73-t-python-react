@@ -18,29 +18,29 @@ export interface AuthState {
   errorMessage: string | null;
 }
 
-const initialState: AuthState = {
-  status: 'checking',
-  uid: null,
-  displayName: null,
-  email: null,
-  phone: null,
-  address: null,
-  errorMessage: null,
-};
-
-// const initialStateLogged: AuthState = {
-//   status: 'authenticated',
-//   uid: '1',
-//   displayName: 'John Doe',
-//   email: 'john@doe.com',
-//   phone: '+50378724055',
-//   address: 'BINAES',
+// const initialState: AuthState = {
+//   status: 'checking',
+//   uid: null,
+//   displayName: null,
+//   email: null,
+//   phone: null,
+//   address: null,
 //   errorMessage: null,
 // };
 
+const initialStateLogged: AuthState = {
+  status: 'authenticated',
+  uid: '1',
+  displayName: 'John Doe',
+  email: 'john@doe.com',
+  phone: '+50378724055',
+  address: 'BINAES',
+  errorMessage: null,
+};
+
 export const authSlice = createSlice({
   name: 'auth',
-  initialState: initialState,
+  initialState: initialStateLogged,
   reducers: {
     login: (
       state,
