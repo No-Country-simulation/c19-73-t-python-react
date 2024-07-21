@@ -11,3 +11,10 @@ class UserCreate(BaseModel):
 class UserLogin(BaseModel):
     correo: str
     contrasenna: str
+
+class UserUpdate(BaseModel):
+    nombre: str
+    telefono: str
+    direccion: str
+    correo: EmailStr
+    contrasenna: str
