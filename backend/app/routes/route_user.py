@@ -1,11 +1,15 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, Depends
+from app.auth.auth import get_current_user
+from app.models.user import UserUpdate
+from app.db.db_conexion import get_db
+from app.controllers.user_controller import update_user
 
 router = APIRouter()
 
-# empoint para actualizar perfil de usuario.
-@router.put("/update_profile")
-async def put_update_profile():
-    pass
+# Endpoint para actualizar perfil de usuario
+@router.put("/update_profile", response_model=dict)
+async def update_profile(user_update: UserUpdate, current_user: dict = Depends(get_current_user), db: any = Depends(get_db)):
+    return update_user(user_update, current_user, db)
 
 # empoint para crear pedidos.
 @router.post("/create_orders")
