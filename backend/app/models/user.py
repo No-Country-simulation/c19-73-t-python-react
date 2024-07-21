@@ -18,3 +18,6 @@ class UserUpdate(BaseModel):
     direccion: str
     correo: EmailStr
     contrasenna: str
+
+class UserRoleUpdate(BaseModel):
+    new_role: int
