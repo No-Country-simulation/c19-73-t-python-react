@@ -51,23 +51,6 @@ app.include_router(route_seller.router, tags=["Seller (User)"])
 app.include_router(route_store.router, tags=["Store"])
 app.include_router(route_administrator.router, tags=["Administrator (User)"])
 
-"""
-# Asegúrate de incluir otras rutas
-app.include_router(route_user.router)
-app.include_router(route_seller.router)
-app.include_router(route_store.router)
-app.include_router(route_administrator.router)
-
-"""
-
-"""
-# rutas protegidas que contienen empoints que seran usason solo si el usuario inicio sesion
-app.include_router(route_user.router, prefix="/user", tags=["User"])
-app.include_router(route_seller.router, prefix="/seller", tags=["Seller (User)"])
-app.include_router(route_store.router, prefix="/store", tags=["Store"])
-app.include_router(route_administrator.router, prefix="/administrator", tags=["Administrator (User)"])
-
-"""
 
 if __name__ == "__main__":
     import uvicorn
