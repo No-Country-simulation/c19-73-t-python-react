@@ -1,6 +1,6 @@
 import traceback
 from fastapi import HTTPException, status
-from app.models.user import UserCreate, UserUpdate
+from app.models.user import UserCreate, UserUpdate, UserRoleUpdate
 from app.utils.security import hash_password
 from mysql.connector import Error
 
@@ -59,3 +59,25 @@ def update_user(user_update: UserUpdate, current_user: dict, db):
         raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=str(e))
     finally:
         cursor.close()
+
+def update_user_role(role_update: UserRoleUpdate, current_user: dict, db):
+    cursor = db.cursor()
+    try:
+        print(f"Datos recibidos para cambiar rol: nuevo_rol='{role_update.new_role}'")
+        print(f"Usuario actual: {current_user}")
+        
+        cursor.execute("""
+            UPDATE usuarios
+            SET rol_id = %s
+            WHERE id_usuario = %s
+        """, (role_update.new_role, current_user['id_usuario']))
+        
+        db.commit()
+        print("Cambio de rol realizado correctamente")
+        return {"message": "User role updated successfully"}
+    except Exception as e:
+        db.rollback()
+        print(f"Error al cambiar el rol: {e}")
+        raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=str(e))
+    finally:
+        cursor.close() 
