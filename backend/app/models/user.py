@@ -7,3 +7,7 @@ class UserCreate(BaseModel):
     correo: EmailStr
     contrasenna: str
     rol_id: int
+
+class UserLogin(BaseModel):
+    correo: str
+    contrasenna: str
