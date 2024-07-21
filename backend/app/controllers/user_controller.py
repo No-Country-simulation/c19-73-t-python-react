@@ -36,8 +36,7 @@ def update_user(user_update: UserUpdate, current_user: dict, db):
     try:
         hashed_password = hash_password(user_update.contrasenna)
         print(f"Datos recibidos para actualizar: nombre='{user_update.nombre}' telefono='{user_update.telefono}' direccion='{user_update.direccion}' correo='{user_update.correo}' contrasenna='{user_update.contrasenna}'")
-        print(f"Usuario actual: {current_user}")
-        
+
         cursor.execute("""
             UPDATE usuarios
             SET nombre = %s, telefono = %s, direccion = %s, correo = %s, contrasenna = %s

@@ -14,7 +14,6 @@ oauth2_scheme = OAuth2PasswordBearer(tokenUrl="login")
 
 
 def get_current_user(token: str = Depends(oauth2_scheme), db: any = Depends(get_db)):
-    print(f"Token recibido: {token}")
     payload = decode_access_token(token)
     if payload is None:
         raise HTTPException(
@@ -23,7 +22,6 @@ def get_current_user(token: str = Depends(oauth2_scheme), db: any = Depends(get_
             headers={"WWW-Authenticate": "Bearer"},
         )
     user_id: int = payload.get("sub")
-    print(f"user_id extraído del token: {user_id}")
     cursor = db.cursor(dictionary=True)
     cursor.execute("SELECT * FROM usuarios WHERE id_usuario = %s", (user_id,))
     user = cursor.fetchone()

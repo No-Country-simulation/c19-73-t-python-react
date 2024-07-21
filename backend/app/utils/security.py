@@ -32,18 +32,11 @@ def create_access_token(data: dict, expires_delta: Optional[timedelta] = None):
 
 def decode_access_token(token: str):
     try:
-        print(f"Decodificando token: {token}")
         payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
-        print(f"Payload decodificado: {payload}")
         return payload
     except JWTError as e:
         print(f"Error al decodificar el token: {e}")
         return None
 
-
-# utils/security.py
-print("SECRET_KEY:", SECRET_KEY)
-print("ALGORITHM:", ALGORITHM)
-print("ACCESS_TOKEN_EXPIRE_MINUTES:", ACCESS_TOKEN_EXPIRE_MINUTES)
 
 
