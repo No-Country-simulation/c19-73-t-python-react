@@ -34,6 +34,7 @@ def create_user(user: UserCreate, db):
 def update_user(user_update: UserUpdate, current_user: dict, db):
     cursor = db.cursor()
     try:
+        hashed_password = hash_password(user_update.contrasenna)
         print(f"Datos recibidos para actualizar: nombre='{user_update.nombre}' telefono='{user_update.telefono}' direccion='{user_update.direccion}' correo='{user_update.correo}' contrasenna='{user_update.contrasenna}'")
         print(f"Usuario actual: {current_user}")
         
@@ -41,7 +42,14 @@ def update_user(user_update: UserUpdate, current_user: dict, db):
             UPDATE usuarios
             SET nombre = %s, telefono = %s, direccion = %s, correo = %s, contrasenna = %s
             WHERE id_usuario = %s
-        """, (user_update.nombre, user_update.telefono, user_update.direccion, user_update.correo, user_update.contrasenna, current_user['id_usuario']))
+        """, (
+            user_update.nombre, 
+            user_update.telefono, 
+            user_update.direccion, 
+            user_update.correo, 
+            hashed_password, 
+            current_user['id_usuario']
+        ))
         
         db.commit()
         print("Actualización realizada correctamente")
