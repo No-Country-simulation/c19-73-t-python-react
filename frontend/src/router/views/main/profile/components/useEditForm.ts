@@ -17,12 +17,26 @@ export const useEditForm = () => {
       email: z.string().email('Correo electronico invalido'),
       password: z
         .string()
-        .min(6, 'Contraseña debe ser mayor a 6 caracteres')
-        .max(50, 'Contraseña debe ser menor a 50 caracteres'),
+        .optional()
+        .transform((val) => val || '')
+        .refine(
+          (val) => val.length === 0 || (val.length >= 6 && val.length <= 50),
+          {
+            message:
+              'Contraseña debe ser mayor a 6 caracteres y menor a 50 caracteres',
+          },
+        ),
       confirmPassword: z
         .string()
-        .min(6, 'Contraseña debe ser mayor a 6 caracteres')
-        .max(50, 'Contraseña debe ser menor a 50 caracteres'),
+        .optional()
+        .transform((val) => val || '')
+        .refine(
+          (val) => val.length === 0 || (val.length >= 6 && val.length <= 50),
+          {
+            message:
+              'Contraseña debe ser mayor a 6 caracteres y menor a 50 caracteres',
+          },
+        ),
       phone: z
         .string()
         .refine(isValidPhoneNumber, { message: 'Número teléfonico no válido' }),
@@ -48,7 +62,7 @@ export const useEditForm = () => {
     submit(
       { ...values, uid },
       {
-        method: 'PUT',
+        method: 'POST',
       },
     );
   };

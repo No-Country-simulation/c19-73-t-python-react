@@ -6,6 +6,7 @@ import {
 
 import { ThemesTester } from '../components/ui/themes-tester';
 import { registerUserAction } from './actions/auth';
+import { editUserAction } from './actions/main';
 import { LayoutAuth, LoginPage, RegisterPage } from './views/auth';
 import { EditProfilePage, LayoutMain, MyProfilePage } from './views/main';
 
@@ -33,6 +34,7 @@ export const Router = () => {
             {
               path: 'edit',
               element: <EditProfilePage />,
+              action: editUserAction(),
             },
           ],
         },
