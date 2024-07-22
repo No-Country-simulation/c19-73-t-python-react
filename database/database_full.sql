@@ -107,6 +107,11 @@ CREATE TABLE pedidos (
         FOREIGN KEY (id_estado_pedido) REFERENCES estados_pedidos(id_estado_pedido)
 );
 
+------------------------ ADD STORE STATES --------------------------
+INSERT INTO estados_tienda (nombre_estado_tienda) VALUES('Activo'),('Inactivo'),('Pendiente de aprobación'),('Suspendido');
+
+-------------------------- ADD USER ROLES --------------------------
+INSERT INTO rol (nombre) VALUES('admin'),('user'),('seller');
 
 ---------------- DELETE ALL TABLES IN THIS ORDER -------------------
 
