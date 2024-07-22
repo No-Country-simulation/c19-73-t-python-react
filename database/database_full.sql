@@ -60,7 +60,7 @@ CREATE TABLE tiendas (
 DROP TABLE IF EXISTS categorias_productos;
 CREATE TABLE categorias_productos (
 		id_categoria_producto INT AUTO_INCREMENT PRIMARY KEY,
-        nombre_categoría_producto VARCHAR(256) NOT NULL
+        nombre_categoria_producto VARCHAR(256) NOT NULL
 );
 
 DROP TABLE IF EXISTS productos;
