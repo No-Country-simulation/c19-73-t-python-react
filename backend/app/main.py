@@ -1,4 +1,4 @@
-from fastapi import FastAPI, Depends, Response, HTTPException
+from fastapi import FastAPI, Depends, Response
 from fastapi.middleware.cors import CORSMiddleware
 from app.routes import route_user, route_seller, route_store, route_administrator
 from fastapi.security import OAuth2PasswordBearer
