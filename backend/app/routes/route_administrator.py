@@ -1,11 +1,14 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, Depends
+from app.auth.auth import get_current_user
+from app.db.db_conexion import get_db
+from app.models.category import CategoriaProductoCreate
+from app.controllers.category_controller import create_category
 
 router = APIRouter()
 
-# empoint para actualizar perfil de tienda.
 @router.post("/create_categories_products")
-async def post_create_categories_products():
-    pass
+async def create_categories_products(category: CategoriaProductoCreate, current_user: dict = Depends(get_current_user), db: any = Depends(get_db)):
+    return create_category(category, current_user, db)
 
 # empoint para actualizar estado de la tienda tienda.
 @router.put("/update_state_store")
