@@ -1,3 +1,4 @@
+from fastapi import HTTPException, status
 from passlib.context import CryptContext
 from jose import JWTError, jwt
 from datetime import datetime, timedelta
@@ -37,6 +38,13 @@ def decode_access_token(token: str):
     except JWTError as e:
         print(f"Error al decodificar el token: {e}")
         return None
+    
+def validate_admin_role(user: dict):
+    if user['rol_id'] != 1:  # Asumiendo que 1 es el rol de 'admin'
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="User does not have admin role"
+        )
 
 
 
