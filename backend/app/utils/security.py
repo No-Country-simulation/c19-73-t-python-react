@@ -46,5 +46,21 @@ def validate_admin_role(user: dict):
             detail="User does not have admin role"
         )
 
+def validate_seller_role(user: dict):
+    if user['rol_id'] != 3:  # Asumiendo que 3 es el rol de 'seller'
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="User does not have seller role"
+        )
 
+def validate_store_ownership(store_id: int, user_id: int, db: any):
+    cursor = db.cursor(dictionary=True)
+    cursor.execute("SELECT id_usuario FROM tiendas WHERE id_tienda = %s", (store_id,))
+    store = cursor.fetchone()
+    cursor.close()
+    if store is None or store['id_usuario'] != user_id:
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="User does not own this store"
+        )
 
