@@ -23,3 +23,23 @@ const Label = React.forwardRef<
 Label.displayName = LabelPrimitive.Root.displayName;
 
 export { Label };
+
+const labelH1Variants = cva(
+  'text-4xl font-bold leading-tight pb-5 text-center peer-disabled:cursor-not-allowed peer-disabled:opacity-70',
+);
+
+const LabelH1 = React.forwardRef<
+  React.ElementRef<typeof LabelPrimitive.Root>,
+  React.ComponentPropsWithoutRef<typeof LabelPrimitive.Root> &
+    VariantProps<typeof labelH1Variants>
+>(({ className, ...props }, ref) => (
+  <LabelPrimitive.Root
+    ref={ref}
+    className={cn(labelH1Variants(), className)}
+    {...props}
+  />
+));
+LabelH1.displayName = LabelPrimitive.Root.displayName;
+
+export { LabelH1 };
+
