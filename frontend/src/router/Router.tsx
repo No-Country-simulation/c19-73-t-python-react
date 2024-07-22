@@ -7,7 +7,7 @@ import {
 import { ThemesTester } from '../components/ui/themes-tester';
 import { registerUserAction } from './actions/auth';
 import { LayoutAuth, LoginPage, RegisterPage } from './views/auth';
-import { LayoutMain } from './views/main/Layout';
+import { EditProfilePage, LayoutMain, MyProfilePage } from './views/main';
 
 export const Router = () => {
   /**
@@ -22,6 +22,19 @@ export const Router = () => {
         {
           index: true,
           element: <ThemesTester />,
+        },
+        {
+          path: 'profile',
+          children: [
+            {
+              index: true,
+              element: <MyProfilePage />,
+            },
+            {
+              path: 'edit',
+              element: <EditProfilePage />,
+            },
+          ],
         },
       ],
     },
