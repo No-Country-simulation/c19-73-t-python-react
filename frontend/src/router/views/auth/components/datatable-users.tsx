@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import DatatablePagination from '../../../../components/datatable-pagination';
-import { Input, InputSearch } from '../../../../components/ui/input';
+import {InputSearch } from '../../../../components/ui/input';
 
 import {
   ColumnDef,

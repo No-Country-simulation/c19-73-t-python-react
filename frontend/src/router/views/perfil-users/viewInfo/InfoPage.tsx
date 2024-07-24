@@ -1,5 +1,5 @@
-import { useAppSelector } from '../../../store/index';
-import { Button } from "../../../components/ui/button";
+import { useAppSelector } from '../../../../store/index';
+import { Button } from "../../../../components/ui/button";
 import { useNavigate } from 'react-router-dom';
 
 export const InfoPage = () => {

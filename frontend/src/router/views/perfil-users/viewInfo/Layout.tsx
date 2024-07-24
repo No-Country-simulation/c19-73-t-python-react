@@ -1,5 +1,5 @@
 import { Outlet } from 'react-router-dom';
-import { Menu } from "../../../components/menu";
+import { Menu } from "../../../../components/menu";
 
 export const LayoutView = () => {
   /**

@@ -8,7 +8,7 @@ import { ThemesTester } from '../components/ui/themes-tester';
 import { registerUserAction } from './actions/auth';
 import { LayoutAuth, LoginPage, RegisterPage } from './views/auth';
 import { LayoutMain } from './views/main/Layout';
-import { LayoutView, InfoPage, EditInfo } from './views/viewInfo/index';
+import { LayoutView, InfoPage, EditInfo } from './views/perfil-users/viewInfo/index';
 import Users_Manage from './views/manage-users/users-manage';
 
 export const Router = () => {
