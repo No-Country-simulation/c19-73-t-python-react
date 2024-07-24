@@ -17,7 +17,7 @@ export const Menu = () => {
   const navigate = useNavigate();
 
   return (
-    <div className='flex justify-between w-full gap-2 p-2 bg-primary'>
+    <div className='flex justify-between w-full gap-2 p-2 bg-primary px-5'>
       <div>
         <img src={logo} alt='Logo' className='w-auto h-20' />
       </div>
