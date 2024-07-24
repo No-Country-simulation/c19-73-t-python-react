@@ -113,6 +113,9 @@ INSERT INTO estados_tienda (nombre_estado_tienda) VALUES('Activo'),('Inactivo'),
 -------------------------- ADD USER ROLES --------------------------
 INSERT INTO rol (nombre) VALUES('admin'),('user'),('seller');
 
+----------------------- ADD ESTADOS PEDIDOS ------------------------
+INSERT INTO estados_pedidos (nombre_estado_pedido) VALUES('Pendiente'),('En camino'),('Entregado') ,('Cancelado');
+
 ---------------- DELETE ALL TABLES IN THIS ORDER -------------------
 
 DROP TABLE IF EXISTS pedidos;
