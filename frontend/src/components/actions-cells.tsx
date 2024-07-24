@@ -12,7 +12,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '../components/ui/dialog';
-import type { usuario } from '../router/views/manage-users/user';
+import type { usuario } from '../core/user';
 import { Button } from './ui/button';
 import { Input } from './ui/input';
 import { TableCell } from './ui/table';
@@ -50,7 +50,7 @@ const ActionsCell: React.FC<ActionsCellProps> = ({ usuario }) => {
             </DialogHeader>
             <div className='grid gap-4 py-4'>
               <div className='grid grid-cols-4 items-center gap-4'>
-                <Label htmlFor='Nombre' className='col-span-1 text-right'>
+                <Label htmlFor='Nombre' className='col-span-1 text-right font-bold'>
                   Nombre
                 </Label>
                 <Label htmlFor='nombre' className='col-span-3'>
@@ -58,7 +58,7 @@ const ActionsCell: React.FC<ActionsCellProps> = ({ usuario }) => {
                 </Label>
               </div>
               <div className='grid grid-cols-4 items-center gap-4'>
-                <Label htmlFor='rolLabel' className='col-span-1 text-right'>
+                <Label htmlFor='rolLabel' className='col-span-1 text-right font-bold'>
                   Rol actual
                 </Label>
                 <Label htmlFor='rol' className='col-span-3'>

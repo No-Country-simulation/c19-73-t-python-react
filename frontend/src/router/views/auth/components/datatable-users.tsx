@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import DatatablePagination from '../../../../components/datatable-pagination';
 import {InputSearch } from '../../../../components/ui/input';
 

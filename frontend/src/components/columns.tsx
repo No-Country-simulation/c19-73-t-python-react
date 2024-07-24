@@ -1,5 +1,5 @@
 import { ColumnDef } from '@tanstack/react-table';
-import type { usuario } from '../router/views/manage-users/user';
+import type { usuario } from '../core/user';
 import ActionsCell from './actions-cells';
 
 export const columns: ColumnDef<usuario>[] = [

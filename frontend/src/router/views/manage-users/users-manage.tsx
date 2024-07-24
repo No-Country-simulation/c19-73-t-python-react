@@ -1,10 +1,7 @@
 import { useEffect, useState } from 'react';
-import { Search } from 'lucide-react';
-import { Button } from '../../../components/ui/button';
-import { InputSearch } from '../../../components/ui/input';
 import { LabelH1 } from '../../../components/ui/label';
 import Datatable_Users from '../auth/components/datatable-users';
-import { getUser } from './user';
+import { getUser } from '../../../core/user';
 import { columns } from '../../../components/columns';
 
 interface Usuario {
