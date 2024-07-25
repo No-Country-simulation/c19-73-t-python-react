@@ -12,3 +12,11 @@ class ProductoCreate(BaseModel):
 class Producto(ProductoCreate):
     id_producto: int
 
+class ProductoUpdate(BaseModel):
+    id_producto: int
+    nombre_producto: str
+    descripcion_producto: str
+    ruta_foto_principal: str
+    precio: float
+    stock: int
+
