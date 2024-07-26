@@ -1,11 +1,11 @@
 export type usuario = {
-    id_usuario: number;
+    id_usuario?: number;
     nombre: string;
     telefono: string;
     direccion: string;
     correo: string;
     contrasena: string;
-    rol_id: string;
+    rol_id?: string;
 }
 
 export async function getUser(): Promise<usuario[]>{
