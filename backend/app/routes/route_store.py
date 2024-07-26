@@ -4,7 +4,7 @@ from app.db.db_conexion import get_db
 from app.models.store import StoreUpdate
 from app.models.product import ProductoCreate, ProductoUpdate
 from app.controllers.store_controller import update_store
-from app.controllers.product_controller import create_product, update_product
+from app.controllers.product_controller import create_product, update_product, delete_product
 
 router = APIRouter()
 
@@ -24,9 +24,9 @@ async def put_update_product_store(product_update: ProductoUpdate, current_user:
     return update_product(product_update, current_user, db)
 
 # empoint para eliminar productos de la tienda.
-@router.delete("/delete_product_store")
-async def delete_delete_product_store():
-    pass
+@router.delete("/delete_product_store/{product_id}", response_model=dict)
+async def delete_product_store(product_id: int, current_user: dict = Depends(get_current_user), db: any = Depends(get_db)):
+    return delete_product(product_id, current_user, db)
 
 # empoint para ver solo productos de la tienda.
 @router.get("/see_products_store")
