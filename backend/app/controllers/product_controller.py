@@ -1,5 +1,5 @@
 from fastapi import HTTPException, status
-from app.models.product import ProductoCreate, ProductoUpdate
+from app.models.product import ProductoCreate, ProductoUpdate, SeeProduct
 from app.utils.security import validate_seller_role, validate_store_ownership
 
 def create_product(product: ProductoCreate, current_user: dict, db: any):
@@ -76,6 +76,19 @@ def delete_product(product_id: int, current_user: dict, db: any):
     except Error as e:
         print(f"Database error: {e}")
         db.rollback()
+        raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=str(e))
+    finally:
+        cursor.close()
+
+def get_products_by_store(id_tienda: int, db):
+    cursor = db.cursor(dictionary=True)
+    try:
+        cursor.execute("SELECT * FROM productos WHERE id_tienda = %s", (id_tienda,))
+        products = cursor.fetchall()
+        if not products:
+            raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="No products found for this store")
+        return [SeeProduct(**product) for product in products]
+    except Exception as e:
         raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=str(e))
     finally:
         cursor.close()
