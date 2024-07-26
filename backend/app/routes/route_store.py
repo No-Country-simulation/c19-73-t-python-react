@@ -2,9 +2,10 @@ from fastapi import APIRouter, Depends
 from app.auth.auth import get_current_user
 from app.db.db_conexion import get_db
 from app.models.store import StoreUpdate
-from app.models.product import ProductoCreate, ProductoUpdate
+from app.models.product import ProductoCreate, ProductoUpdate, SeeProduct
 from app.controllers.store_controller import update_store
-from app.controllers.product_controller import create_product, update_product, delete_product
+from app.controllers.product_controller import create_product, update_product, delete_product, get_products_by_store
+from typing import List
 
 router = APIRouter()
 
@@ -29,9 +30,9 @@ async def delete_product_store(product_id: int, current_user: dict = Depends(get
     return delete_product(product_id, current_user, db)
 
 # empoint para ver solo productos de la tienda.
-@router.get("/see_products_store")
-async def get_see_products_store():
-    pass
+@router.get("/see_products_store/{id_tienda}", response_model=List[SeeProduct])
+async def see_products_store(id_tienda: int, db: any = Depends(get_db)):
+    return get_products_by_store(id_tienda, db)
 
 # empoint para ver pedidos de la tienda
 @router.get("/see_orders_store")
