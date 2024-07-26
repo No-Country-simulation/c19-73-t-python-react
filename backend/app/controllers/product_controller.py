@@ -50,3 +50,32 @@ def update_product(product: ProductoUpdate, current_user: dict, db: any):
         raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=str(e))
     finally:
         cursor.close()
+
+def delete_product(product_id: int, current_user: dict, db: any):
+    validate_seller_role(current_user)
+    
+    cursor = db.cursor()
+    try:
+        # Verificar si el producto pertenece a una tienda del usuario
+        cursor.execute("""
+            SELECT id_tienda FROM productos WHERE id_producto = %s
+        """, (product_id,))
+        result = cursor.fetchone()
+        if not result:
+            raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Producto no encontrado")
+        
+        id_tienda = result[0]
+        validate_store_ownership(id_tienda, current_user['id_usuario'], db)
+
+        print(f"Deleting product: {product_id}")
+        cursor.execute("""
+            DELETE FROM productos WHERE id_producto = %s
+        """, (product_id,))
+        db.commit()
+        return {"message": "Producto eliminado exitosamente"}
+    except Error as e:
+        print(f"Database error: {e}")
+        db.rollback()
+        raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=str(e))
+    finally:
+        cursor.close()
