@@ -1,5 +1,5 @@
 from fastapi import HTTPException, status
-from app.models.store import StoreCreate, StoreUpdate
+from app.models.store import StoreCreate, StoreUpdate, StoreStateUpdate
 from fastapi import HTTPException, status
 from mysql.connector import Error
 
@@ -61,6 +61,28 @@ def update_store(store_update: StoreUpdate, store_id: int, user_id: int, db):
 
         return {"message": "Store updated successfully"}
     except Error as e:
+        db.rollback()
+        raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=str(e))
+    finally:
+        cursor.close()
+
+def update_store_state(id_tienda: int, state_update: StoreStateUpdate, db):
+    cursor = db.cursor()
+    try:
+        cursor.execute("SELECT * FROM tiendas WHERE id_tienda = %s", (id_tienda,))
+        store = cursor.fetchone()
+        if not store:
+            raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Store not found")
+        
+        cursor.execute("""
+            UPDATE tiendas
+            SET id_estado_tienda = %s
+            WHERE id_tienda = %s
+        """, (state_update.id_estado_tienda, id_tienda))
+        
+        db.commit()
+        return {"message": "Store state updated successfully"}
+    except Exception as e:
         db.rollback()
         raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=str(e))
     finally:
