@@ -18,7 +18,6 @@ def create_product(product: ProductoCreate, current_user: dict, db: any):
         raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Store is not active. Cannot create products.")
 
     try:
-        print(f"Creating product: id_tienda={product.id_tienda} id_categoria_producto={product.id_categoria_producto} nombre_producto='{product.nombre_producto}' descripcion_producto='{product.descripcion_producto}' precio={product.precio} stock={product.stock}")
         cursor.execute("""
             INSERT INTO productos (id_tienda, id_categoria_producto, nombre_producto, descripcion_producto, ruta_foto_principal, precio, stock)
             VALUES (%s, %s, %s, %s, %s, %s, %s)
