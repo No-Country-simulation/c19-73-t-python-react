@@ -1,3 +1,4 @@
+
 export type usuario = {
     id_usuario?: number;
     nombre: string;
@@ -5,19 +6,19 @@ export type usuario = {
     direccion: string;
     correo: string;
     contrasena: string;
-    rol_id?: string;
+    rol_id?: number;
 }
 
 export async function getUser(): Promise<usuario[]>{
     return[
         {
             id_usuario: 1,
-            nombre: "John Doe Doe Doe",
+            nombre: "John Doe Doe Doeing",
             telefono: "+1 123 456 7890",
             direccion: "123 Main St, Springfield, USA",
             correo: "john.doe@example.com",
             contrasena: "password123",
-            rol_id: "Vendedor"
+            rol_id: 1
           },
           {
             id_usuario: 2,
@@ -26,7 +27,7 @@ export async function getUser(): Promise<usuario[]>{
             direccion: "456 High St, London, UK",
             correo: "jane.smith@example.com",
             contrasena: "password456",
-            rol_id: "Administrador"
+            rol_id: 2
           },
           {
             id_usuario: 3,
@@ -35,7 +36,7 @@ export async function getUser(): Promise<usuario[]>{
             direccion: "789 Queen St, Sydney, Australia",
             correo: "emily.johnson@example.com",
             contrasena: "password789",
-            rol_id: "Comprador"
+            rol_id: 3
           }
     ]
 }
