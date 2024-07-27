@@ -18,3 +18,7 @@ class StoreUpdate(BaseModel):
     tipo_cuenta_bancaria: Optional[str]
     numero_de_cuenta: Optional[str]
     cci: Optional[str]
+
+
+class StoreStateUpdate(BaseModel):
+    id_estado_tienda: int
