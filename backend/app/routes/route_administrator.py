@@ -1,8 +1,11 @@
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, HTTPException, status
 from app.auth.auth import get_current_user
 from app.db.db_conexion import get_db
 from app.models.category import CategoriaProductoCreate
+from app.models.store import StoreStateUpdate
+from app.models.user import User
 from app.controllers.category_controller import create_category
+from app.controllers.store_controller import update_store_state
 
 router = APIRouter()
 
@@ -11,9 +14,11 @@ async def create_categories_products(category: CategoriaProductoCreate, current_
     return create_category(category, current_user, db)
 
 # empoint para actualizar estado de la tienda tienda.
-@router.put("/update_state_store")
-async def put_update_state_store():
-    pass
+@router.put("/update_state_store/{id_tienda}")
+async def update_state_store(id_tienda: int, state_update: StoreStateUpdate, db: any = Depends(get_db), current_user: User = Depends(get_current_user)):
+    if current_user["rol_id"] != 1: # Solo los administradores puedes usar este empoint
+        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Not authorized to update store state")
+    return update_store_state(id_tienda, state_update, db)
 
 # empoint para eliminar cualquier producto.
 @router.delete("/delete_product")
