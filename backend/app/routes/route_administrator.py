@@ -7,6 +7,7 @@ from app.models.user import User
 from app.controllers.category_controller import create_category
 from app.controllers.store_controller import update_store_state
 from app.controllers.product_controller import delete_product
+from app.controllers.administrator_controller import delete_store_admin
 
 router = APIRouter()
 
@@ -33,10 +34,12 @@ async def delete_product_endpoint(product_id: int, db: any = Depends(get_db), cu
     print("User authorized to delete products")  # Mensaje de depuración
     return delete_product(product_id, db)
 
-# empoint para eliminar cualquier tienda.
-@router.delete("/delete_store")
-async def delete_delete_store():
-    pass
+# Endpoint para eliminar una tienda
+@router.delete("/delete_store/{store_id}")
+async def delete_store(store_id: int, db: any = Depends(get_db), current_user: dict = Depends(get_current_user)):
+    if current_user["rol_id"] != 1:
+        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Not authorized to delete store")
+    return delete_store_admin(store_id, db)
 
 # empoint para notificar al usuario vendedor.
 @router.post("/notify_seller_user")
