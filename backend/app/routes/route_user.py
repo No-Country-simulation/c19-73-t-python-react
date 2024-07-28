@@ -26,8 +26,4 @@ async def get_see_orders():
 async def change_role(role_update: UserRoleUpdate, current_user: dict = Depends(get_current_user), db: any = Depends(get_db)):
     return update_user_role(role_update, current_user, db)
 
-# empoint para ver notificaciones.
-@router.get("/see_notifications_user")
-async def get_see_notifications_user():
-    pass
 
