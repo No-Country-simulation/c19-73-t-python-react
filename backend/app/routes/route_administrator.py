@@ -4,10 +4,11 @@ from app.db.db_conexion import get_db
 from app.models.category import CategoriaProductoCreate
 from app.models.store import StoreStateUpdate
 from app.models.user import User
+from app.models.notification import NotificationSellerCreate
 from app.controllers.category_controller import create_category
 from app.controllers.store_controller import update_store_state
 from app.controllers.product_controller import delete_product
-from app.controllers.administrator_controller import delete_store_admin
+from app.controllers.administrator_controller import delete_store_admin, notify_seller
 
 router = APIRouter()
 
@@ -42,6 +43,16 @@ async def delete_store(store_id: int, db: any = Depends(get_db), current_user: d
     return delete_store_admin(store_id, db)
 
 # empoint para notificar al usuario vendedor.
-@router.post("/notify_seller_user")
-async def post_notify_seller_user():
-    pass
+@router.post("/notification_for_sellers", summary="Notify Seller Endpoint")
+def notify_seller_endpoint(notification: NotificationSellerCreate, user_id: int, db: any = Depends(get_db), current_user: dict = Depends(get_current_user)):
+    # Verificamos que el usuario actual tenga el rol de administrador (suponiendo rol_id = 1 es admin)
+    if current_user['rol_id'] != 1:
+        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Not authorized")
+    return notify_seller(notification, db, user_id)
+
+@router.post("/notification_for_sellers/{user_id}", summary="Notify Seller Endpoint")
+def notify_seller_endpoint(user_id: int, notification: NotificationSellerCreate, db: any = Depends(get_db), current_user: dict = Depends(get_current_user)):
+    # Verificamos que el usuario actual tenga el rol de administrador (suponiendo rol_id = 1 es admin)
+    if current_user['rol_id'] != 1:
+        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Not authorized")
+    return notify_seller(notification, db, user_id)
