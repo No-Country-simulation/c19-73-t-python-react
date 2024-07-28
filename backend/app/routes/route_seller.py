@@ -15,6 +15,6 @@ async def post_create_store(store: StoreCreate, current_user: dict = Depends(get
     return create_store(store, current_user, db)
 
 # empoint para ver notificaciones del usurio vendedor.
-@router.get("/see_notifications_seller")
+@router.get("/see_notifications")
 async def get_see_notifications_seller():
     pass
