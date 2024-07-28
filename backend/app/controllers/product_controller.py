@@ -1,6 +1,8 @@
 from fastapi import HTTPException, status
 from app.models.product import ProductoCreate, ProductoUpdate, SeeProduct
 from app.utils.security import validate_seller_role, validate_store_ownership
+from typing import Dict, Any
+from mysql.connector import Error
 
 def create_product(product: ProductoCreate, current_user: dict, db: any):
     validate_seller_role(current_user)
@@ -61,7 +63,7 @@ def update_product(product: ProductoUpdate, current_user: dict, db: any):
     finally:
         cursor.close()
 
-def delete_product(product_id: int, current_user: dict, db: any):
+def delete_product_store_seller(product_id: int, current_user: dict, db: any):
     validate_seller_role(current_user)
     
     cursor = db.cursor()
@@ -99,6 +101,23 @@ def get_products_by_store(id_tienda: int, db):
             raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="No products found for this store")
         return [SeeProduct(**product) for product in products]
     except Exception as e:
+        raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=str(e))
+    finally:
+        cursor.close()
+
+def delete_product(product_id: int, db) -> Dict[str, Any]:
+    cursor = db.cursor()
+    try:
+        print(f"Attempting to delete product with ID: {product_id}")
+        cursor.execute("DELETE FROM productos WHERE id_producto = %s", (product_id,))
+        if cursor.rowcount == 0:
+            raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Product not found")
+        db.commit()
+        print(f"Product with ID: {product_id} deleted successfully")
+        return {"message": "Product deleted successfully"}
+    except Error as e:
+        db.rollback()
+        print(f"Database error: {str(e)}")
         raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=str(e))
     finally:
         cursor.close()
