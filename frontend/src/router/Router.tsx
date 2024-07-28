@@ -1,21 +1,14 @@
-import {
-  Navigate,
-  RouterProvider,
-  createBrowserRouter,
-} from 'react-router-dom';
-
+import { Navigate, RouterProvider, createBrowserRouter } from 'react-router-dom';
 import { ThemesTester } from '../components/ui/themes-tester';
 import { registerUserAction } from './actions/auth';
 import { LayoutAuth, LoginPage, RegisterPage } from './views/auth';
 import { LayoutMain } from './views/main/Layout';
 import { LayoutView, InfoPage, EditInfo } from './views/perfil-users/viewInfo/index';
 import Users_Manage from './views/manage-users/users-manage';
+import PedidosPage from './views/auth/orders/view-orders';
+import PedidoDetallePage from './views/auth/orders/view-product-orders';
 
 export const Router = () => {
-  /**
-   * Router de las diferentes rutas que son parte de la web
-   * TODO: Agregar loaders para la protección de rutas privadas
-   */
   const router = createBrowserRouter([
     {
       path: '/',
@@ -26,9 +19,9 @@ export const Router = () => {
           element: <ThemesTester />,
         },
         {
-          path:'/data',
-          element: <Users_Manage/>,
-        }
+          path: '/data',
+          element: <Users_Manage />,
+        },
       ],
     },
     {
@@ -61,8 +54,22 @@ export const Router = () => {
       ],
     },
     {
+      path: 'pedidos',
+      element: <LayoutView />,
+      children: [
+        {
+          index: true,
+          element: <PedidosPage />,
+        },
+        {
+          path: 'detalle-pedido/:id',
+          element: <PedidoDetallePage />,
+        },
+      ],
+    },
+    {
       path: '*',
-      element: <Navigate to={'/'} />,
+      element: <Navigate to="/" />,
     },
   ]);
 

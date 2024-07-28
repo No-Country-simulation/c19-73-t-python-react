@@ -32,14 +32,14 @@ export const Menu = () => {
                   <ul className="grid gap-3 p-4">
                     <li className='row-span-3'>
                       <NavigationMenuLink asChild>
-                        <Link to="viewInfo" className="flex h-full w-full select-none flex-col justify-end rounded-md p-2 no-underline outline-none focus:shadow-md hover:bg-accent hover:border-gray-500">
+                        <Link to="/viewInfo" className="flex h-full w-full select-none flex-col justify-end rounded-md p-2 no-underline outline-none focus:shadow-md hover:bg-accent hover:border-gray-500">
                           Mi perfil
                         </Link>
                       </NavigationMenuLink>
                     </li>
                     <li className='row-span-3'>
                       <NavigationMenuLink asChild>
-                        <Link to="" className="flex h-full w-full select-none flex-col justify-end rounded-md p-2 no-underline outline-none focus:shadow-md hover:bg-accent hover:border-gray-500">
+                        <Link to="/pedidos" className="flex h-full w-full select-none flex-col justify-end rounded-md p-2 no-underline outline-none focus:shadow-md hover:bg-accent hover:border-gray-500">
                           Mis pedidos
                         </Link>
                       </NavigationMenuLink>

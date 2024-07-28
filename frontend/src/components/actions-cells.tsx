@@ -6,7 +6,7 @@ import {
   DropdownMenuTrigger,
 } from '@radix-ui/react-dropdown-menu';
 import { Label } from '@radix-ui/react-label';
-import { Eye, EyeOff, SquarePen} from 'lucide-react';
+import { Eye, EyeOff, SquarePen } from 'lucide-react';
 import {
   Dialog,
   DialogContent,
@@ -21,7 +21,8 @@ import type { usuario } from '../core/user';
 import { Button } from './ui/button';
 import { Input } from './ui/input';
 import { TableCell } from './ui/table';
-import { getRol } from '../core/rol'; // Asegúrate de importar la función getRol
+import { getRol } from '../core/rol';
+import { toast } from 'sonner';
 
 interface ActionsCellProps {
   usuario: usuario;
@@ -93,6 +94,11 @@ const ActionsCell: React.FC<ActionsCellProps> = ({ usuario }) => {
     // Aquí puedes manejar la lógica para guardar los cambios
     // ...
 
+    // Luego de guardar, muestra el toast
+    toast("Usuario modificado", {
+      description: "El usuario seleccionado ha sido modificado con éxito"
+    });
+
     // Luego de guardar, limpia los campos de contraseña
     setPassword('');
     setRepeatPassword('');
@@ -145,7 +151,7 @@ const ActionsCell: React.FC<ActionsCellProps> = ({ usuario }) => {
                       {roles.map((rol) => (
                         <DropdownMenuItem
                           key={rol.rol_id}
-                          className='flex w-full items-center px-4 py-2'
+                          className='flex w-full items-center px-4 py-2 cursor-pointer hover:bg-gray-100'
                           onSelect={() => handleRoleChange(rol)}
                         >
                           {rol.nombre}
@@ -174,7 +180,7 @@ const ActionsCell: React.FC<ActionsCellProps> = ({ usuario }) => {
                   />
                   <Button
                     type='button'
-                    variant= "ghost"
+                    variant='ghost'
                     onClick={togglePasswordVisibility}
                     className='p-2'
                   >
@@ -196,9 +202,9 @@ const ActionsCell: React.FC<ActionsCellProps> = ({ usuario }) => {
                   />
                   <Button
                     type='button'
-                    variant= "ghost"
+                    variant='ghost'
                     onClick={toggleRepeatPasswordVisibility}
-                    className='p-2 '
+                    className='p-2'
                   >
                     {isRepeatPasswordVisible ? <EyeOff size={20} /> : <Eye size={20} />}
                   </Button>
@@ -211,7 +217,7 @@ const ActionsCell: React.FC<ActionsCellProps> = ({ usuario }) => {
                 onClick={handleSave}
                 disabled={!isPasswordMatch}
               >
-                Aceptar
+                Actualizar
               </Button>
             </DialogFooter>
           </DialogContent>
