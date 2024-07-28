@@ -73,7 +73,7 @@ CREATE TABLE productos (
         ruta_foto_principal VARCHAR(256) NOT NULL,
         precio FLOAT NOT NULL,
         stock INT NOT NULL,
-        FOREIGN KEY (id_tienda) REFERENCES tiendas(id_tienda),
+        FOREIGN KEY (id_tienda) REFERENCES tiendas(id_tienda) ON DELETE CASCADE,
         FOREIGN KEY (id_categoria_producto) REFERENCES categorias_productos(id_categoria_producto)
 );
 
