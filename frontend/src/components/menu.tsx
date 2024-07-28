@@ -46,7 +46,7 @@ export const Menu = () => {
                     </li>
                     <li className='row-span-3'>
                       <NavigationMenuLink asChild>
-                        <Link to="" className="flex h-full w-full select-none flex-col justify-end rounded-md p-2 no-underline outline-none focus:shadow-md hover:bg-accent hover:border-gray-500">
+                        <Link to="/panel" className="flex h-full w-full select-none flex-col justify-end rounded-md p-2 no-underline outline-none focus:shadow-md hover:bg-accent hover:border-gray-500">
                           Panel de control
                         </Link>
                       </NavigationMenuLink>

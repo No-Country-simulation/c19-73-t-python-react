@@ -11,7 +11,7 @@ export const LayoutView = () => {
    * `hijas` definidas en el router
    */
   return (
-    <div className="h-screen bg-white flex flex-col">
+    <div className="h-screen bg-white flex flex-col mt-20">
         <header className="mb-2">
             <Menu></Menu>
         </header>

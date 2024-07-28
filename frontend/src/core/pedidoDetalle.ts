@@ -19,6 +19,18 @@ export type pedidoDetalle = {
         cantidad: 1,
         total: 20.0,
       },
+      {
+        id_producto: 45,
+        id_pedido: 1,
+        cantidad: 1,
+        total: 20.0,
+      },
+      {
+        id_producto: 23,
+        id_pedido: 1,
+        cantidad: 2,
+        total: 50.0,
+      },
     ];
   
     return pedidoDetalles.filter(detalle => detalle.id_pedido === idPedido);
