@@ -26,6 +26,11 @@ def get_all_users_endpoint(db: any = Depends(get_db), current_user: dict = Depen
         raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Not authorized")
     return get_all_users(db)
 
+# Empoint para actualizar el rol de un usuraio.
+@router.put("/update_rol_user")
+async def put_update_rol_user():
+    pass
+
 # Empoint para actualizar estado de la tienda tienda.
 @router.put("/update_state_store/{id_tienda}")
 async def update_state_store(id_tienda: int, state_update: StoreStateUpdate, db: any = Depends(get_db), current_user: User = Depends(get_current_user)):
