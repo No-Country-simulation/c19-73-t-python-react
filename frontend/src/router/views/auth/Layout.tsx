@@ -10,7 +10,7 @@ export const LayoutAuth = () => {
    * `hijas` definidas en el router
    */
   return (
-    <div className='flex items-center justify-center bg-white min-h-dvh'>
+    <div className='flex items-center justify-center min-h-dvh mt-20'>
       <Outlet />
     </div>
   );

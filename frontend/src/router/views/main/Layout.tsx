@@ -4,7 +4,7 @@ import { Menu } from '../../../components/menu';
 
 export const LayoutMain = () => {
   return (
-    <div className='flex flex-col w-full bg-white min-h-dvh'>
+    <div className='flex flex-col w-full bg-white min-h-dvh mt-20'>
       <Menu />
       <Outlet />
     </div>

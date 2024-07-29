@@ -37,6 +37,50 @@ export async function getUser(): Promise<usuario[]>{
             correo: "emily.johnson@example.com",
             contrasena: "password789",
             rol_id: 3
+          },{
+            id_usuario: 4,
+            nombre: "Michael Brown Brown Browning",
+            telefono: "+1 555 123 4567",
+            direccion: "987 Elm St, Metropolis, USA",
+            correo: "michael.brown@example.com",
+            contrasena: "password321",
+            rol_id: 1
+          },
+          {
+            id_usuario: 5,
+            nombre: "Sarah Davis Davis Davis",
+            telefono: "+44 20 7946 6789",
+            direccion: "654 King St, London, UK",
+            correo: "sarah.davis@example.com",
+            contrasena: "password654",
+            rol_id: 2
+          },
+          {
+            id_usuario: 6,
+            nombre: "David Wilson Wilson Wilsoning",
+            telefono: "+61 2 8765 4321",
+            direccion: "321 Prince St, Sydney, Australia",
+            correo: "david.wilson@example.com",
+            contrasena: "password987",
+            rol_id: 3
+          },
+          {
+            id_usuario: 7,
+            nombre: "Laura Martinez Martinez Martinezing",
+            telefono: "+34 91 123 4567",
+            direccion: "123 Calle Mayor, Madrid, Spain",
+            correo: "laura.martinez@example.com",
+            contrasena: "password741",
+            rol_id: 1
+          },
+          {
+            id_usuario: 8,
+            nombre: "Carlos Lopez Lopez Lopezing",
+            telefono: "+52 55 1234 5678",
+            direccion: "456 Avenida Reforma, Mexico City, Mexico",
+            correo: "carlos.lopez@example.com",
+            contrasena: "password852",
+            rol_id: 2
           }
     ]
 }

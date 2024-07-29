@@ -7,6 +7,7 @@ import { LayoutView, InfoPage, EditInfo } from './views/perfil-users/viewInfo/in
 import Users_Manage from './views/manage-users/users-manage';
 import PedidosPage from './views/auth/orders/view-orders';
 import PedidoDetallePage from './views/auth/orders/view-product-orders';
+import Dashboard from './views/main/dashboard-admin';
 
 export const Router = () => {
   const router = createBrowserRouter([
@@ -22,6 +23,10 @@ export const Router = () => {
           path: '/data',
           element: <Users_Manage />,
         },
+        {
+          path: '/panel',
+          element: <Dashboard/>
+        }
       ],
     },
     {
@@ -55,7 +60,7 @@ export const Router = () => {
     },
     {
       path: 'pedidos',
-      element: <LayoutView />,
+      element: <LayoutMain />,
       children: [
         {
           index: true,
