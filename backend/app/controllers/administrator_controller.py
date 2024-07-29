@@ -1,6 +1,20 @@
 from fastapi import HTTPException, status
 from app.models.notification import NotificationSellerCreate
+from app.models.user import User
+from typing import List
 from mysql.connector import Error
+
+def get_all_users(db) -> List[User]:
+    cursor = db.cursor(dictionary=True)
+    try:
+        cursor.execute("SELECT * FROM usuarios")
+        users = cursor.fetchall()
+        return users
+    except Exception as e:
+        raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=str(e))
+    finally:
+        cursor.close()
+
 
 def delete_store_admin(store_id: int, db):
     cursor = db.cursor()
