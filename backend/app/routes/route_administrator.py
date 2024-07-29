@@ -3,12 +3,12 @@ from app.auth.auth import get_current_user
 from app.db.db_conexion import get_db
 from app.models.category import CategoriaProductoCreate
 from app.models.store import StoreStateUpdate
-from app.models.user import User
+from app.models.user import User, UserRoleUpdate
 from app.models.notification import NotificationSellerCreate
 from app.controllers.category_controller import create_category
 from app.controllers.store_controller import update_store_state
 from app.controllers.product_controller import delete_product
-from app.controllers.administrator_controller import delete_store_admin, notify_seller, get_all_users
+from app.controllers.administrator_controller import delete_store_admin, notify_seller, get_all_users, update_user_role
 from typing import List
 
 router = APIRouter()
@@ -27,9 +27,11 @@ def get_all_users_endpoint(db: any = Depends(get_db), current_user: dict = Depen
     return get_all_users(db)
 
 # Empoint para actualizar el rol de un usuraio.
-@router.put("/update_rol_user")
-async def put_update_rol_user():
-    pass
+@router.put("/update_rol_user/{user_id}", summary="Update User Role")
+def update_user_role_endpoint(user_id: int, role_update: UserRoleUpdate, db: any = Depends(get_db), current_user: dict = Depends(get_current_user)):
+    if current_user['rol_id'] != 1:
+        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Not authorized")
+    return update_user_role(user_id, role_update.new_role, db)
 
 # Empoint para actualizar estado de la tienda tienda.
 @router.put("/update_state_store/{id_tienda}")
