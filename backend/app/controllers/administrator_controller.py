@@ -53,3 +53,16 @@ def notify_seller(notification: NotificationSellerCreate, db, user_id: int):
         raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=str(e))
     finally:
         cursor.close()
+
+def update_user_role(user_id: int, new_role_id: int, db):
+    cursor = db.cursor()
+    try:
+        cursor.execute("UPDATE usuarios SET rol_id = %s WHERE id_usuario = %s", (new_role_id, user_id))
+        db.commit()
+        if cursor.rowcount == 0:
+            raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="User not found")
+        return {"message": "User role updated successfully"}
+    except Exception as e:
+        raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=str(e))
+    finally:
+        cursor.close()
