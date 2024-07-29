@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
-import { Button } from '../../../../components/ui/button';
-import { Card } from '../../../../components/ui/card';
+import { Button } from '../../../components/ui/button';
+import { Card } from '../../../components/ui/card';
 import {
   getPedidoDetalles,
   pedidoDetalle,
-} from '../../../../core/pedidoDetalle';
-import { getPedidos, pedido } from '../../../../core/pedidos';
-import { getProductoById, productos } from '../../../../core/productos';
-import { getTiendas, tiendas } from '../../../../core/tienda';
+} from '../../../core/pedidoDetalle';
+import { getPedidos, pedido } from '../../../core/pedidos';
+import { getProductoById, productos } from '../../../core/productos';
+import { getTiendas, tiendas } from '../../../core/tienda';
 
 const PedidoDetallePage: React.FC = () => {
   const { id } = useParams<{ id: string }>();

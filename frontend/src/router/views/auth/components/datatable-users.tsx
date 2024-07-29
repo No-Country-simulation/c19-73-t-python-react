@@ -67,7 +67,7 @@ export default function Datatable_Users<TData, TValue>({
     <div>
       {globalFilterColumn &&(
         <InputSearch
-        placeholder='Nombre o rol del usuario que deseas encontrar'
+        placeholder='Nombre que deseas encontrar'
         value={(table.getColumn(globalFilterColumn)?.getFilterValue() as string) ?? 
           ""
         }
@@ -80,7 +80,7 @@ export default function Datatable_Users<TData, TValue>({
       )}
       <div className='rounded-md border'>
         <Table>
-          {caption && <TableCaption>Lista de usuarios</TableCaption>}
+          {caption && <TableCaption></TableCaption>}
 
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
