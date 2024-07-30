@@ -5,6 +5,7 @@ from fastapi.security import OAuth2PasswordBearer
 from jose import JWTError, jwt
 from app.models.user import UserCreate, UserLogin
 from app.controllers import user_controller, auth_controller
+from app.controllers.store_controller import see_all_stores_controller
 from app.db.db_conexion import get_db
 
 app = FastAPI()
@@ -36,18 +37,14 @@ async def post_login(user_login: UserLogin, response: Response, db: any = Depend
     return token_data
 
 # empoint para ver todas las tiendas.
-@app.get("/see_all_stores")
-async def get_all_stores():
-    pass
+@app.get("/see_all_stores", tags=["Public"])
+def see_all_stores(db: any = Depends(get_db)):
+    stores = see_all_stores_controller(db)
+    return stores
 
 # empoint para ver todos los productos.
 @app.get("/see_all_products")
 async def get_all_products():
-    pass
-
-# empoint para ver todos los productos de una tienda.
-@app.get("/see_products_by_store")
-async def get_see_products_by_store():
     pass
 
 # empoint para ver todos los productos de una tienda.
