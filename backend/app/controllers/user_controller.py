@@ -81,3 +81,17 @@ def update_user_role(role_update: UserRoleUpdate, current_user: dict, db):
         raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=str(e))
     finally:
         cursor.close() 
+
+def get_notifications(user_id: int, db):
+    try:
+        cursor = db.cursor(dictionary=True)
+        query = "SELECT * FROM notificaciones WHERE id_usuario = %s"
+        cursor.execute(query, (user_id,))
+        result = cursor.fetchall()
+        cursor.close()
+        
+        if not result:
+            raise HTTPException(status_code=404, detail="No notifications found for this user")
+        return result
+    except mysql.connector.Error as err:
+        raise HTTPException(status_code=500, detail=f"Database error: {err}")
