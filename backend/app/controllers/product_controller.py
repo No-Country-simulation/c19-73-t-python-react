@@ -121,3 +121,11 @@ def delete_product(product_id: int, db) -> Dict[str, Any]:
         raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=str(e))
     finally:
         cursor.close()
+
+def see_all_products_controller(db):
+    query = "SELECT * FROM productos"
+    cursor = db.cursor(dictionary=True)
+    cursor.execute(query)
+    products = cursor.fetchall()
+    cursor.close()
+    return products
