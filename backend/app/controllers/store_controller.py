@@ -5,7 +5,7 @@ from app.utils.save_image import save_image_as_webp
 from mysql.connector import Error
 
 def create_store(store: StoreCreate, current_user: dict, db):
-
+    # Guardamos la imagen en una carpeta
     image_path = "uploads/store/logos_store"
     path_logo_tienda = save_image_as_webp(image_path, store.logo_tienda)
 
@@ -36,6 +36,10 @@ def create_store(store: StoreCreate, current_user: dict, db):
 
 
 def update_store(store_update: StoreUpdate, store_id: int, user_id: int, db):
+    # Guardamos la imagen en una carpeta
+    image_path = "uploads/store/logos_store"
+    update_path_logo_tienda = save_image_as_webp(image_path, store_update.logo_tienda)
+
     cursor = db.cursor(dictionary=True)
     
     try:
@@ -52,7 +56,7 @@ def update_store(store_update: StoreUpdate, store_id: int, user_id: int, db):
         """
         update_values = (
             store_update.nombre_tienda or db_store['nombre_tienda'],
-            store_update.logo_tienda or db_store['logo_tienda'],
+            update_path_logo_tienda or db_store['logo_tienda'],
             store_update.descripcion or db_store['descripcion'],
             store_update.nombre_banco or db_store['nombre_banco'],
             store_update.tipo_cuenta_bancaria or db_store['tipo_cuenta_bancaria'],
