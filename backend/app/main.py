@@ -6,6 +6,7 @@ from jose import JWTError, jwt
 from app.models.user import UserCreate, UserLogin
 from app.controllers import user_controller, auth_controller
 from app.controllers.store_controller import see_all_stores_controller
+from app.controllers.product_controller import see_all_products_controller
 from app.db.db_conexion import get_db
 
 app = FastAPI()
@@ -44,8 +45,9 @@ def see_all_stores(db: any = Depends(get_db)):
 
 # empoint para ver todos los productos.
 @app.get("/see_all_products", tags=["Public"])
-async def get_all_products():
-    pass
+def see_all_products(db: any = Depends(get_db)):
+    products = see_all_products_controller(db)
+    return products
 
 # empoint para ver todos los productos de una tienda.
 @app.get("/see_all_categories_products", tags=["Public"])
