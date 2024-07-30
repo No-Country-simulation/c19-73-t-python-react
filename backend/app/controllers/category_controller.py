@@ -18,3 +18,11 @@ def create_category(category: CategoriaProductoCreate, current_user: dict, db: a
         raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=str(e))
     finally:
         cursor.close()
+
+def see_all_categories_products_controller(db):
+    query = "SELECT * FROM categorias_productos"
+    cursor = db.cursor(dictionary=True)
+    cursor.execute(query)
+    categories = cursor.fetchall()
+    cursor.close()
+    return categories
