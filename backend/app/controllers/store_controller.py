@@ -37,8 +37,8 @@ def create_store(store: StoreCreate, current_user: dict, db):
 
 def update_store(store_update: StoreUpdate, store_id: int, user_id: int, db):
     # Guardamos la imagen en una carpeta
-    image_path = "uploads/store/logos_store"
-    update_path_logo_tienda = save_image_as_webp(image_path, store_update.logo_tienda)
+    path = "uploads/store/logos_store"
+    update_path_logo_tienda = save_image_as_webp(path, store_update.logo_tienda)
 
     cursor = db.cursor(dictionary=True)
     
