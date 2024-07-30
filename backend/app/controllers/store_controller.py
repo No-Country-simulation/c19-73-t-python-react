@@ -1,9 +1,14 @@
 from fastapi import HTTPException, status
 from app.models.store import StoreCreate, StoreUpdate, StoreStateUpdate
 from fastapi import HTTPException, status
+from app.utils.save_image import save_image_as_webp
 from mysql.connector import Error
 
 def create_store(store: StoreCreate, current_user: dict, db):
+
+    image_path = "uploads/store/logos_store"
+    path_logo_tienda = save_image_as_webp(image_path, store.logo_tienda)
+
     cursor = db.cursor()
     try:
         cursor.execute("""
@@ -13,7 +18,7 @@ def create_store(store: StoreCreate, current_user: dict, db):
             current_user['id_usuario'],  # id_usuario
             3,  # id_estado_tienda (PENDIENTE POR APROBACION - POR DEFECTO)
             store.nombre_tienda,
-            store.logo_tienda,
+            path_logo_tienda,
             store.descripcion,
             store.nombre_banco,
             store.tipo_cuenta_bancaria,
