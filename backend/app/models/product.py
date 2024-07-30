@@ -1,7 +1,7 @@
 from pydantic import BaseModel
 from typing import List, Optional
 
-class ProductoCreate(BaseModel):
+class ProductCreate(BaseModel):
     id_tienda: int
     id_categoria_producto: int
     nombre_producto: str
@@ -10,10 +10,10 @@ class ProductoCreate(BaseModel):
     precio: float
     stock: int
 
-class Producto(ProductoCreate):
+class Product(ProductCreate):
     id_producto: int
 
-class ProductoUpdate(BaseModel):
+class ProductUpdate(BaseModel):
     id_producto: int
     nombre_producto: str
     descripcion_producto: str
