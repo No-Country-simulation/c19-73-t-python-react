@@ -21,11 +21,11 @@ app.add_middleware(
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="login")
 
 # empoint para registrar un usuario.
-@app.post("/register_user")
+@app.post("/register_user", tags=["Public"])
 async def post_register_user(user: UserCreate,  db: any = Depends(get_db)):
     return user_controller.create_user(user, db)
 
-@app.post("/login")
+@app.post("/login", tags=["Public"])
 async def post_login(user_login: UserLogin, response: Response, db: any = Depends(get_db)):
     token_data = auth_controller.authenticate_user(user_login, db)
     response.set_cookie(
@@ -43,12 +43,12 @@ def see_all_stores(db: any = Depends(get_db)):
     return stores
 
 # empoint para ver todos los productos.
-@app.get("/see_all_products")
+@app.get("/see_all_products", tags=["Public"])
 async def get_all_products():
     pass
 
 # empoint para ver todos los productos de una tienda.
-@app.get("/see_all_categories_products")
+@app.get("/see_all_categories_products", tags=["Public"])
 async def get_see_all_categories_products():
     pass
 
