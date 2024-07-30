@@ -7,6 +7,7 @@ from app.models.user import UserCreate, UserLogin
 from app.controllers import user_controller, auth_controller
 from app.controllers.store_controller import see_all_stores_controller
 from app.controllers.product_controller import see_all_products_controller
+from app.controllers.category_controller import see_all_categories_products_controller
 from app.db.db_conexion import get_db
 
 app = FastAPI()
@@ -51,8 +52,9 @@ def see_all_products(db: any = Depends(get_db)):
 
 # empoint para ver todos los productos de una tienda.
 @app.get("/see_all_categories_products", tags=["Public"])
-async def get_see_all_categories_products():
-    pass
+def see_all_categories_products(db: any = Depends(get_db)):
+    categories = see_all_categories_products_controller(db)
+    return categories
 
 # rutas protegidas que contienen empoints que seran usason solo si el usuario inicio sesion
 app.include_router(route_user.router, tags=["User"])
