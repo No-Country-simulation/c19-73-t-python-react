@@ -88,3 +88,11 @@ def update_store_state(id_tienda: int, state_update: StoreStateUpdate, db):
     finally:
         cursor.close()
 
+def see_all_stores_controller(db):
+    query = "SELECT * FROM tiendas"
+    cursor = db.cursor(dictionary=True)
+    cursor.execute(query)
+    stores = cursor.fetchall()
+    cursor.close()
+    return stores
+
