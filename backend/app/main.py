@@ -4,11 +4,14 @@ from app.routes import route_user, route_seller, route_store, route_administrato
 from fastapi.security import OAuth2PasswordBearer
 from jose import JWTError, jwt
 from app.models.user import UserCreate, UserLogin
+from app.models.product import SeeProduct
 from app.controllers import user_controller, auth_controller
 from app.controllers.store_controller import see_all_stores_controller
 from app.controllers.product_controller import see_all_products_controller
 from app.controllers.category_controller import see_all_categories_products_controller
+from app.controllers.product_controller import get_products_by_store
 from app.db.db_conexion import get_db
+from typing import List
 
 app = FastAPI()
 
@@ -49,6 +52,11 @@ def see_all_stores(db: any = Depends(get_db)):
 def see_all_products(db: any = Depends(get_db)):
     products = see_all_products_controller(db)
     return products
+
+# empoint para ver solo productos de una tienda.
+@app.get("/see_products_store/{id_tienda}", tags=["Public"],response_model=List[SeeProduct])
+async def see_products_store(id_tienda: int, db: any = Depends(get_db)):
+    return get_products_by_store(id_tienda, db)
 
 # empoint para ver todos los productos de una tienda.
 @app.get("/see_all_categories_products", tags=["Public"])
