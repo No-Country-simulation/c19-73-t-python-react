@@ -5,8 +5,6 @@ export type tiendas = {
     nombre_tienda: string;
     logo_tienda: string;
     descripcion: string;
-    telefono_tienda: string;
-    correo_tienda: string;
     nombre_banco: string;
     tipo_cuenta_bancaria: string;
     numero_de_cuenta: string;
@@ -21,8 +19,6 @@ export type tiendas = {
       nombre_tienda: 'Artesanías La Paz',
       logo_tienda: 'logo1.png',
       descripcion: 'Tienda de artesanías bolivianas.',
-      telefono_tienda: '123456789',
-      correo_tienda: 'contacto@lapaz.com',
       nombre_banco: 'Banco La Paz',
       tipo_cuenta_bancaria: 'Ahorro',
       numero_de_cuenta: '1234567890',
@@ -35,8 +31,6 @@ export type tiendas = {
       nombre_tienda: 'Artesanías Cusco',
       logo_tienda: 'logo2.png',
       descripcion: 'Tienda de artesanías peruanas.',
-      telefono_tienda: '987654321',
-      correo_tienda: 'contacto@cusco.com',
       nombre_banco: 'Banco Cusco',
       tipo_cuenta_bancaria: 'Corriente',
       numero_de_cuenta: '0987654321',
@@ -49,8 +43,6 @@ export type tiendas = {
       nombre_tienda: 'Artesanías Quito',
       logo_tienda: 'logo3.png',
       descripcion: 'Tienda de artesanías ecuatorianas.',
-      telefono_tienda: '123123123',
-      correo_tienda: 'contacto@quito.com',
       nombre_banco: 'Banco Quito',
       tipo_cuenta_bancaria: 'Ahorro',
       numero_de_cuenta: '1231231230',
@@ -63,8 +55,6 @@ export type tiendas = {
       nombre_tienda: 'Artesanías Bogotá',
       logo_tienda: 'logo4.png',
       descripcion: 'Tienda de artesanías colombianas.',
-      telefono_tienda: '321321321',
-      correo_tienda: 'contacto@bogota.com',
       nombre_banco: 'Banco Bogotá',
       tipo_cuenta_bancaria: 'Corriente',
       numero_de_cuenta: '3213213210',
@@ -77,12 +67,46 @@ export type tiendas = {
       nombre_tienda: 'Artesanías Lima',
       logo_tienda: 'logo5.png',
       descripcion: 'Tienda de artesanías peruanas.',
-      telefono_tienda: '456456456',
-      correo_tienda: 'contacto@lima.com',
       nombre_banco: 'Banco Lima',
       tipo_cuenta_bancaria: 'Ahorro',
       numero_de_cuenta: '4564564560',
       cci: '004564564560'
+    },
+    {
+      id_tienda: 6,
+      id_usuario: 6,
+      id_estado_tienda: 1,
+      nombre_tienda: 'Artesanías Cusco',
+      logo_tienda: 'logo6.png',
+      descripcion: 'Tienda de artesanías tradicionales de Cusco.',
+      nombre_banco: 'Banco Cusco',
+      tipo_cuenta_bancaria: 'Corriente',
+      numero_de_cuenta: '6543219870',
+      cci: '007654321987'
+    },
+    {
+      id_tienda: 7,
+      id_usuario: 7,
+      id_estado_tienda: 2,
+      nombre_tienda: 'Artesanías Arequipa',
+      logo_tienda: 'logo7.png',
+      descripcion: 'Especialidades en artesanías de Arequipa.',
+      nombre_banco: 'Banco Arequipa',
+      tipo_cuenta_bancaria: 'Ahorro',
+      numero_de_cuenta: '7894561230',
+      cci: '008794561230'
+    },
+    {
+      id_tienda: 8,
+      id_usuario: 8,
+      id_estado_tienda: 1,
+      nombre_tienda: 'Artesanías Puno',
+      logo_tienda: 'logo8.png',
+      descripcion: 'Artesanías únicas de la región de Puno.',
+      nombre_banco: 'Banco Puno',
+      tipo_cuenta_bancaria: 'Corriente',
+      numero_de_cuenta: '3216549870',
+      cci: '009321654987'
     }
   ];
   

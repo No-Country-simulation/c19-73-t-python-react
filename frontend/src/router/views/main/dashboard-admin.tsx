@@ -43,7 +43,7 @@ const Dashboard: React.FC = () => {
             <h2 className="text-xl text-center">Gestión de Productos</h2>
           </Card>
         </Link>
-        <Link to="/gestion-tiendas">
+        <Link to="/gestion_tiendas">
           <Card className="p-4 border rounded-lg shadow flex flex-col items-center justify-center bg-white border-accent border-4 h-40">
             <Store size={48} className="mb-2" />
             <h2 className="text-xl text-center">Gestión de Tiendas</h2>
