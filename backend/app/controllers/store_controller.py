@@ -3,6 +3,7 @@ from app.models.store import StoreCreate, StoreUpdate, StoreStateUpdate
 from fastapi import HTTPException, status
 from app.utils.save_image import save_image_as_webp
 from mysql.connector import Error
+from typing import List, Dict
 
 def create_store(store: StoreCreate, current_user: dict, db):
     # Guardamos la imagen en una carpeta
@@ -161,26 +162,6 @@ def get_user_orders(user_id: int, db):
         for row in orders
     ]
 
-def get_store_orders(store_id: int, db):
-    cursor = db.cursor()
-    query = "SELECT * FROM pedidos WHERE id_tienda = %s"
-    cursor.execute(query, (store_id,))
-    orders = cursor.fetchall()
-    cursor.close()
-    return [
-        {
-            "id_pedido": row[0],
-            "id_usuario": row[1],
-            "id_tienda": row[2],
-            "id_producto": row[3],
-            "id_estado_pedido": row[4],
-            "cantidad": row[5],
-            "fecha_y_hora": row[6],
-            "total": row[7]
-        }
-        for row in orders
-    ]
-
 def update_order_status(id_pedido: int, id_estado_pedido: int, db) -> str:
     query = f"""
     UPDATE pedidos
@@ -190,3 +171,49 @@ def update_order_status(id_pedido: int, id_estado_pedido: int, db) -> str:
     db.execute(query)
     db.commit()
     return "Estado del pedido actualizado correctamente."
+
+
+def get_orders_by_store(user_id: int, db) -> List[Dict]:
+    try:
+        cursor = db.cursor()
+        query = """
+        SELECT 
+            p.id_pedido, 
+            p.id_usuario, 
+            p.id_tienda, 
+            p.id_producto, 
+            p.id_estado_pedido, 
+            p.cantidad, 
+            p.fecha_y_hora, 
+            p.total 
+        FROM pedidos p
+        JOIN tiendas t ON p.id_tienda = t.id_tienda
+        WHERE t.id_usuario = %s
+        """
+        cursor.execute(query, (user_id,))
+        orders = cursor.fetchall()
+        
+        if not orders:
+            return []
+
+        result = [
+            {
+                "id_pedido": order[0],
+                "id_usuario": order[1],
+                "id_tienda": order[2],
+                "id_producto": order[3],
+                "id_estado_pedido": order[4],
+                "cantidad": order[5],
+                "fecha_y_hora": order[6],
+                "total": order[7]
+            }
+            for order in orders
+        ]
+
+        return result
+
+    except mysql.connector.Error as err:
+        print(f"Error fetching orders: {err}")
+        raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=str(err))
+    finally:
+        cursor.close()
