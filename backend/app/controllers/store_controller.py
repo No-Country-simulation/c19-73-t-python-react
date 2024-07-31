@@ -3,7 +3,7 @@ from app.models.store import StoreCreate, StoreUpdate, StoreStateUpdate
 from fastapi import HTTPException, status
 from app.utils.save_image import save_image_as_webp
 from mysql.connector import Error
-from typing import List, Dict
+from typing import List, Dict, Any
 
 def create_store(store: StoreCreate, current_user: dict, db):
     # Guardamos la imagen en una carpeta
@@ -162,15 +162,20 @@ def get_user_orders(user_id: int, db):
         for row in orders
     ]
 
-def update_order_status(id_pedido: int, id_estado_pedido: int, db) -> str:
-    query = f"""
-    UPDATE pedidos
-    SET id_estado_pedido = {id_estado_pedido}
-    WHERE id_pedido = {id_pedido}
-    """
-    db.execute(query)
-    db.commit()
-    return "Estado del pedido actualizado correctamente."
+def update_order_status_in_db(db: Any, id_pedido: int, id_estado_pedido: int):
+    try:
+        query = """
+            UPDATE pedidos
+            SET id_estado_pedido = %s
+            WHERE id_pedido = %s
+        """
+        cursor = db.cursor()
+        cursor.execute(query, (id_estado_pedido, id_pedido))
+        db.commit()
+        return {"message": "Order status updated successfully"}
+    except Exception as e:
+        print(f"Error updating order status: {e}")
+        raise Exception("Error updating order status in database")
 
 
 def get_orders_by_store(user_id: int, db) -> List[Dict]:
