@@ -1,4 +1,4 @@
-# Proyecto de Marketplace de Productos Artesanales
+# Proyecto "Marketplace de Productos Artesanales"
 
 Este proyecto es una plataforma de marketplace para productos artesanales, que permite a los vendedores crear y administrar sus tiendas, y a los compradores buscar y adquirir productos.
 
