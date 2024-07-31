@@ -2,12 +2,12 @@
 import { useEffect, useState } from "react";
 import { LabelH1 } from "../../../components/ui/label";
 import Datatable_Users from "../auth/components/datatable-users";
-import { useColumns_store } from "../../../components/columns-store";
+import { useColumns_productos } from "../../../components/columns-products";
 import { getProductos, productos } from "../../../core/productos";
 
-function StoreManage() {
+function ProductsManage() {
   const [producto, setProducto] = useState<productos[]>([]);
-  const columns = useColumns_store();
+  const columns = useColumns_productos();
 
   useEffect(() => {
     const fetchStore = async () => {
@@ -27,11 +27,11 @@ function StoreManage() {
       <Datatable_Users
         data={producto}
         columns={columns}
-        caption="Lista de tiendas"
-        globalFilterColumn="nombre_tienda"
+        caption="Lista de producto"
+        globalFilterColumn="nombre_producto"
       />
     </section>
   );
 }
 
-export default StoreManage;
+export default ProductsManage;
