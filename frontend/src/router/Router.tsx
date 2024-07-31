@@ -11,6 +11,7 @@ import Dashboard from './views/main/dashboard-admin';
 import StoreManage from './views/manage/store-manage';
 import CategoryManage from './views/manage/category-manage';
 import ProductsManage from './views/manage/products-manage';
+import InicioPage from './views/main/inicio';
 
 export const Router = () => {
   const router = createBrowserRouter([
@@ -41,7 +42,12 @@ export const Router = () => {
         {
           path: '/gestion_productos',
           element:<ProductsManage/>
-        }
+        },
+        {
+          path: '/inicio',
+          element:<InicioPage/>
+        },
+
       ],
     },
     {
