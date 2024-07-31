@@ -1,5 +1,3 @@
-# Plataforma de Marketplace de Productos Artesanales.
-
 # Proyecto de Marketplace de Productos Artesanales
 
 Este proyecto es una plataforma de marketplace para productos artesanales, que permite a los vendedores crear y administrar sus tiendas, y a los compradores buscar y adquirir productos.
@@ -17,11 +15,6 @@ Este proyecto es una plataforma de marketplace para productos artesanales, que p
 - Base de datos: MySQL
 - Frontend: React
 
-## Requisitos Previos
-
-- Python 3.7 o superior
-- MySQL
-- Crear una base de datos llamada `marketplace` y ejecutar el script de creación de tablas proporcionado en el archivo `schema.sql`.
 
 ## Instalación y Ejecución del Backend
 
