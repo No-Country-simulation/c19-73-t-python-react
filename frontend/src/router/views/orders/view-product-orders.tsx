@@ -93,7 +93,7 @@ const PedidoDetallePage: React.FC = () => {
   }
 
   return (
-    <div className='flex flex-col items-center px-6 py-24'>
+    <div className='flex flex-col items-center px-6 pb-24'>
       <h1 className='mb-6 mt-12 text-3xl'>
         Detalle del Pedido #{pedido.id_pedido}
       </h1>

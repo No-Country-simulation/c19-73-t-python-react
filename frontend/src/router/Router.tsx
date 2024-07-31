@@ -9,6 +9,8 @@ import PedidosPage from './views/orders/view-orders';
 import PedidoDetallePage from './views/orders/view-product-orders';
 import Dashboard from './views/main/dashboard-admin';
 import StoreManage from './views/manage/store-manage';
+import CategoryManage from './views/manage/category-manage';
+import ProductsManage from './views/manage/products-manage';
 
 export const Router = () => {
   const router = createBrowserRouter([
@@ -31,6 +33,14 @@ export const Router = () => {
         {
           path: '/gestion_tiendas',
           element:<StoreManage/>
+        },
+        {
+          path: '/gestion_categorias',
+          element:<CategoryManage/>
+        },
+        {
+          path: '/gestion_productos',
+          element:<ProductsManage/>
         }
       ],
     },

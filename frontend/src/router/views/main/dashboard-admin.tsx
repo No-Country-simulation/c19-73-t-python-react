@@ -4,7 +4,7 @@ import { getUser } from '../../../core/user';
 import { getProductos } from '../../../core/productos';
 import { getTiendas } from '../../../core/tienda';
 import { Card } from '../../../components/ui/card';
-import { Users, Box, Store } from 'lucide-react';
+import { Users, Box, Store, Tag } from 'lucide-react';
 
 const Dashboard: React.FC = () => {
   const [usuariosCount, setUsuariosCount] = useState(0);
@@ -30,23 +30,29 @@ const Dashboard: React.FC = () => {
   return (
     <div className="flex flex-col items-center py-12 px-6">
       <h1 className="text-4xl mb-6">Panel de control</h1>
-      <div className="w-full max-w-4xl grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+      <div className="w-full max-w-4xl grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
         <Link to="/data">
           <Card className="p-4 border rounded-lg shadow flex flex-col items-center justify-center bg-white border-accent border-4 h-40">
             <Users size={48} className="mb-2" />
             <h2 className="text-xl text-center">Gestión de Usuarios</h2>
           </Card>
         </Link>
-        <Link to="/gestion-productos">
+        <Link to="/gestion_productos">
           <Card className="p-4 border rounded-lg shadow flex flex-col items-center justify-center bg-white border-accent border-4 h-40">
             <Box size={48} className="mb-2" />
             <h2 className="text-xl text-center">Gestión de Productos</h2>
           </Card>
         </Link>
-        <Link to="/gestion_tiendas">
+        <Link to="/gestion-tiendas">
           <Card className="p-4 border rounded-lg shadow flex flex-col items-center justify-center bg-white border-accent border-4 h-40">
             <Store size={48} className="mb-2" />
             <h2 className="text-xl text-center">Gestión de Tiendas</h2>
+          </Card>
+        </Link>
+        <Link to="/gestion_categorias">
+          <Card className="p-4 border rounded-lg shadow flex flex-col items-center justify-center bg-white border-accent border-4 h-40">
+            <Tag size={48} className="mb-2" />
+            <h2 className="text-xl text-center">Gestión de Categorías</h2>
           </Card>
         </Link>
       </div>
