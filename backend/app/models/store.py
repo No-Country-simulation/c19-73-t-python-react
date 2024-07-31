@@ -38,3 +38,7 @@ class OrderResponse(BaseModel):
     cantidad: int
     fecha_y_hora: str
     total: int
+
+class UpdateOrderStatus(BaseModel):
+    id_pedido: int
+    id_estado_pedido: int
