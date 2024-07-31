@@ -1,17 +1,22 @@
-import { Navigate, RouterProvider, createBrowserRouter } from 'react-router-dom';
+import {
+  Navigate,
+  RouterProvider,
+  createBrowserRouter,
+} from 'react-router-dom';
+
 import { ThemesTester } from '../components/ui/themes-tester';
 import { registerUserAction } from './actions/auth';
+import { editUserAction } from './actions/main';
 import { LayoutAuth, LoginPage, RegisterPage } from './views/auth';
-import { LayoutMain } from './views/main/Layout';
-import { LayoutView, InfoPage, EditInfo } from './views/perfil-users/viewInfo/index';
-import Users_Manage from './views/manage/users-manage';
-import PedidosPage from './views/orders/view-orders';
-import PedidoDetallePage from './views/orders/view-product-orders';
+import CategoryManage from './views/dashboard/manage/category-manage';
+import ProductsManage from './views/dashboard/manage/products-manage';
+import StoreManage from './views/dashboard/manage/store-manage';
+import UsersManage from './views/dashboard/manage/users-manage';
+import { EditProfilePage, LayoutMain, MyProfilePage } from './views/main';
 import Dashboard from './views/main/dashboard-admin';
-import StoreManage from './views/manage/store-manage';
-import CategoryManage from './views/manage/category-manage';
-import ProductsManage from './views/manage/products-manage';
 import InicioPage from './views/main/inicio';
+import PedidosPage from './views/main/orders/view-orders';
+import PedidoDetallePage from './views/main/orders/view-product-orders';
 
 export const Router = () => {
   const router = createBrowserRouter([
@@ -21,33 +26,64 @@ export const Router = () => {
       children: [
         {
           index: true,
+          element: <InicioPage />,
+        },
+        {
+          path: 'theme-tester',
           element: <ThemesTester />,
         },
         {
-          path: '/data',
-          element: <Users_Manage />,
+          path: '/dashboard',
+          children: [
+            {
+              index: true,
+              element: <Dashboard />,
+            },
+            {
+              path: 'users',
+              element: <UsersManage />,
+            },
+            {
+              path: 'stores',
+              element: <StoreManage />,
+            },
+            {
+              path: 'categories',
+              element: <CategoryManage />,
+            },
+            {
+              path: 'products',
+              element: <ProductsManage />,
+            },
+          ],
         },
         {
-          path: '/panel',
-          element: <Dashboard/>
+          path: 'profile',
+          children: [
+            {
+              index: true,
+              element: <MyProfilePage />,
+            },
+            {
+              path: 'edit',
+              element: <EditProfilePage />,
+              action: editUserAction(),
+            },
+          ],
         },
         {
-          path: '/gestion_tiendas',
-          element:<StoreManage/>
+          path: 'orders',
+          children: [
+            {
+              index: true,
+              element: <PedidosPage />,
+            },
+            {
+              path: 'orders/:id',
+              element: <PedidoDetallePage />,
+            },
+          ],
         },
-        {
-          path: '/gestion_categorias',
-          element:<CategoryManage/>
-        },
-        {
-          path: '/gestion_productos',
-          element:<ProductsManage/>
-        },
-        {
-          path: '/inicio',
-          element:<InicioPage/>
-        },
-
       ],
     },
     {
@@ -66,36 +102,8 @@ export const Router = () => {
       ],
     },
     {
-      path: 'viewInfo',
-      element: <LayoutView />,
-      children: [
-        {
-          index: true,
-          element: <InfoPage />,
-        },
-        {
-          path: 'edit',
-          element: <EditInfo />,
-        },
-      ],
-    },
-    {
-      path: 'pedidos',
-      element: <LayoutMain />,
-      children: [
-        {
-          index: true,
-          element: <PedidosPage />,
-        },
-        {
-          path: 'detalle-pedido/:id',
-          element: <PedidoDetallePage />,
-        },
-      ],
-    },
-    {
       path: '*',
-      element: <Navigate to="/" />,
+      element: <Navigate to='/' />,
     },
   ]);
 

@@ -1,20 +1,20 @@
 import { useState } from 'react';
-import DatatablePagination from '../../../../components/datatable-pagination';
-import {InputSearch } from '../../../../components/ui/input';
 
 import {
   ColumnDef,
+  ColumnFiltersState,
   PaginationState,
+  SortingState,
   flexRender,
   getCoreRowModel,
-  getPaginationRowModel,
-  useReactTable,
-  SortingState,
-  getSortedRowModel,
-  ColumnFiltersState,
   getFilteredRowModel,
+  getPaginationRowModel,
+  getSortedRowModel,
+  useReactTable,
 } from '@tanstack/react-table';
 
+import DatatablePagination from '../../../../components/datatable-pagination';
+import { InputSearch } from '../../../../components/ui/input';
 import {
   Table,
   TableBody,
@@ -65,17 +65,19 @@ export default function Datatable_Users<TData, TValue>({
 
   return (
     <div>
-      {globalFilterColumn &&(
+      {globalFilterColumn && (
         <InputSearch
-        placeholder='Nombre que deseas encontrar'
-        value={(table.getColumn(globalFilterColumn)?.getFilterValue() as string) ?? 
-          ""
-        }
-        onChange={(event) =>
-          table.getColumn(globalFilterColumn)
-          ?.setFilterValue(event.target.value)
-        }
-        className='max-w-md mb-5 align-center'
+          placeholder='Nombre que deseas encontrar'
+          value={
+            (table.getColumn(globalFilterColumn)?.getFilterValue() as string) ??
+            ''
+          }
+          onChange={(event) =>
+            table
+              .getColumn(globalFilterColumn)
+              ?.setFilterValue(event.target.value)
+          }
+          className='align-center mb-5 max-w-md'
         />
       )}
       <div className='rounded-md border'>
@@ -125,10 +127,9 @@ export default function Datatable_Users<TData, TValue>({
           </TableBody>
         </Table>
       </div>
-      <div className='pt-5 mx-5'>
-      <DatatablePagination table={table} />
+      <div className='mx-5 pt-5'>
+        <DatatablePagination table={table} />
       </div>
-
     </div>
   );
 }

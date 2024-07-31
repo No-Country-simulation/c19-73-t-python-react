@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import { Button } from '../../../components/ui/button';
-import { Card } from '../../../components/ui/card';
+import { Button } from '../../../../components/ui/button';
+import { Card } from '../../../../components/ui/card';
 import {
   Tabs,
   TabsContent,
   TabsList,
   TabsTrigger,
-} from '../../../components/ui/tabs';
-import { getPedidos, pedido } from '../../../core/pedidos';
+} from '../../../../components/ui/tabs';
+import { getPedidos, pedido } from '../../../../core/pedidos';
 
 const PedidosPage: React.FC = () => {
   const [pedidos, setPedidos] = useState<pedido[]>([]);
@@ -115,7 +115,7 @@ const PedidosPage: React.FC = () => {
                     </div>
                   </div>
                   <Link
-                    to={`/pedidos/detalle-pedido/${pedido.id_pedido}`}
+                    to={`orders/${pedido.id_pedido}`}
                     className='text-white no-underline'
                   >
                     <Button className='rounded px-4 py-2 text-white transition hover:bg-accent'>

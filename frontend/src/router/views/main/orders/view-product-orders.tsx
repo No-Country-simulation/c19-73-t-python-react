@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
-import { Button } from '../../../components/ui/button';
-import { Card } from '../../../components/ui/card';
+import { Button } from '../../../../components/ui/button';
+import { Card } from '../../../../components/ui/card';
 import {
   getPedidoDetalles,
   pedidoDetalle,
-} from '../../../core/pedidoDetalle';
-import { getPedidos, pedido } from '../../../core/pedidos';
-import { getProductoById, productos } from '../../../core/productos';
-import { getTiendas, tiendas } from '../../../core/tienda';
+} from '../../../../core/pedidoDetalle';
+import { getPedidos, pedido } from '../../../../core/pedidos';
+import { getProductoById, productos } from '../../../../core/productos';
+import { getTiendas, tiendas } from '../../../../core/tienda';
 
 const PedidoDetallePage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -118,24 +118,30 @@ const PedidoDetallePage: React.FC = () => {
                 alt={producto.nombre_producto}
                 className='mr-4 h-40 w-40 object-cover'
               />
-             <div className="flex-grow">
-                <div className="mb-2">
+              <div className='flex-grow'>
+                <div className='mb-2'>
                   <span className='text-2xl'>{producto.nombre_producto}</span>
                 </div>
-                <div className="mb-2">
+                <div className='mb-2'>
                   <span>{producto.descripcion_producto}</span>
                 </div>
-                <div className="mb-2">
+                <div className='mb-2'>
                   <span>${producto.precio} c/u</span>
                 </div>
-                <div className="mb-2 text-xs">
-                  <span><strong>Vendido por:</strong> {tienda.nombre_tienda}</span>
+                <div className='mb-2 text-xs'>
+                  <span>
+                    <strong>Vendido por:</strong> {tienda.nombre_tienda}
+                  </span>
                 </div>
-                <div className="mb-2 text-xs">
-                  <span><strong>Cantidad solicitada:</strong> {detalle.cantidad}</span>
+                <div className='mb-2 text-xs'>
+                  <span>
+                    <strong>Cantidad solicitada:</strong> {detalle.cantidad}
+                  </span>
                 </div>
-                <div className="mb-2 text-xs">
-                  <span><strong>Total:</strong> ${detalle.total}</span>
+                <div className='mb-2 text-xs'>
+                  <span>
+                    <strong>Total:</strong> ${detalle.total}
+                  </span>
                 </div>
               </div>
             </Card>

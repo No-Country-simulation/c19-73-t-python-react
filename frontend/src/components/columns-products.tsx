@@ -1,11 +1,19 @@
 // components/columns.tsx
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
+
 import { ColumnDef } from '@tanstack/react-table';
+
+import {
+  categorias_productos,
+  getCategorias,
+} from '../core/categorias_productos';
 import { productos } from '../core/productos';
-import { categorias_productos, getCategorias } from '../core/categorias_productos';
 import { tiendas } from '../core/tienda';
-import { getTiendas } from '../core/tienda'; // Asegúrate de tener una función para obtener las tiendas
-import ActionsCellsProduct from './actions-cells-product'; // Asegúrate de tener el componente ActionsCellsProduct
+import { getTiendas } from '../core/tienda';
+// Asegúrate de tener una función para obtener las tiendas
+import ActionsCellsProduct from './actions-cells-product';
+
+// Asegúrate de tener el componente ActionsCellsProduct
 
 export const useColumns_productos = () => {
   const [categorias, setCategorias] = useState<categorias_productos[]>([]);
@@ -17,12 +25,14 @@ export const useColumns_productos = () => {
   }, []);
 
   const getCategoriaNombre = (id_categoria: number | undefined) => {
-    const categoria = categorias.find(categoria => categoria.id_categoría_producto === id_categoria);
+    const categoria = categorias.find(
+      (categoria) => categoria.id_categoría_producto === id_categoria,
+    );
     return categoria ? categoria.nombre_categoría_producto : 'Desconocido';
   };
 
   const getTiendaNombre = (id_tienda: number | undefined) => {
-    const tienda = tiendas.find(tienda => tienda.id_tienda === id_tienda);
+    const tienda = tiendas.find((tienda) => tienda.id_tienda === id_tienda);
     return tienda ? tienda.nombre_tienda : 'Desconocido';
   };
 

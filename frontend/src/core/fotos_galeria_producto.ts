@@ -1,7 +1,7 @@
-import { productos } from "./productos";
+import { productos } from './productos';
 
-export type fotos_galeria_producto ={
-    id_foto_galeria: number;
-    id_producto: productos;
-    ruta_foto: string;
-}
+export type fotos_galeria_producto = {
+  id_foto_galeria: number;
+  id_producto: productos;
+  ruta_foto: string;
+};
