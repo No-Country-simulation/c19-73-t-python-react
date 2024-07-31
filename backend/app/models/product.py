@@ -31,3 +31,8 @@ class SeeProduct(BaseModel):
     precio: float
     stock: int
 
+# Modelo para los datos del producto en el pedido
+class ProductOrder(BaseModel):
+    id_producto: int
+    cantidad: int
+

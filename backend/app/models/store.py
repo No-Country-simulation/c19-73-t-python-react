@@ -1,5 +1,7 @@
 from pydantic import BaseModel
 from typing import Optional
+from app.models.product import ProductOrder
+from typing import List
 
 class StoreCreate(BaseModel):
     nombre_tienda: str
@@ -22,3 +24,7 @@ class StoreUpdate(BaseModel):
 
 class StoreStateUpdate(BaseModel):
     id_estado_tienda: int
+
+# Modelo para la solicitud de creación de pedidos
+class CreateOrderRequest(BaseModel):
+    productos: List[ProductOrder]
