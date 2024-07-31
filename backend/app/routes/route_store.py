@@ -1,10 +1,11 @@
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, HTTPException, status
 from app.auth.auth import get_current_user
 from app.db.db_conexion import get_db
-from app.models.store import StoreUpdate
+from app.models.store import StoreUpdate, OrderResponse
 from app.models.product import ProductCreate, ProductUpdate
-from app.controllers.store_controller import update_store
+from app.controllers.store_controller import update_store, get_store_orders
 from app.controllers.product_controller import create_product, update_product, delete_product_store_seller
+from typing import List
 
 router = APIRouter()
 
@@ -29,9 +30,11 @@ async def delete_product_store(product_id: int, current_user: dict = Depends(get
     return delete_product_store_seller(product_id, current_user, db)
 
 # empoint para ver pedidos de la tienda
-@router.get("/see_orders_store")
-async def get_see_orders_store():
-    pass
+@router.get("/see_orders_store", response_model=List[OrderResponse])
+def get_see_store_orders(current_user: dict = Depends(get_current_user), db: any = Depends(get_db)):
+    if current_user is None or current_user['rol_id'] != 3:  # Asegúrate de que el rol_id para las tiendas sea 3
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Not authenticated or not authorized")
+    return get_store_orders(current_user['id_usuario'], db)
 
 # empoint para actualizar estado del pedido
 @router.put("/update_state_orders")
