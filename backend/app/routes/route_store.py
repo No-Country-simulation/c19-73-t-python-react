@@ -1,9 +1,10 @@
 from fastapi import APIRouter, Depends, HTTPException, status
 from app.auth.auth import get_current_user
 from app.db.db_conexion import get_db
-from app.models.store import StoreUpdate, OrderResponse
+from app.models.store import StoreUpdate, OrderResponse, UpdateOrderStatus
 from app.models.product import ProductCreate, ProductUpdate
-from app.controllers.store_controller import update_store, get_store_orders
+from app.models.user import User
+from app.controllers.store_controller import update_store, get_store_orders, update_order_status
 from app.controllers.product_controller import create_product, update_product, delete_product_store_seller
 from typing import List
 
@@ -37,6 +38,8 @@ def get_see_store_orders(current_user: dict = Depends(get_current_user), db: any
     return get_store_orders(current_user['id_usuario'], db)
 
 # empoint para actualizar estado del pedido
-@router.put("/update_state_orders")
-async def put_update_state_orders():
-    pass
+@router.put("/update_order_status", response_model=str)
+def update_order_status_endpoint(order: UpdateOrderStatus, db: any = Depends(get_db), current_user: User = Depends(get_current_user)):
+    if current_user.rol_id != 3:  # Solo los usuarios con rol "seller" pueden acceder
+        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="No autorizado")
+    return update_order_status(order.id_pedido, order.id_estado_pedido, db)
