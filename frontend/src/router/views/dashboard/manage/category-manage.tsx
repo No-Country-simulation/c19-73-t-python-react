@@ -1,13 +1,13 @@
 // StoreManage.tsx
 import { useEffect, useState } from 'react';
 
-import { useColumns_categorias } from '../../../components/columns-category';
-import { LabelH1 } from '../../../components/ui/label';
+import { useColumns_categorias } from '../../../../components/columns-category';
+import { LabelH1 } from '../../../../components/ui/label';
 import {
   categorias_productos,
   getCategorias,
-} from '../../../core/categorias_productos';
-import Datatable_Users from '../auth/components/datatable-users';
+} from '../../../../core/categorias_productos';
+import Datatable_Users from '../../auth/components/datatable-users';
 
 function CategoryManage() {
   const [categoria, setCategoria] = useState<categorias_productos[]>([]);

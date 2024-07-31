@@ -8,15 +8,15 @@ import { ThemesTester } from '../components/ui/themes-tester';
 import { registerUserAction } from './actions/auth';
 import { editUserAction } from './actions/main';
 import { LayoutAuth, LoginPage, RegisterPage } from './views/auth';
+import CategoryManage from './views/dashboard/manage/category-manage';
+import ProductsManage from './views/dashboard/manage/products-manage';
+import StoreManage from './views/dashboard/manage/store-manage';
+import UsersManage from './views/dashboard/manage/users-manage';
 import { EditProfilePage, LayoutMain, MyProfilePage } from './views/main';
 import Dashboard from './views/main/dashboard-admin';
 import InicioPage from './views/main/inicio';
-import CategoryManage from './views/manage/category-manage';
-import ProductsManage from './views/manage/products-manage';
-import StoreManage from './views/manage/store-manage';
-import Users_Manage from './views/manage/users-manage';
-import PedidosPage from './views/orders/view-orders';
-import PedidoDetallePage from './views/orders/view-product-orders';
+import PedidosPage from './views/main/orders/view-orders';
+import PedidoDetallePage from './views/main/orders/view-product-orders';
 
 export const Router = () => {
   const router = createBrowserRouter([
@@ -41,7 +41,7 @@ export const Router = () => {
             },
             {
               path: 'users',
-              element: <Users_Manage />,
+              element: <UsersManage />,
             },
             {
               path: 'stores',

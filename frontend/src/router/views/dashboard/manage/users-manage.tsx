@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 
-import { useColumns } from '../../../components/columns';
-import { LabelH1 } from '../../../components/ui/label';
-import { getUser } from '../../../core/user';
-import Datatable_Users from '../auth/components/datatable-users';
+import { useColumns } from '../../../../components/columns';
+import { LabelH1 } from '../../../../components/ui/label';
+import { getUser } from '../../../../core/user';
+import Datatable_Users from '../../auth/components/datatable-users';
 
 interface Usuario {
   id_usuario?: number;

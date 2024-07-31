@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import { Button } from '../../../components/ui/button';
-import { Card } from '../../../components/ui/card';
+import { Button } from '../../../../components/ui/button';
+import { Card } from '../../../../components/ui/card';
 import {
   Tabs,
   TabsContent,
   TabsList,
   TabsTrigger,
-} from '../../../components/ui/tabs';
-import { getPedidos, pedido } from '../../../core/pedidos';
+} from '../../../../components/ui/tabs';
+import { getPedidos, pedido } from '../../../../core/pedidos';
 
 const PedidosPage: React.FC = () => {
   const [pedidos, setPedidos] = useState<pedido[]>([]);

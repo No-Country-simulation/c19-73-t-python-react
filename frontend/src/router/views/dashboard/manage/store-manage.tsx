@@ -1,10 +1,10 @@
 // StoreManage.tsx
 import { useEffect, useState } from 'react';
 
-import { useColumns_store } from '../../../components/columns-store';
-import { LabelH1 } from '../../../components/ui/label';
-import { getTiendas, tiendas } from '../../../core/tienda';
-import Datatable_Users from '../auth/components/datatable-users';
+import { useColumns_store } from '../../../../components/columns-store';
+import { LabelH1 } from '../../../../components/ui/label';
+import { getTiendas, tiendas } from '../../../../core/tienda';
+import Datatable_Users from '../../auth/components/datatable-users';
 
 function StoreManage() {
   const [tienda, setTiendas] = useState<tiendas[]>([]);
