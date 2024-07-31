@@ -25,6 +25,10 @@ app.add_middleware(
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="login")
 
+@app.get("/", tags=["Public"])
+async def welcome():
+    return {"Mensaje":"Bienvenido(a) a la API Marketplace Artesanias"}
+
 # empoint para registrar un usuario.
 @app.post("/register_user", tags=["Public"])
 async def post_register_user(user: UserCreate,  db: any = Depends(get_db)):
