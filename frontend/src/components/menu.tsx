@@ -19,7 +19,7 @@ export const Menu = () => {
   return (
     <div className='fixed top-0 z-50 flex w-full justify-between gap-2 bg-primary bg-opacity-50 p-2 px-5'>
       <div>
-        <Link to='/inicio'>
+        <Link to='/'>
           <img src={logo} alt='Logo' className='h-20 w-auto' />
         </Link>
       </div>
@@ -36,7 +36,7 @@ export const Menu = () => {
                     <li className='row-span-3'>
                       <NavigationMenuLink asChild>
                         <Link
-                          to='/viewInfo'
+                          to='profile'
                           className='flex h-full w-full select-none flex-col justify-end rounded-md p-2 no-underline outline-none hover:border-gray-500 hover:bg-accent focus:shadow-md'
                         >
                           Mi perfil
@@ -46,7 +46,7 @@ export const Menu = () => {
                     <li className='row-span-3'>
                       <NavigationMenuLink asChild>
                         <Link
-                          to='/pedidos'
+                          to='orders'
                           className='flex h-full w-full select-none flex-col justify-end rounded-md p-2 no-underline outline-none hover:border-gray-500 hover:bg-accent focus:shadow-md'
                         >
                           Mis pedidos
@@ -56,7 +56,7 @@ export const Menu = () => {
                     <li className='row-span-3'>
                       <NavigationMenuLink asChild>
                         <Link
-                          to='/panel'
+                          to='dashboard'
                           className='flex h-full w-full select-none flex-col justify-end rounded-md p-2 no-underline outline-none hover:border-gray-500 hover:bg-accent focus:shadow-md'
                         >
                           Panel de control

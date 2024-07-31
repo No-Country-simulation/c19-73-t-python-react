@@ -115,7 +115,7 @@ const PedidosPage: React.FC = () => {
                     </div>
                   </div>
                   <Link
-                    to={`/pedidos/detalle-pedido/${pedido.id_pedido}`}
+                    to={`orders/${pedido.id_pedido}`}
                     className='text-white no-underline'
                   >
                     <Button className='rounded px-4 py-2 text-white transition hover:bg-accent'>

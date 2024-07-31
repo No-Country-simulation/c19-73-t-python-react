@@ -17,11 +17,6 @@ import StoreManage from './views/manage/store-manage';
 import Users_Manage from './views/manage/users-manage';
 import PedidosPage from './views/orders/view-orders';
 import PedidoDetallePage from './views/orders/view-product-orders';
-import {
-  EditInfo,
-  InfoPage,
-  LayoutView,
-} from './views/perfil-users/viewInfo/index';
 
 export const Router = () => {
   const router = createBrowserRouter([
@@ -31,31 +26,36 @@ export const Router = () => {
       children: [
         {
           index: true,
+          element: <InicioPage />,
+        },
+        {
+          path: 'theme-tester',
           element: <ThemesTester />,
         },
         {
-          path: '/data',
-          element: <Users_Manage />,
-        },
-        {
-          path: '/panel',
-          element: <Dashboard />,
-        },
-        {
-          path: '/gestion_tiendas',
-          element: <StoreManage />,
-        },
-        {
-          path: '/gestion_categorias',
-          element: <CategoryManage />,
-        },
-        {
-          path: '/gestion_productos',
-          element: <ProductsManage />,
-        },
-        {
-          path: '/inicio',
-          element: <InicioPage />,
+          path: '/dashboard',
+          children: [
+            {
+              index: true,
+              element: <Dashboard />,
+            },
+            {
+              path: 'users',
+              element: <Users_Manage />,
+            },
+            {
+              path: 'stores',
+              element: <StoreManage />,
+            },
+            {
+              path: 'categories',
+              element: <CategoryManage />,
+            },
+            {
+              path: 'products',
+              element: <ProductsManage />,
+            },
+          ],
         },
         {
           path: 'profile',
@@ -68,6 +68,19 @@ export const Router = () => {
               path: 'edit',
               element: <EditProfilePage />,
               action: editUserAction(),
+            },
+          ],
+        },
+        {
+          path: 'orders',
+          children: [
+            {
+              index: true,
+              element: <PedidosPage />,
+            },
+            {
+              path: 'orders/:id',
+              element: <PedidoDetallePage />,
             },
           ],
         },
@@ -85,34 +98,6 @@ export const Router = () => {
           path: 'register',
           element: <RegisterPage />,
           action: registerUserAction(),
-        },
-      ],
-    },
-    {
-      path: 'viewInfo',
-      element: <LayoutView />,
-      children: [
-        {
-          index: true,
-          element: <InfoPage />,
-        },
-        {
-          path: 'edit',
-          element: <EditInfo />,
-        },
-      ],
-    },
-    {
-      path: 'pedidos',
-      element: <LayoutMain />,
-      children: [
-        {
-          index: true,
-          element: <PedidosPage />,
-        },
-        {
-          path: 'detalle-pedido/:id',
-          element: <PedidoDetallePage />,
         },
       ],
     },

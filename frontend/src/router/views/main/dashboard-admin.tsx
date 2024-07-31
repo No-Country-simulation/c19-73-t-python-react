@@ -33,26 +33,26 @@ const Dashboard: React.FC = () => {
     <div className='flex flex-col items-center px-6 py-12'>
       <h1 className='mb-6 text-4xl'>Panel de control</h1>
       <div className='mb-8 grid w-full max-w-4xl grid-cols-1 gap-4 md:grid-cols-4'>
-        <Link to='/data'>
-          <Card className='flex h-40 flex-col items-center justify-center rounded-lg border border-4 border-accent bg-white p-4 shadow'>
+        <Link to='users'>
+          <Card className='flex h-40 flex-col items-center justify-center rounded-lg border-4 border-accent bg-white p-4 shadow'>
             <Users size={48} className='mb-2' />
             <h2 className='text-center text-xl'>Gestión de Usuarios</h2>
           </Card>
         </Link>
-        <Link to='/gestion_productos'>
-          <Card className='flex h-40 flex-col items-center justify-center rounded-lg border border-4 border-accent bg-white p-4 shadow'>
+        <Link to='products'>
+          <Card className='flex h-40 flex-col items-center justify-center rounded-lg border-4 border-accent bg-white p-4 shadow'>
             <Box size={48} className='mb-2' />
             <h2 className='text-center text-xl'>Gestión de Productos</h2>
           </Card>
         </Link>
-        <Link to='/gestion-tiendas'>
-          <Card className='flex h-40 flex-col items-center justify-center rounded-lg border border-4 border-accent bg-white p-4 shadow'>
+        <Link to='stores'>
+          <Card className='flex h-40 flex-col items-center justify-center rounded-lg border-4 border-accent bg-white p-4 shadow'>
             <Store size={48} className='mb-2' />
             <h2 className='text-center text-xl'>Gestión de Tiendas</h2>
           </Card>
         </Link>
-        <Link to='/gestion_categorias'>
-          <Card className='flex h-40 flex-col items-center justify-center rounded-lg border border-4 border-accent bg-white p-4 shadow'>
+        <Link to='categories'>
+          <Card className='flex h-40 flex-col items-center justify-center rounded-lg border-4 border-accent bg-white p-4 shadow'>
             <Tag size={48} className='mb-2' />
             <h2 className='text-center text-xl'>Gestión de Categorías</h2>
           </Card>
