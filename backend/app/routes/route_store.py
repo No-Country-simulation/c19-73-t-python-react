@@ -4,9 +4,9 @@ from app.db.db_conexion import get_db
 from app.models.store import StoreUpdate, OrderResponse, UpdateOrderStatus
 from app.models.product import ProductCreate, ProductUpdate
 from app.models.user import User
-from app.controllers.store_controller import update_store, get_orders_by_store, update_order_status
+from app.controllers.store_controller import update_store, get_orders_by_store, update_order_status_in_db
 from app.controllers.product_controller import create_product, update_product, delete_product_store_seller
-from typing import List, Dict
+from typing import List, Dict, Any
 
 router = APIRouter()
 
@@ -47,8 +47,17 @@ async def get_see_store_orders(
     return store_orders
 
 # empoint para actualizar estado del pedido
-@router.put("/update_order_status", response_model=str)
-async def update_order_status_endpoint(order: UpdateOrderStatus, db: any = Depends(get_db), current_user: User = Depends(get_current_user)):
-    if current_user.rol_id != 3:  # Solo los usuarios con rol "seller" pueden acceder
-        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="No autorizado")
-    return update_order_status(order.id_pedido, order.id_estado_pedido, db)
+@router.put("/update_order_status")
+async def update_order_status(
+    order_status: UpdateOrderStatus,
+    current_user: dict = Depends(get_current_user),  # Asegurar que el usuario está autenticado
+    db: Any = Depends(get_db)
+):
+    if current_user is None or current_user['rol_id'] != 3:  # Solo usuarios con rol de vendedor pueden actualizar
+        raise HTTPException(status_code=401, detail="Not authenticated or not authorized")
+    try:
+        result = update_order_status_in_db(db, order_status.id_pedido, order_status.id_estado_pedido)
+        return result
+    except Exception as e:
+        print(f"Error updating order status: {e}")
+        raise HTTPException(status_code=500, detail="Internal Server Error")
