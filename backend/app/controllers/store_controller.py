@@ -105,3 +105,39 @@ def see_all_stores_controller(db):
     cursor.close()
     return stores
 
+# Función para obtener la tienda de un producto
+def get_product_store(db, id_producto: int) -> int:
+    cursor = db.cursor(dictionary=True)
+    query = "SELECT id_tienda FROM productos WHERE id_producto = %s"
+    cursor.execute(query, (id_producto,))
+    result = cursor.fetchone()
+    cursor.close()
+    if result:
+        return result['id_tienda']
+    else:
+        raise HTTPException(status_code=404, detail="Producto no encontrado")
+
+# Función para obtener el precio de un producto
+def get_product_price(db, id_producto: int) -> float:
+    cursor = db.cursor(dictionary=True)
+    query = "SELECT precio FROM productos WHERE id_producto = %s"
+    cursor.execute(query, (id_producto,))
+    result = cursor.fetchone()
+    cursor.close()
+    if result:
+        return result['precio']
+    else:
+        raise HTTPException(status_code=404, detail="Producto no encontrado")
+
+# Función para crear un registro de pedido
+def create_order(db, id_usuario: int, id_tienda: int, id_producto: int, cantidad: int, total: float):
+    cursor = db.cursor()
+    query = """
+    INSERT INTO pedidos (id_usuario, id_tienda, id_producto, id_estado_pedido, cantidad, fecha_y_hora, total)
+    VALUES (%s, %s, %s, %s, %s, NOW(), %s)
+    """
+    estado_pendiente = 1  # Estado "Pendiente"
+    cursor.execute(query, (id_usuario, id_tienda, id_producto, estado_pendiente, cantidad, total))
+    db.commit()
+    cursor.close()
+
