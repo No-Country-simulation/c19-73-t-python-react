@@ -180,3 +180,13 @@ def get_store_orders(store_id: int, db):
         }
         for row in orders
     ]
+
+def update_order_status(id_pedido: int, id_estado_pedido: int, db) -> str:
+    query = f"""
+    UPDATE pedidos
+    SET id_estado_pedido = {id_estado_pedido}
+    WHERE id_pedido = {id_pedido}
+    """
+    db.execute(query)
+    db.commit()
+    return "Estado del pedido actualizado correctamente."
