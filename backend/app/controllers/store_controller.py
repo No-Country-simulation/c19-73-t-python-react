@@ -141,3 +141,52 @@ def create_order(db, id_usuario: int, id_tienda: int, id_producto: int, cantidad
     db.commit()
     cursor.close()
 
+def get_user_orders(user_id: int, db):
+    cursor = db.cursor()
+    query = f"SELECT * FROM pedidos WHERE id_usuario = {user_id}"
+    cursor.execute(query)
+    orders = cursor.fetchall()
+    cursor.close()
+    return [
+        {
+            "id_pedido": row[0],
+            "id_usuario": row[1],
+            "id_tienda": row[2],
+            "id_producto": row[3],
+            "id_estado_pedido": row[4],
+            "cantidad": row[5],
+            "fecha_y_hora": row[6],
+            "total": row[7]
+        }
+        for row in orders
+    ]
+
+def get_store_orders(store_id: int, db):
+    cursor = db.cursor()
+    query = "SELECT * FROM pedidos WHERE id_tienda = %s"
+    cursor.execute(query, (store_id,))
+    orders = cursor.fetchall()
+    cursor.close()
+    return [
+        {
+            "id_pedido": row[0],
+            "id_usuario": row[1],
+            "id_tienda": row[2],
+            "id_producto": row[3],
+            "id_estado_pedido": row[4],
+            "cantidad": row[5],
+            "fecha_y_hora": row[6],
+            "total": row[7]
+        }
+        for row in orders
+    ]
+
+def update_order_status(id_pedido: int, id_estado_pedido: int, db) -> str:
+    query = f"""
+    UPDATE pedidos
+    SET id_estado_pedido = {id_estado_pedido}
+    WHERE id_pedido = {id_pedido}
+    """
+    db.execute(query)
+    db.commit()
+    return "Estado del pedido actualizado correctamente."

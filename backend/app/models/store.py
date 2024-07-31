@@ -28,3 +28,17 @@ class StoreStateUpdate(BaseModel):
 # Modelo para la solicitud de creación de pedidos
 class CreateOrderRequest(BaseModel):
     productos: List[ProductOrder]
+
+class OrderResponse(BaseModel):
+    id_pedido: int
+    id_usuario: int
+    id_tienda: int
+    id_producto: int
+    id_estado_pedido: int
+    cantidad: int
+    fecha_y_hora: str
+    total: int
+
+class UpdateOrderStatus(BaseModel):
+    id_pedido: int
+    id_estado_pedido: int
