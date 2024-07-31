@@ -1,5 +1,6 @@
 import { Outlet } from 'react-router-dom';
-import { Menu } from "../../../../components/menu";
+
+import { Menu } from '../../../../components/menu';
 
 export const LayoutView = () => {
   /**
@@ -11,13 +12,13 @@ export const LayoutView = () => {
    * `hijas` definidas en el router
    */
   return (
-    <div className="h-screen bg-white flex flex-col">
-        <header className="mb-2">
-            <Menu></Menu>
-        </header>
-        <main className='flex-1 flex flex-col justify-center items-center'>
-            <Outlet />
-        </main>
+    <div className='flex h-screen flex-col bg-white'>
+      <header className='mb-2'>
+        <Menu></Menu>
+      </header>
+      <main className='flex flex-1 flex-col items-center justify-center'>
+        <Outlet />
+      </main>
     </div>
   );
 };

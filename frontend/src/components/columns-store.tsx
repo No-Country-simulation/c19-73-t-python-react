@@ -1,8 +1,10 @@
 // components/columns.tsx
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
+
 import { ColumnDef } from '@tanstack/react-table';
-import { tiendas } from '../core/tienda';
+
 import { estados_tienda, get_estado_tiendas } from '../core/estados_tienda';
+import { tiendas } from '../core/tienda';
 import ActionsCellsStore from './actions-cells-store';
 
 export const useColumns_store = () => {
@@ -13,7 +15,9 @@ export const useColumns_store = () => {
   }, []);
 
   const getEstadoNombre = (id_estado_tienda: number | undefined) => {
-    const estado = estados.find(estado => estado.id_estado_tienda === id_estado_tienda);
+    const estado = estados.find(
+      (estado) => estado.id_estado_tienda === id_estado_tienda,
+    );
     return estado ? estado.nombre_estado_tienda : 'Desconocido';
   };
 
@@ -22,7 +26,11 @@ export const useColumns_store = () => {
       accessorKey: 'logo_tienda',
       header: 'Logo',
       cell: ({ row }) => (
-        <img src={row.original.logo_tienda} alt="Logo" className="w-10 h-10 object-cover" />
+        <img
+          src={row.original.logo_tienda}
+          alt='Logo'
+          className='h-10 w-10 object-cover'
+        />
       ),
     },
     {

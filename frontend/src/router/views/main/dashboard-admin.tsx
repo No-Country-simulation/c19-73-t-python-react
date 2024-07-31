@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { getUser } from '../../../core/user';
+
+import { Box, Store, Tag, Users } from 'lucide-react';
+
+import { Card } from '../../../components/ui/card';
 import { getProductos } from '../../../core/productos';
 import { getTiendas } from '../../../core/tienda';
-import { Card } from '../../../components/ui/card';
-import { Users, Box, Store, Tag } from 'lucide-react';
+import { getUser } from '../../../core/user';
 
 const Dashboard: React.FC = () => {
   const [usuariosCount, setUsuariosCount] = useState(0);
@@ -16,7 +18,7 @@ const Dashboard: React.FC = () => {
       const [usuarios, tiendas, productos] = await Promise.all([
         getUser(),
         getTiendas(),
-        getProductos()
+        getProductos(),
       ]);
 
       setUsuariosCount(usuarios.length);
@@ -28,51 +30,51 @@ const Dashboard: React.FC = () => {
   }, []);
 
   return (
-    <div className="flex flex-col items-center py-12 px-6">
-      <h1 className="text-4xl mb-6">Panel de control</h1>
-      <div className="w-full max-w-4xl grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
-        <Link to="/data">
-          <Card className="p-4 border rounded-lg shadow flex flex-col items-center justify-center bg-white border-accent border-4 h-40">
-            <Users size={48} className="mb-2" />
-            <h2 className="text-xl text-center">Gestión de Usuarios</h2>
+    <div className='flex flex-col items-center px-6 py-12'>
+      <h1 className='mb-6 text-4xl'>Panel de control</h1>
+      <div className='mb-8 grid w-full max-w-4xl grid-cols-1 gap-4 md:grid-cols-4'>
+        <Link to='/data'>
+          <Card className='flex h-40 flex-col items-center justify-center rounded-lg border border-4 border-accent bg-white p-4 shadow'>
+            <Users size={48} className='mb-2' />
+            <h2 className='text-center text-xl'>Gestión de Usuarios</h2>
           </Card>
         </Link>
-        <Link to="/gestion_productos">
-          <Card className="p-4 border rounded-lg shadow flex flex-col items-center justify-center bg-white border-accent border-4 h-40">
-            <Box size={48} className="mb-2" />
-            <h2 className="text-xl text-center">Gestión de Productos</h2>
+        <Link to='/gestion_productos'>
+          <Card className='flex h-40 flex-col items-center justify-center rounded-lg border border-4 border-accent bg-white p-4 shadow'>
+            <Box size={48} className='mb-2' />
+            <h2 className='text-center text-xl'>Gestión de Productos</h2>
           </Card>
         </Link>
-        <Link to="/gestion-tiendas">
-          <Card className="p-4 border rounded-lg shadow flex flex-col items-center justify-center bg-white border-accent border-4 h-40">
-            <Store size={48} className="mb-2" />
-            <h2 className="text-xl text-center">Gestión de Tiendas</h2>
+        <Link to='/gestion-tiendas'>
+          <Card className='flex h-40 flex-col items-center justify-center rounded-lg border border-4 border-accent bg-white p-4 shadow'>
+            <Store size={48} className='mb-2' />
+            <h2 className='text-center text-xl'>Gestión de Tiendas</h2>
           </Card>
         </Link>
-        <Link to="/gestion_categorias">
-          <Card className="p-4 border rounded-lg shadow flex flex-col items-center justify-center bg-white border-accent border-4 h-40">
-            <Tag size={48} className="mb-2" />
-            <h2 className="text-xl text-center">Gestión de Categorías</h2>
+        <Link to='/gestion_categorias'>
+          <Card className='flex h-40 flex-col items-center justify-center rounded-lg border border-4 border-accent bg-white p-4 shadow'>
+            <Tag size={48} className='mb-2' />
+            <h2 className='text-center text-xl'>Gestión de Categorías</h2>
           </Card>
         </Link>
       </div>
-      <div className="w-full max-w-4xl grid grid-cols-1 md:grid-cols-3 gap-4">
-        <Card className="p-4 border rounded-lg shadow flex flex-col items-center justify-center h-40">
+      <div className='grid w-full max-w-4xl grid-cols-1 gap-4 md:grid-cols-3'>
+        <Card className='flex h-40 flex-col items-center justify-center rounded-lg border p-4 shadow'>
           <div>
-            <h2 className="text-xl text-center">Cantidad de Usuarios</h2>
-            <p className="text-3xl text-center">{usuariosCount}</p>
+            <h2 className='text-center text-xl'>Cantidad de Usuarios</h2>
+            <p className='text-center text-3xl'>{usuariosCount}</p>
           </div>
         </Card>
-        <Card className="p-4 border rounded-lg shadow flex flex-col items-center justify-center h-40">
+        <Card className='flex h-40 flex-col items-center justify-center rounded-lg border p-4 shadow'>
           <div>
-            <h2 className="text-xl text-center">Cantidad de Productos</h2>
-            <p className="text-3xl text-center">{productosCount}</p>
+            <h2 className='text-center text-xl'>Cantidad de Productos</h2>
+            <p className='text-center text-3xl'>{productosCount}</p>
           </div>
         </Card>
-        <Card className="p-4 border rounded-lg shadow flex flex-col items-center justify-center h-40">
+        <Card className='flex h-40 flex-col items-center justify-center rounded-lg border p-4 shadow'>
           <div>
-            <h2 className="text-xl text-center">Cantidad de Tiendas</h2>
-            <p className="text-3xl text-center">{tiendasCount}</p>
+            <h2 className='text-center text-xl'>Cantidad de Tiendas</h2>
+            <p className='text-center text-3xl'>{tiendasCount}</p>
           </div>
         </Card>
       </div>

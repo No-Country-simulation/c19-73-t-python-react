@@ -42,4 +42,3 @@ const LabelH1 = React.forwardRef<
 LabelH1.displayName = LabelPrimitive.Root.displayName;
 
 export { LabelH1 };
-

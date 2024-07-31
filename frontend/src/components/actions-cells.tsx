@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -7,6 +8,8 @@ import {
 } from '@radix-ui/react-dropdown-menu';
 import { Label } from '@radix-ui/react-label';
 import { Eye, EyeOff, SquarePen } from 'lucide-react';
+import { toast } from 'sonner';
+
 import {
   Dialog,
   DialogContent,
@@ -17,12 +20,11 @@ import {
   DialogTrigger,
 } from '../components/ui/dialog';
 import type { rol } from '../core/rol';
+import { getRol } from '../core/rol';
 import type { usuario } from '../core/user';
 import { Button } from './ui/button';
 import { Input } from './ui/input';
 import { TableCell } from './ui/table';
-import { getRol } from '../core/rol';
-import { toast } from 'sonner';
 
 interface ActionsCellProps {
   usuario: usuario;
@@ -36,7 +38,8 @@ const ActionsCell: React.FC<ActionsCellProps> = ({ usuario }) => {
   const [repeatPassword, setRepeatPassword] = useState<string>('');
   const [isPasswordMatch, setIsPasswordMatch] = useState<boolean>(true);
   const [isPasswordVisible, setIsPasswordVisible] = useState<boolean>(false);
-  const [isRepeatPasswordVisible, setIsRepeatPasswordVisible] = useState<boolean>(false);
+  const [isRepeatPasswordVisible, setIsRepeatPasswordVisible] =
+    useState<boolean>(false);
 
   useEffect(() => {
     const fetchRoles = async () => {
@@ -53,7 +56,7 @@ const ActionsCell: React.FC<ActionsCellProps> = ({ usuario }) => {
 
   useEffect(() => {
     if (selectedUsuario) {
-      const role = roles.find(r => r.rol_id === selectedUsuario.rol_id);
+      const role = roles.find((r) => r.rol_id === selectedUsuario.rol_id);
       setSelectedRole(role?.nombre ?? 'Seleccionar rol');
     }
   }, [selectedUsuario, roles]);
@@ -78,7 +81,9 @@ const ActionsCell: React.FC<ActionsCellProps> = ({ usuario }) => {
     setPassword(e.target.value);
   };
 
-  const handleRepeatPasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleRepeatPasswordChange = (
+    e: React.ChangeEvent<HTMLInputElement>,
+  ) => {
     setRepeatPassword(e.target.value);
   };
 
@@ -95,8 +100,8 @@ const ActionsCell: React.FC<ActionsCellProps> = ({ usuario }) => {
     // ...
 
     // Luego de guardar, muestra el toast
-    toast("Usuario modificado", {
-      description: "El usuario seleccionado ha sido modificado con éxito"
+    toast('Usuario modificado', {
+      description: 'El usuario seleccionado ha sido modificado con éxito',
     });
 
     // Luego de guardar, limpia los campos de contraseña
@@ -123,7 +128,10 @@ const ActionsCell: React.FC<ActionsCellProps> = ({ usuario }) => {
             </DialogHeader>
             <div className='grid gap-4 py-4'>
               <div className='grid grid-cols-4 items-center gap-4'>
-                <Label htmlFor='Nombre' className='col-span-1 text-right text-sm'>
+                <Label
+                  htmlFor='Nombre'
+                  className='col-span-1 text-right text-sm'
+                >
                   Nombre:
                 </Label>
                 <Label htmlFor='nombre' className='col-span-3'>
@@ -131,7 +139,10 @@ const ActionsCell: React.FC<ActionsCellProps> = ({ usuario }) => {
                 </Label>
               </div>
               <div className='grid grid-cols-4 items-center gap-4'>
-                <Label htmlFor='rolLabel' className='col-span-1 text-right text-sm'>
+                <Label
+                  htmlFor='rolLabel'
+                  className='col-span-1 text-right text-sm'
+                >
                   Rol actual:
                 </Label>
                 <Label htmlFor='rol' className='col-span-3'>
@@ -139,7 +150,10 @@ const ActionsCell: React.FC<ActionsCellProps> = ({ usuario }) => {
                 </Label>
               </div>
               <div className='grid grid-cols-4 items-center gap-4'>
-                <Label htmlFor='rolLabel' className='col-span-1 text-right text-sm'>
+                <Label
+                  htmlFor='rolLabel'
+                  className='col-span-1 text-right text-sm'
+                >
                   Nuevo rol:
                 </Label>
                 <div className='col-span-3'>
@@ -151,7 +165,7 @@ const ActionsCell: React.FC<ActionsCellProps> = ({ usuario }) => {
                       {roles.map((rol) => (
                         <DropdownMenuItem
                           key={rol.rol_id}
-                          className='flex w-full items-center px-4 py-2 cursor-pointer hover:bg-gray-100'
+                          className='flex w-full cursor-pointer items-center px-4 py-2 hover:bg-gray-100'
                           onSelect={() => handleRoleChange(rol)}
                         >
                           {rol.nombre}
@@ -162,12 +176,16 @@ const ActionsCell: React.FC<ActionsCellProps> = ({ usuario }) => {
                 </div>
               </div>
               <div className='grid grid-cols-4 items-center gap-4'>
-                <Label className='col-span-4 text-sm text-center'>
-                  Si desea cambiar la contraseña, utilizar este apartado, si no, omitirlo.
+                <Label className='col-span-4 text-center text-sm'>
+                  Si desea cambiar la contraseña, utilizar este apartado, si no,
+                  omitirlo.
                 </Label>
               </div>
               <div className='grid grid-cols-4 items-center gap-4'>
-                <Label htmlFor='contraseñaLabel' className='col-span-1 text-right text-sm'>
+                <Label
+                  htmlFor='contraseñaLabel'
+                  className='col-span-1 text-right text-sm'
+                >
                   Contraseña:
                 </Label>
                 <div className='col-span-3 flex items-center'>
@@ -184,12 +202,19 @@ const ActionsCell: React.FC<ActionsCellProps> = ({ usuario }) => {
                     onClick={togglePasswordVisibility}
                     className='p-2'
                   >
-                    {isPasswordVisible ? <EyeOff size={20} /> : <Eye size={20} />}
+                    {isPasswordVisible ? (
+                      <EyeOff size={20} />
+                    ) : (
+                      <Eye size={20} />
+                    )}
                   </Button>
                 </div>
               </div>
               <div className='grid grid-cols-4 items-center gap-4'>
-                <Label htmlFor='contraseñaRepLabel' className='col-span-1 text-right text-sm'>
+                <Label
+                  htmlFor='contraseñaRepLabel'
+                  className='col-span-1 text-right text-sm'
+                >
                   Repetir contraseña:
                 </Label>
                 <div className='col-span-3 flex items-center'>
@@ -206,7 +231,11 @@ const ActionsCell: React.FC<ActionsCellProps> = ({ usuario }) => {
                     onClick={toggleRepeatPasswordVisibility}
                     className='p-2'
                   >
-                    {isRepeatPasswordVisible ? <EyeOff size={20} /> : <Eye size={20} />}
+                    {isRepeatPasswordVisible ? (
+                      <EyeOff size={20} />
+                    ) : (
+                      <Eye size={20} />
+                    )}
                   </Button>
                 </div>
               </div>
@@ -225,7 +254,7 @@ const ActionsCell: React.FC<ActionsCellProps> = ({ usuario }) => {
       </Dialog>
       <Dialog>
         <DialogTrigger asChild>
-          <Button className='rounded-full px-2 mx-3' onClick={handleViewClick}>
+          <Button className='mx-3 rounded-full px-2' onClick={handleViewClick}>
             <Eye size={23} color='#ffffff' />
           </Button>
         </DialogTrigger>
@@ -236,7 +265,10 @@ const ActionsCell: React.FC<ActionsCellProps> = ({ usuario }) => {
             </DialogHeader>
             <div className='grid gap-4 py-4'>
               <div className='grid grid-cols-4 items-center gap-4'>
-                <Label htmlFor='nombreLabel' className='col-span-1 text-right text-sm'>
+                <Label
+                  htmlFor='nombreLabel'
+                  className='col-span-1 text-right text-sm'
+                >
                   Nombre:
                 </Label>
                 <Label htmlFor='nombre' className='col-span-3'>
@@ -244,7 +276,10 @@ const ActionsCell: React.FC<ActionsCellProps> = ({ usuario }) => {
                 </Label>
               </div>
               <div className='grid grid-cols-4 items-center gap-4'>
-                <Label htmlFor='telefonoLabel' className='col-span-1 text-right text-sm'>
+                <Label
+                  htmlFor='telefonoLabel'
+                  className='col-span-1 text-right text-sm'
+                >
                   Teléfono:
                 </Label>
                 <Label htmlFor='telefono' className='col-span-3'>
@@ -252,7 +287,10 @@ const ActionsCell: React.FC<ActionsCellProps> = ({ usuario }) => {
                 </Label>
               </div>
               <div className='grid grid-cols-4 items-center gap-4'>
-                <Label htmlFor='correoLabel' className='col-span-1 text-right text-sm'>
+                <Label
+                  htmlFor='correoLabel'
+                  className='col-span-1 text-right text-sm'
+                >
                   E-mail:
                 </Label>
                 <Label htmlFor='correo' className='col-span-3'>
@@ -260,7 +298,10 @@ const ActionsCell: React.FC<ActionsCellProps> = ({ usuario }) => {
                 </Label>
               </div>
               <div className='grid grid-cols-4 items-center gap-4'>
-                <Label htmlFor='direccionLabel' className='col-span-1 text-right text-sm'>
+                <Label
+                  htmlFor='direccionLabel'
+                  className='col-span-1 text-right text-sm'
+                >
                   Dirección:
                 </Label>
                 <Label htmlFor='direccion' className='col-span-3'>
@@ -268,8 +309,11 @@ const ActionsCell: React.FC<ActionsCellProps> = ({ usuario }) => {
                 </Label>
               </div>
               <div className='grid grid-cols-4 items-center gap-4'>
-                <Label htmlFor='rolLabel' className='col-span-1 text-right text-sm'>
-                  Rol: 
+                <Label
+                  htmlFor='rolLabel'
+                  className='col-span-1 text-right text-sm'
+                >
+                  Rol:
                 </Label>
                 <Label htmlFor='rol' className='col-span-3'>
                   {selectedRole}

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -7,6 +8,8 @@ import {
 } from '@radix-ui/react-dropdown-menu';
 import { Label } from '@radix-ui/react-label';
 import { Eye, SquarePen } from 'lucide-react';
+import { toast } from 'sonner';
+
 import {
   Dialog,
   DialogContent,
@@ -16,10 +19,9 @@ import {
   DialogTrigger,
 } from '../components/ui/dialog';
 import type { estados_tienda } from '../core/estados_tienda';
+import { get_estado_tiendas } from '../core/estados_tienda';
 import type { tiendas } from '../core/tienda';
 import { Button } from './ui/button';
-import { get_estado_tiendas } from '../core/estados_tienda';
-import { toast } from 'sonner';
 import { TableCell } from './ui/table';
 
 interface ActionsCellProps {
@@ -29,7 +31,8 @@ interface ActionsCellProps {
 const ActionsCellsStore: React.FC<ActionsCellProps> = ({ tienda }) => {
   const [selectedTienda, setSelectedTienda] = useState<tiendas | null>(null);
   const [estados, setEstados] = useState<estados_tienda[]>([]);
-  const [selectedEstado, setSelectedEstado] = useState<string>('Seleccionar estado');
+  const [selectedEstado, setSelectedEstado] =
+    useState<string>('Seleccionar estado');
 
   useEffect(() => {
     const fetchEstados = async () => {
@@ -42,7 +45,9 @@ const ActionsCellsStore: React.FC<ActionsCellProps> = ({ tienda }) => {
 
   useEffect(() => {
     if (selectedTienda) {
-      const estado = estados.find(e => e.id_estado_tienda === selectedTienda.id_estado_tienda);
+      const estado = estados.find(
+        (e) => e.id_estado_tienda === selectedTienda.id_estado_tienda,
+      );
       setSelectedEstado(estado?.nombre_estado_tienda ?? 'Seleccionar estado');
     }
   }, [selectedTienda, estados]);
@@ -65,8 +70,9 @@ const ActionsCellsStore: React.FC<ActionsCellProps> = ({ tienda }) => {
     // ...
 
     // Luego de guardar, muestra el toast
-    toast("Estado de la tienda modificado", {
-      description: "El estado de la tienda seleccionada ha sido modificado con éxito"
+    toast('Estado de la tienda modificado', {
+      description:
+        'El estado de la tienda seleccionada ha sido modificado con éxito',
     });
 
     handleClose(); // Cerrar el diálogo
@@ -87,7 +93,10 @@ const ActionsCellsStore: React.FC<ActionsCellProps> = ({ tienda }) => {
             </DialogHeader>
             <div className='grid gap-4 py-4'>
               <div className='grid grid-cols-4 items-center gap-4'>
-                <Label htmlFor='Nombre' className='col-span-1 text-right text-sm'>
+                <Label
+                  htmlFor='Nombre'
+                  className='col-span-1 text-right text-sm'
+                >
                   Nombre de la tienda:
                 </Label>
                 <Label htmlFor='nombre' className='col-span-3'>
@@ -95,7 +104,10 @@ const ActionsCellsStore: React.FC<ActionsCellProps> = ({ tienda }) => {
                 </Label>
               </div>
               <div className='grid grid-cols-4 items-center gap-4'>
-                <Label htmlFor='estadoActual' className='col-span-1 text-right text-sm'>
+                <Label
+                  htmlFor='estadoActual'
+                  className='col-span-1 text-right text-sm'
+                >
                   Estado actual:
                 </Label>
                 <Label htmlFor='estado' className='col-span-3'>
@@ -103,7 +115,10 @@ const ActionsCellsStore: React.FC<ActionsCellProps> = ({ tienda }) => {
                 </Label>
               </div>
               <div className='grid grid-cols-4 items-center gap-4'>
-                <Label htmlFor='nuevoEstado' className='col-span-1 text-right text-sm'>
+                <Label
+                  htmlFor='nuevoEstado'
+                  className='col-span-1 text-right text-sm'
+                >
                   Nuevo estado:
                 </Label>
                 <div className='col-span-3'>
@@ -115,7 +130,7 @@ const ActionsCellsStore: React.FC<ActionsCellProps> = ({ tienda }) => {
                       {estados.map((estado) => (
                         <DropdownMenuItem
                           key={estado.id_estado_tienda}
-                          className='flex w-full items-center px-4 py-2 cursor-pointer hover:bg-gray-100'
+                          className='flex w-full cursor-pointer items-center px-4 py-2 hover:bg-gray-100'
                           onSelect={() => handleEstadoChange(estado)}
                         >
                           {estado.nombre_estado_tienda}
@@ -127,10 +142,7 @@ const ActionsCellsStore: React.FC<ActionsCellProps> = ({ tienda }) => {
               </div>
             </div>
             <DialogFooter>
-              <Button
-                type='button'
-                onClick={handleSave}
-              >
+              <Button type='button' onClick={handleSave}>
                 Actualizar
               </Button>
             </DialogFooter>
@@ -139,7 +151,7 @@ const ActionsCellsStore: React.FC<ActionsCellProps> = ({ tienda }) => {
       </Dialog>
       <Dialog>
         <DialogTrigger asChild>
-          <Button className='rounded-full px-2 mx-3' onClick={handleViewClick}>
+          <Button className='mx-3 rounded-full px-2' onClick={handleViewClick}>
             <Eye size={23} color='#ffffff' />
           </Button>
         </DialogTrigger>
@@ -150,7 +162,10 @@ const ActionsCellsStore: React.FC<ActionsCellProps> = ({ tienda }) => {
             </DialogHeader>
             <div className='grid gap-4 py-4'>
               <div className='grid grid-cols-4 items-center gap-4'>
-                <Label htmlFor='nombreLabel' className='col-span-1 text-right text-sm'>
+                <Label
+                  htmlFor='nombreLabel'
+                  className='col-span-1 text-right text-sm'
+                >
                   Nombre:
                 </Label>
                 <Label htmlFor='nombre' className='col-span-3'>
@@ -158,7 +173,10 @@ const ActionsCellsStore: React.FC<ActionsCellProps> = ({ tienda }) => {
                 </Label>
               </div>
               <div className='grid grid-cols-4 items-center gap-4'>
-                <Label htmlFor='descripcionLabel' className='col-span-1 text-right text-sm'>
+                <Label
+                  htmlFor='descripcionLabel'
+                  className='col-span-1 text-right text-sm'
+                >
                   Descripción:
                 </Label>
                 <Label htmlFor='descripcion' className='col-span-3'>
@@ -166,15 +184,25 @@ const ActionsCellsStore: React.FC<ActionsCellProps> = ({ tienda }) => {
                 </Label>
               </div>
               <div className='grid grid-cols-4 items-center gap-4'>
-                <Label htmlFor='logoLabel' className='col-span-1 text-right text-sm'>
+                <Label
+                  htmlFor='logoLabel'
+                  className='col-span-1 text-right text-sm'
+                >
                   Logo:
                 </Label>
                 <div className='col-span-3'>
-                  <img src={selectedTienda.logo_tienda} alt="Logo de la tienda" className='w-20 h-20 object-cover' />
+                  <img
+                    src={selectedTienda.logo_tienda}
+                    alt='Logo de la tienda'
+                    className='h-20 w-20 object-cover'
+                  />
                 </div>
               </div>
               <div className='grid grid-cols-4 items-center gap-4'>
-                <Label htmlFor='bancoLabel' className='col-span-1 text-right text-sm'>
+                <Label
+                  htmlFor='bancoLabel'
+                  className='col-span-1 text-right text-sm'
+                >
                   Nombre del banco:
                 </Label>
                 <Label htmlFor='banco' className='col-span-3'>
@@ -182,7 +210,10 @@ const ActionsCellsStore: React.FC<ActionsCellProps> = ({ tienda }) => {
                 </Label>
               </div>
               <div className='grid grid-cols-4 items-center gap-4'>
-                <Label htmlFor='cuentaLabel' className='col-span-1 text-right text-sm'>
+                <Label
+                  htmlFor='cuentaLabel'
+                  className='col-span-1 text-right text-sm'
+                >
                   Número de cuenta:
                 </Label>
                 <Label htmlFor='cuenta' className='col-span-3'>
@@ -190,7 +221,10 @@ const ActionsCellsStore: React.FC<ActionsCellProps> = ({ tienda }) => {
                 </Label>
               </div>
               <div className='grid grid-cols-4 items-center gap-4'>
-                <Label htmlFor='tipoCuentaLabel' className='col-span-1 text-right text-sm'>
+                <Label
+                  htmlFor='tipoCuentaLabel'
+                  className='col-span-1 text-right text-sm'
+                >
                   Tipo de cuenta:
                 </Label>
                 <Label htmlFor='tipoCuenta' className='col-span-3'>
@@ -198,7 +232,10 @@ const ActionsCellsStore: React.FC<ActionsCellProps> = ({ tienda }) => {
                 </Label>
               </div>
               <div className='grid grid-cols-4 items-center gap-4'>
-                <Label htmlFor='cciLabel' className='col-span-1 text-right text-sm'>
+                <Label
+                  htmlFor='cciLabel'
+                  className='col-span-1 text-right text-sm'
+                >
                   CCI:
                 </Label>
                 <Label htmlFor='cci' className='col-span-3'>

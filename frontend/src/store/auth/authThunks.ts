@@ -20,6 +20,10 @@ interface RegisterUserPayload {
   address: string;
 }
 
+interface EditUserPayload extends RegisterUserPayload {
+  uid: string;
+}
+
 // Define los tipos del resultado exitoso y del error
 interface RegisterUserResponse {
   ok: boolean;
@@ -32,7 +36,7 @@ interface RegisterUserResponse {
   error?: string;
 }
 
-// Configuración adicional para el thunk (opcional)
+// Configuración adicional para el thunk
 interface AsyncThunkConfig {
   rejectValue: unknown;
 }
@@ -79,6 +83,58 @@ export const startRegisterUser = createAsyncThunk<
 
     toast({
       title: 'Registro hecho de forma correcta',
+      description: JSON.stringify(result),
+    });
+
+    return { ...result };
+  },
+);
+
+export const startEditUser = createAsyncThunk<
+  RegisterUserResponse,
+  EditUserPayload,
+  AsyncThunkConfig
+>(
+  'auth/editUser',
+  async (
+    {
+      uid,
+      email,
+      password,
+      displayName,
+      phone,
+      address,
+    }: {
+      uid: string;
+      email: string;
+      password: string;
+      displayName: string;
+      phone: string;
+      address: string;
+    },
+    { rejectWithValue },
+  ) => {
+    const result = await API.auth.editUser({
+      uid,
+      address,
+      displayName,
+      email,
+      password,
+      phone,
+    });
+
+    if (!result.ok) {
+      toast({
+        variant: 'destructive',
+        title: 'Error al editar usuario',
+        description: result.error,
+      });
+
+      return rejectWithValue(result.error);
+    }
+
+    toast({
+      title: 'Usuario editado adecuadamente',
       description: JSON.stringify(result),
     });
 

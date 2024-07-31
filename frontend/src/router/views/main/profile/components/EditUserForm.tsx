@@ -1,6 +1,4 @@
-import { Link } from 'react-router-dom';
-
-import { Button } from '../../../../components/ui/button';
+import { Button } from '../../../../../components/ui/button';
 import {
   Form,
   FormControl,
@@ -8,23 +6,16 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '../../../../components/ui/form';
-import { Input } from '../../../../components/ui/input';
-import { PasswordInput } from '../../../../components/ui/password-input';
-import { PhoneInput } from '../../../../components/ui/phone-input';
-import { useRegisterForm } from './useRegisterForm';
+} from '../../../../../components/ui/form';
+import { Input } from '../../../../../components/ui/input';
+import { PasswordInput } from '../../../../../components/ui/password-input';
+import { PhoneInput } from '../../../../../components/ui/phone-input';
+import { useEditForm } from './useEditForm';
 
-export const RegisterForm = () => {
-  /**
-   * Formulario basado en el diseño de Shadcn en:
-   * https://ui.shadcn.com/docs/components/form
-   * pero con la lógica de validación separada en
-   * un customHook
-   */
-  const { form, onSubmit, handleSubmit } = useRegisterForm();
-
+export const EditUserForm = () => {
+  const { form, handleSubmit, onSubmit } = useEditForm();
   return (
-    <div>
+    <>
       <Form {...form}>
         <form className='mt-6 flex flex-col gap-3'>
           <FormField
@@ -86,7 +77,7 @@ export const RegisterForm = () => {
               <FormItem>
                 <FormLabel>Contraseña</FormLabel>
                 <FormControl>
-                  <PasswordInput {...field} />
+                  <PasswordInput placeholder='*********' {...field} />
                   {/* <Input type='password' /> */}
                 </FormControl>
                 <FormMessage />
@@ -100,7 +91,7 @@ export const RegisterForm = () => {
               <FormItem>
                 <FormLabel>Repita la contraseña</FormLabel>
                 <FormControl>
-                  <PasswordInput {...field} />
+                  <PasswordInput placeholder='*********' {...field} />
                   {/* <Input type='password' {...field} /> */}
                 </FormControl>
                 <FormMessage />
@@ -116,15 +107,9 @@ export const RegisterForm = () => {
           onClick={handleSubmit((formData) => onSubmit(formData))}
           variant={'outline'}
         >
-          Registrarse
+          Actualizar Usuario
         </Button>
       </div>
-      <p className='md:hidden'>
-        ¿Ya posees una cuenta?{' '}
-        <Link className='font-bold' to={'/auth'}>
-          Inicia Sesión
-        </Link>
-      </p>
-    </div>
+    </>
   );
 };

@@ -1,17 +1,27 @@
-import { Navigate, RouterProvider, createBrowserRouter } from 'react-router-dom';
+import {
+  Navigate,
+  RouterProvider,
+  createBrowserRouter,
+} from 'react-router-dom';
+
 import { ThemesTester } from '../components/ui/themes-tester';
 import { registerUserAction } from './actions/auth';
+import { editUserAction } from './actions/main';
 import { LayoutAuth, LoginPage, RegisterPage } from './views/auth';
-import { LayoutMain } from './views/main/Layout';
-import { LayoutView, InfoPage, EditInfo } from './views/perfil-users/viewInfo/index';
+import { EditProfilePage, LayoutMain, MyProfilePage } from './views/main';
+import Dashboard from './views/main/dashboard-admin';
+import InicioPage from './views/main/inicio';
+import CategoryManage from './views/manage/category-manage';
+import ProductsManage from './views/manage/products-manage';
+import StoreManage from './views/manage/store-manage';
 import Users_Manage from './views/manage/users-manage';
 import PedidosPage from './views/orders/view-orders';
 import PedidoDetallePage from './views/orders/view-product-orders';
-import Dashboard from './views/main/dashboard-admin';
-import StoreManage from './views/manage/store-manage';
-import CategoryManage from './views/manage/category-manage';
-import ProductsManage from './views/manage/products-manage';
-import InicioPage from './views/main/inicio';
+import {
+  EditInfo,
+  InfoPage,
+  LayoutView,
+} from './views/perfil-users/viewInfo/index';
 
 export const Router = () => {
   const router = createBrowserRouter([
@@ -29,25 +39,38 @@ export const Router = () => {
         },
         {
           path: '/panel',
-          element: <Dashboard/>
+          element: <Dashboard />,
         },
         {
           path: '/gestion_tiendas',
-          element:<StoreManage/>
+          element: <StoreManage />,
         },
         {
           path: '/gestion_categorias',
-          element:<CategoryManage/>
+          element: <CategoryManage />,
         },
         {
           path: '/gestion_productos',
-          element:<ProductsManage/>
+          element: <ProductsManage />,
         },
         {
           path: '/inicio',
-          element:<InicioPage/>
+          element: <InicioPage />,
         },
-
+        {
+          path: 'profile',
+          children: [
+            {
+              index: true,
+              element: <MyProfilePage />,
+            },
+            {
+              path: 'edit',
+              element: <EditProfilePage />,
+              action: editUserAction(),
+            },
+          ],
+        },
       ],
     },
     {
@@ -95,7 +118,7 @@ export const Router = () => {
     },
     {
       path: '*',
-      element: <Navigate to="/" />,
+      element: <Navigate to='/' />,
     },
   ]);
 
