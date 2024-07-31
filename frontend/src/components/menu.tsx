@@ -18,7 +18,10 @@ export const Menu = () => {
   return (
     <div className='flex w-full justify-between gap-2 bg-primary bg-opacity-50 p-2 px-5 fixed top-0 z-50'>
       <div>
+        <Link to="/inicio">
         <img src={logo} alt='Logo' className='h-20 w-auto' />
+        </Link>
+        
       </div>
       <div className='my-auto pl-2 px-10 bg-default text-md'>
         {uid ? (
