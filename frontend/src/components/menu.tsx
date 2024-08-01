@@ -1,8 +1,12 @@
 import { Link, useNavigate } from 'react-router-dom';
+
+import { ShoppingCart } from 'lucide-react';
+
 import logo from '../assets/images/White.png';
 import { useAppSelector } from '../hooks/useStore';
+import { useAppDispatch } from '../store';
+import { logout } from '../store/auth/authSlice';
 import { Button } from './ui/button';
-import { ShoppingCart } from 'lucide-react';
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -15,6 +19,12 @@ import {
 export const Menu = () => {
   const { uid, displayName } = useAppSelector((state) => state.auth);
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+
+  const onLogOut = () => {
+    localStorage.removeItem('access_token');
+    dispatch(logout());
+  };
 
   // Simulación de número de ítems en el carrito
   const cartItemCount = 1; // Reemplaza este valor con la cantidad real de ítems en el carrito
@@ -26,7 +36,7 @@ export const Menu = () => {
           <img src={logo} alt='Logo' className='h-20 w-auto' />
         </Link>
       </div>
-      <div className='bg-default text-md my-auto px-10 pl-2 flex items-center gap-4'>
+      <div className='bg-default text-md my-auto flex items-center gap-4 px-10 pl-2'>
         {uid ? (
           <NavigationMenu>
             <NavigationMenuList>
@@ -69,12 +79,13 @@ export const Menu = () => {
                     <hr className='mt-2 border-gray-300' />
                     <li className='row-span-3'>
                       <NavigationMenuLink asChild>
-                        <Link
-                          to=''
+                        <Button
+                          onClick={() => onLogOut()}
+                          variant={'ghost'}
                           className='flex h-full w-full select-none flex-col justify-end rounded-md p-2 pb-2 no-underline outline-none hover:border-gray-500 hover:bg-accent focus:shadow-md'
                         >
                           Cerrar sesión
-                        </Link>
+                        </Button>
                       </NavigationMenuLink>
                     </li>
                   </ul>
@@ -98,7 +109,7 @@ export const Menu = () => {
         <Button className='relative' onClick={() => navigate('/cart')}>
           <ShoppingCart size={24} />
           {cartItemCount > 0 && (
-            <span className='absolute -top-2 -right-2 flex h-5 w-5 items-center justify-center rounded-full bg-accent text-xs text-black'>
+            <span className='absolute -right-2 -top-2 flex h-5 w-5 items-center justify-center rounded-full bg-accent text-xs text-black'>
               {cartItemCount}
             </span>
           )}

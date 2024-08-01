@@ -63,6 +63,16 @@ export const authSlice = createSlice({
       state.phone = action.payload.phone;
       state.errorMessage = null;
     },
+    logout: (state) => {
+      state.status = 'not-authenticated';
+      state.uid = null;
+      state.displayName = null;
+      state.email = null;
+      state.phone = null;
+      state.address = null;
+      state.roleId = null;
+      state.errorMessage = null;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -113,6 +123,6 @@ export const authSlice = createSlice({
   },
 });
 
-export const { login } = authSlice.actions;
+export const { login, logout } = authSlice.actions;
 
 export default authSlice.reducer;
