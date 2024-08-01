@@ -5,7 +5,7 @@ import {
 } from 'react-router-dom';
 
 import { ThemesTester } from '../components/ui/themes-tester';
-import { registerUserAction } from './actions/auth';
+import { loginUserAction, registerUserAction } from './actions/auth';
 import { editUserAction } from './actions/main';
 import { LayoutAuth, LoginPage, RegisterPage } from './views/auth';
 import CategoryManage from './views/dashboard/manage/category-manage';
@@ -98,6 +98,7 @@ export const Router = () => {
         {
           index: true,
           element: <LoginPage />,
+          action: loginUserAction(),
         },
         {
           path: 'register',

@@ -41,55 +41,6 @@ interface AsyncThunkConfig {
   rejectValue: unknown;
 }
 
-export const startRegisterUser = createAsyncThunk<
-  RegisterUserResponse,
-  RegisterUserPayload,
-  AsyncThunkConfig
->(
-  'auth/registerUser',
-  async (
-    {
-      email,
-      password,
-      displayName,
-      phone,
-      address,
-    }: {
-      email: string;
-      password: string;
-      displayName: string;
-      phone: string;
-      address: string;
-    },
-    { rejectWithValue },
-  ) => {
-    const result = await API.auth.registerUser({
-      address,
-      displayName,
-      email,
-      password,
-      phone,
-    });
-
-    if (!result.ok) {
-      toast({
-        variant: 'destructive',
-        title: 'Error al registrarse',
-        description: result.error,
-      });
-
-      return rejectWithValue(result.error);
-    }
-
-    toast({
-      title: 'Registro hecho de forma correcta',
-      description: JSON.stringify(result),
-    });
-
-    return { ...result };
-  },
-);
-
 export const startEditUser = createAsyncThunk<
   RegisterUserResponse,
   EditUserPayload,
