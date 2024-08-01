@@ -18,6 +18,8 @@ import InicioPage from './views/main/inicio';
 import PedidosPage from './views/main/orders/view-orders';
 import PedidoDetallePage from './views/main/orders/view-product-orders';
 import CategoryProductPage from './views/main/products-category';
+import ProductDetailPage from './views/main/details-product';
+import Carrito from './views/main/orders/cart';
 
 export const Router = () => {
   const router = createBrowserRouter([
@@ -36,6 +38,14 @@ export const Router = () => {
         {
           path: 'categoryProduct/:id',
           element: <CategoryProductPage />,
+        },
+        {
+          path: 'detailProduct/:id',
+          element: <ProductDetailPage />,
+        },
+        {
+          path: 'cart',
+          element: <Carrito />,
         },
         {
           path: '/dashboard',

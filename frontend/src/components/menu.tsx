@@ -1,8 +1,8 @@
 import { Link, useNavigate } from 'react-router-dom';
-
 import logo from '../assets/images/White.png';
 import { useAppSelector } from '../hooks/useStore';
 import { Button } from './ui/button';
+import { ShoppingCart } from 'lucide-react';
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -16,6 +16,9 @@ export const Menu = () => {
   const { uid, displayName } = useAppSelector((state) => state.auth);
   const navigate = useNavigate();
 
+  // Simulación de número de ítems en el carrito
+  const cartItemCount = 1; // Reemplaza este valor con la cantidad real de ítems en el carrito
+
   return (
     <div className='fixed top-0 z-50 flex w-full justify-between gap-2 bg-primary bg-opacity-50 p-2 px-5'>
       <div>
@@ -23,7 +26,7 @@ export const Menu = () => {
           <img src={logo} alt='Logo' className='h-20 w-auto' />
         </Link>
       </div>
-      <div className='bg-default text-md my-auto px-10 pl-2'>
+      <div className='bg-default text-md my-auto px-10 pl-2 flex items-center gap-4'>
         {uid ? (
           <NavigationMenu>
             <NavigationMenuList>
@@ -92,6 +95,14 @@ export const Menu = () => {
             </Button>
           </>
         )}
+        <Button className='relative' onClick={() => navigate('/cart')}>
+          <ShoppingCart size={24} />
+          {cartItemCount > 0 && (
+            <span className='absolute -top-2 -right-2 flex h-5 w-5 items-center justify-center rounded-full bg-accent text-xs text-black'>
+              {cartItemCount}
+            </span>
+          )}
+        </Button>
       </div>
     </div>
   );

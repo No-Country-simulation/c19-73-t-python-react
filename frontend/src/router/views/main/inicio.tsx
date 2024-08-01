@@ -1,4 +1,4 @@
-import React from 'react';
+
 import { useNavigate } from 'react-router-dom'; // Importar useNavigate
 import banner from '../../../assets/images/banner.jpg';
 import decoracion from '../../../assets/images/categories/Decoracion.jpg';

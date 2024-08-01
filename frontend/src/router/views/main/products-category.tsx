@@ -4,6 +4,7 @@ import { categorias_productos, getCategorias } from '../../../core/categorias_pr
 import { productos, getProductos } from '../../../core/productos';
 import { tiendas, getTiendas } from '../../../core/tienda';
 import { useParams } from 'react-router-dom';
+import { ShoppingCart } from 'lucide-react'; // Importar el icono de carrito de compras
 
 type Categoria = categorias_productos;
 type Producto = productos;
@@ -29,6 +30,11 @@ const CategoryPage: React.FC = () => {
   const handleCategoryClick = (id: number) => {
     setSelectedCategory(id);
     setCurrentPage(1); // Reset to first page on category change
+  };
+
+  const handleAddToCart = (id: number) => {
+    // Lógica para agregar al carrito
+    console.log(`Producto ${id} agregado al carrito`);
   };
 
   const filteredProductos = productos.filter(producto =>
@@ -94,7 +100,13 @@ const CategoryPage: React.FC = () => {
                   <h2 className='text-xl font-semibold mb-2'>{producto.nombre_producto}</h2>
                   <p className='text-lg font-bold mb-2'>${producto.precio}</p>
                   <p className='mb-2'>Tienda: {getStoreName(producto.id_tienda)}</p>
-                  <Button className='w-full mt-auto' onClick={() => window.location.href = `/producto/${producto.id_producto}`}>Ver producto</Button>
+                  <div className='flex mt-auto'>
+                    <Button className='w-1/2 mr-2' onClick={() => window.location.href = `/detailProduct/${producto.id_producto}`}>Ver producto</Button>
+                    <Button className='w-1/2 flex items-center justify-center' onClick={() => handleAddToCart(producto.id_producto)}>
+                      <ShoppingCart className='mr-1 h-24 w-24' />
+                      <span>Agregar al carrito</span>
+                    </Button>
+                  </div>
                 </div>
               </div>
             ))}
