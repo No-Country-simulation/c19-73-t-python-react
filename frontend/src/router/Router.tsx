@@ -22,6 +22,9 @@ import Dashboard from './views/main/dashboard-admin';
 import InicioPage from './views/main/inicio';
 import PedidosPage from './views/main/orders/view-orders';
 import PedidoDetallePage from './views/main/orders/view-product-orders';
+import CategoryProductPage from './views/main/products-category';
+import ProductDetailPage from './views/main/details-product';
+import Carrito from './views/main/orders/cart';
 
 export const Router = () => {
   const dispatch = useAppDispatch();
@@ -41,6 +44,18 @@ export const Router = () => {
         {
           path: 'theme-tester',
           element: <ThemesTester />,
+        },
+        {
+          path: 'categoryProduct/:id',
+          element: <CategoryProductPage />,
+        },
+        {
+          path: 'detailProduct/:id',
+          element: <ProductDetailPage />,
+        },
+        {
+          path: 'cart',
+          element: <Carrito />,
         },
         {
           path: '/dashboard',
