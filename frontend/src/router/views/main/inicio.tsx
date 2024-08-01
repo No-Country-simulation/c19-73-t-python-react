@@ -1,6 +1,14 @@
-import banner from '../../../assets/images/banner.png';
-import decoracion from '../../../assets/images/categories/Decoracion.png';
-import joyeria from '../../../assets/images/categories/Joyeria.png';
+import React from 'react';
+import { useNavigate } from 'react-router-dom'; // Importar useNavigate
+import banner from '../../../assets/images/banner.jpg';
+import decoracion from '../../../assets/images/categories/Decoracion.jpg';
+import joyeria from '../../../assets/images/categories/Joyeria.jpg';
+import ceramica from '../../../assets/images/categories/ceramica.jpg';
+import cosmetica from '../../../assets/images/categories/cosmetica.jpg';
+import juguetes from '../../../assets/images/categories/juguetes.jpg';
+import ropa from '../../../assets/images/categories/ropa.jpg';
+import papeleria from '../../../assets/images/categories/papeleria.jpg';
+import ecologicos from '../../../assets/images/categories/ecologicos.jpg';
 import { Button } from '../../../components/ui/button';
 
 // Datos de categorías con descripciones y rutas de imágenes
@@ -21,44 +29,46 @@ const categories = [
     id: 3,
     name: 'Ropa y accesorios',
     description: 'Moda y estilo para todos.',
-    image: '/path/to/ropa.jpg',
+    image: ropa,
   },
   {
     id: 4,
     name: 'Papelería y artículos de oficina',
     description: 'Todo lo necesario para tu oficina.',
-    image: '/path/to/papeleria.jpg',
+    image: papeleria,
   },
   {
     id: 5,
     name: 'Juguetes y juegos',
     description: 'Diversión garantizada para todas las edades.',
-    image: '/path/to/juguetes.jpg',
+    image: juguetes,
   },
   {
     id: 6,
     name: 'Productos ecológicos',
     description: 'Productos amigables con el medio ambiente.',
-    image: '/path/to/ecologicos.jpg',
+    image: ecologicos,
   },
   {
     id: 7,
     name: 'Cerámica y vidrio',
     description: 'Artículos elegantes y sofisticados.',
-    image: '/path/to/ceramica.jpg',
+    image: ceramica,
   },
   {
     id: 8,
     name: 'Cosmética y perfumería',
     description: 'Cuida tu belleza con productos especiales.',
-    image: '/path/to/cosmetica.jpg',
+    image: cosmetica,
   },
 ];
 
 const InicioPage = () => {
+  const navigate = useNavigate(); // Inicializar useNavigate
+
   const handleCategoryClick = (id: number) => {
     // Redirige a la página de la categoría según el id
-    window.location.href = `/categoria/${id}`;
+    navigate(`/categoryproduct/${id}`);
   };
 
   return (
@@ -97,7 +107,7 @@ const InicioPage = () => {
       </div>
 
       {/* Categorías */}
-      <div className='grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4'>
+      <div className='grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4 px-12'>
         {categories.map((category) => (
           <div
             key={category.id}
@@ -114,7 +124,9 @@ const InicioPage = () => {
                 <h2 className='mb-2 text-xl font-semibold'>{category.name}</h2>
                 <p className='mb-4'>{category.description}</p>
               </div>
-              <Button className='mt-auto w-full'>Ver productos</Button>
+              <Button className='mt-auto w-full' onClick={() => handleCategoryClick(category.id)}>
+                Ver productos
+              </Button>
             </div>
           </div>
         ))}
