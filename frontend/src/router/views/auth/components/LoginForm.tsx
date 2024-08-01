@@ -59,6 +59,11 @@ export const LoginForm = () => {
           Iniciar Sesión
         </Button>
       </div>
+      {form.formState.errors.root?.message && (
+        <p className='my-2 rounded-md bg-destructive py-2 text-center text-destructive-foreground'>
+          {form.formState.errors.root?.message}
+        </p>
+      )}
       <p className='md:hidden'>
         ¿No posees una cuenta?{' '}
         <Link className='font-bold' to={'/auth/register'}>

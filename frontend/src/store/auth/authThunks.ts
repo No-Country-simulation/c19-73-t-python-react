@@ -1,7 +1,9 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
+import { jwtDecode } from 'jwt-decode';
 
 import API from '../../api/apiServices';
 import { toast } from '../../components/ui/use-toast';
+import { DecodedToken } from '../../lib/jwt';
 
 /**
  * Thunk de Redux, para ver como funciona ver este enlace:
@@ -12,16 +14,14 @@ import { toast } from '../../components/ui/use-toast';
  */
 
 // Define los tipos de los parámetros de entrada
-interface RegisterUserPayload {
+
+interface EditUserPayload {
+  uid: string;
   email: string;
   password: string;
   displayName: string;
   phone: string;
   address: string;
-}
-
-interface EditUserPayload extends RegisterUserPayload {
-  uid: string;
 }
 
 // Define los tipos del resultado exitoso y del error
@@ -92,3 +92,35 @@ export const startEditUser = createAsyncThunk<
     return { ...result };
   },
 );
+
+export const startLoginUser = createAsyncThunk<
+  {
+    token: string;
+    user: DecodedToken;
+  },
+  { email: string; password: string },
+  { rejectValue: string }
+>('auth/loginUser', async (credentials, { rejectWithValue }) => {
+  const result = await API.auth.loginUser(credentials);
+
+  if (result.ok) {
+    const { accessToken } = result;
+    const decodedToken = jwtDecode<DecodedToken>(accessToken);
+    localStorage.setItem('access_token', accessToken);
+    toast({
+      title: 'Sesión iniciada',
+      description: `Bienvenido ${decodedToken.nombre}`,
+    });
+    return {
+      token: accessToken,
+      user: decodedToken,
+    };
+  } else {
+    toast({
+      variant: 'destructive',
+      title: 'Ha ocurrido un error al iniciar sesión',
+      description: 'Porfavor, intentar más tarde',
+    });
+    return rejectWithValue(result.error);
+  }
+});
