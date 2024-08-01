@@ -1,6 +1,6 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
-import { startEditUser, startRegisterUser } from './authThunks';
+import { startEditUser } from './authThunks';
 
 /**
  * Slice del estado de la autenticación
@@ -63,21 +63,6 @@ export const authSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(startRegisterUser.pending, (state) => {
-        state.status = 'checking';
-      })
-      .addCase(startRegisterUser.fulfilled, (state, action) => {
-        state.status = 'authenticated';
-        (state.uid = action.payload.uid!),
-          (state.address = action.payload.address!),
-          (state.displayName = action.payload.displayName!),
-          (state.email = action.payload.email!),
-          (state.phone = action.payload.phone!);
-      })
-      .addCase(startRegisterUser.rejected, (state, action) => {
-        state.status = 'not-authenticated';
-        state.errorMessage = action.payload as string;
-      })
       .addCase(startEditUser.pending, (state) => {
         state.status = 'checking';
       })

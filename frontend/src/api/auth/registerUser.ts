@@ -1,4 +1,6 @@
-export interface Props {
+import axiosInstance from '../axiosConfig';
+
+interface Props {
   email: string;
   password: string;
   displayName: string;
@@ -16,24 +18,33 @@ export const registerUser = async ({
   /**
    * TODO: Agregar la lógica de conexión al backend
    */
-  try {
-    // throw new Error('Error desconocido');
-    return {
-      ok: true,
-      uid: '1',
-      address,
-      displayName,
-      email,
-      password,
-      phone,
-    };
-  } catch (error) {
-    if (error instanceof Error) {
+
+  return await axiosInstance
+    .post('/register_user', {
+      nombre: displayName,
+      telefono: phone,
+      direccion: address,
+      correo: email,
+      contrasenna: password,
+      rol_id: 2,
+    })
+    .then((response) => {
       return {
-        ok: false,
-        error: error.message,
+        ok: true,
+        response: response.data,
+        error: null,
       };
-    }
-    return { ok: false, error: 'Error Desconocido' };
-  }
+    })
+    .catch((error) => {
+      if (error.response.data.detail) {
+        return { ok: false, error: error.response.data.detail };
+      }
+      if (error instanceof Error) {
+        return {
+          ok: false,
+          error: error.message,
+        };
+      }
+      return { ok: false, error: 'Error Desconocido' };
+    });
 };
