@@ -1,6 +1,6 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
-import { startEditUser, startLoginUser } from './authThunks';
+import { startCheckToken, startEditUser, startLoginUser } from './authThunks';
 
 /**
  * Slice del estado de la autenticación
@@ -19,30 +19,31 @@ export interface AuthState {
   errorMessage: string | null;
 }
 
-// const initialState: AuthState = {
-//   status: 'checking',
-//   uid: null,
-//   displayName: null,
-//   email: null,
-//   phone: null,
-//   address: null,
-//   errorMessage: null,
-// };
-
-const initialStateLogged: AuthState = {
-  status: 'authenticated',
-  uid: '1',
-  displayName: 'John Doe',
-  email: 'john@doe.com',
-  phone: '+50378724055',
-  address: 'BINAES',
+const initialState: AuthState = {
+  status: 'checking',
+  uid: null,
+  displayName: null,
+  email: null,
+  phone: null,
   roleId: null,
+  address: null,
   errorMessage: null,
 };
 
+// const initialStateLogged: AuthState = {
+//   status: 'authenticated',
+//   uid: '1',
+//   displayName: 'John Doe',
+//   email: 'john@doe.com',
+//   phone: '+50378724055',
+//   address: 'BINAES',
+//   roleId: 1,
+//   errorMessage: null,
+// };
+
 export const authSlice = createSlice({
   name: 'auth',
-  initialState: initialStateLogged,
+  initialState: initialState,
   reducers: {
     login: (
       state,
@@ -92,6 +93,22 @@ export const authSlice = createSlice({
       .addCase(startLoginUser.rejected, (state, action) => {
         state.status = 'not-authenticated';
         state.errorMessage = action.payload as string;
+      })
+      .addCase(startCheckToken.pending, (state) => {
+        state.status = 'checking';
+      })
+      .addCase(startCheckToken.fulfilled, (state, action) => {
+        state.status = 'authenticated';
+        state.uid = action.payload.user.sub;
+        state.displayName = action.payload.user.nombre;
+        state.email = action.payload.user.correo;
+        state.phone = action.payload.user.telefono;
+        state.address = action.payload.user.direccion;
+        state.roleId = action.payload.user.role_id;
+        state.errorMessage = null;
+      })
+      .addCase(startCheckToken.rejected, (state) => {
+        state.status = 'not-authenticated';
       });
   },
 });

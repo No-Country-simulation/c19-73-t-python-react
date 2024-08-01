@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import {
   Navigate,
   RouterProvider,
@@ -5,8 +6,12 @@ import {
 } from 'react-router-dom';
 
 import { ThemesTester } from '../components/ui/themes-tester';
+import { useAppDispatch } from '../store';
+import { startCheckToken } from '../store/auth/authThunks';
 import { loginUserAction, registerUserAction } from './actions/auth';
 import { editUserAction } from './actions/main';
+import { AdminRoute } from './utils/AdminRoute';
+import { ProtectedRoute } from './utils/ProtectedRoute';
 import { LayoutAuth, LoginPage, RegisterPage } from './views/auth';
 import CategoryManage from './views/dashboard/manage/category-manage';
 import ProductsManage from './views/dashboard/manage/products-manage';
@@ -19,6 +24,11 @@ import PedidosPage from './views/main/orders/view-orders';
 import PedidoDetallePage from './views/main/orders/view-product-orders';
 
 export const Router = () => {
+  const dispatch = useAppDispatch();
+  useEffect(() => {
+    dispatch(startCheckToken());
+  }, [dispatch]);
+
   const router = createBrowserRouter([
     {
       path: '/',
@@ -34,6 +44,7 @@ export const Router = () => {
         },
         {
           path: '/dashboard',
+          element: <AdminRoute />,
           children: [
             {
               index: true,
@@ -59,6 +70,7 @@ export const Router = () => {
         },
         {
           path: 'profile',
+          element: <ProtectedRoute />,
           children: [
             {
               index: true,
@@ -73,6 +85,7 @@ export const Router = () => {
         },
         {
           path: 'orders',
+          element: <ProtectedRoute />,
           children: [
             {
               index: true,

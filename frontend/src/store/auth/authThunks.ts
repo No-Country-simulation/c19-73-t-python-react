@@ -124,3 +124,30 @@ export const startLoginUser = createAsyncThunk<
     return rejectWithValue(result.error);
   }
 });
+
+export const startCheckToken = createAsyncThunk<
+  {
+    token: string;
+    user: DecodedToken;
+  },
+  undefined,
+  { rejectValue: string }
+>('auth/checkToken', async (_, { rejectWithValue }) => {
+  const token = localStorage.getItem('access_token');
+
+  if (token) {
+    try {
+      const decodedToken = jwtDecode<DecodedToken>(token);
+      // Opcional: Verificar si el token ha expirado
+      if (decodedToken.exp * 1000 < Date.now()) {
+        throw new Error('Token expired');
+      }
+      return { token, user: decodedToken };
+    } catch (error) {
+      localStorage.removeItem('access_token');
+      return rejectWithValue('Invalid token');
+    }
+  } else {
+    return rejectWithValue('No token found');
+  }
+});
