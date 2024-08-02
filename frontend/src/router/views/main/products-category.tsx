@@ -103,7 +103,7 @@ const CategoryPage: React.FC = () => {
                   <div className='flex mt-auto'>
                     <Button className='w-1/2 mr-2' onClick={() => window.location.href = `/detailProduct/${producto.id_producto}`}>Ver producto</Button>
                     <Button className='w-1/2 flex items-center justify-center' onClick={() => handleAddToCart(producto.id_producto)}>
-                      <ShoppingCart className='mr-1 h-24 w-24' />
+                      <ShoppingCart className='mr-1 h-6 w-6' />
                       <span>Agregar al carrito</span>
                     </Button>
                   </div>
