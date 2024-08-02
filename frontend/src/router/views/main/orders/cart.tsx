@@ -200,19 +200,20 @@ const Carrito: React.FC = () => {
               <div className="text-gray-800">{selectedStore.cci}</div>
               <div className="text-gray-600 pt-2">Total de la compra:</div>
               <div className="text-gray-800 font-bold pt-2">${getTotalByStore(selectedStore.id_tienda)}</div>
-            </div>
-          ) : (
-            <p>No hay información de pago disponible</p>
-          )}
-          <h4 className='text-sm pt-12 pb-6'>Por favor, realiza la transferencia bancaria a los datos proporcionados.</h4>
-          <h4 className='text-sm pb-6'>Plazo para realizar la transferencia: 48 horas</h4>
-          <h4 className='text-sm pb-12'>Envíanos el comprobante de pago a nuestro correo: <strong>artesaniaselsol@gmail.com</strong></h4>
+              <h4 className='text-sm pt-12 pb-6 col-span-2'>Por favor, realiza la transferencia bancaria a los datos proporcionados.</h4>
+          <h4 className='text-sm pb-6 col-span-2'>Plazo para realizar la transferencia: 48 horas</h4>
+          <h4 className='text-sm pb-12 col-span-2'>Envíanos el comprobante de pago a nuestro correo: <strong>artesaniaselsol@gmail.com</strong></h4> 
           <Button
             onClick={handleConfirmOrder}
             className="text-white px-4 py-2 rounded-lg hover:bg-accent"
           >
             Confirmar Pedido
           </Button>
+            </div>
+          ) : (
+            <p>No hay información de pago disponible</p>
+          )}
+
         </div>
       </div>
     </div>
