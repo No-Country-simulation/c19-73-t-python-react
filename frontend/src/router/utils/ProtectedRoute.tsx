@@ -1,12 +1,13 @@
 import { Navigate, Outlet } from 'react-router-dom';
 
 import { useAppSelector } from '../../store';
+import { Loader } from './Loader';
 
 export const ProtectedRoute = () => {
   const { status } = useAppSelector((state) => state.auth);
 
   if (status === 'checking') {
-    return <div>Loading...</div>; // or a loading spinner
+    return <Loader />;
   }
 
   if (status !== 'authenticated') {
