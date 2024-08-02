@@ -6,7 +6,7 @@ export interface DecodedToken {
   telefono: string;
   direccion: string;
   correo: string;
-  role_id: number;
+  rol_id: number;
   exp: number;
 }
 

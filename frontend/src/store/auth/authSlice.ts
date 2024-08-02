@@ -1,4 +1,4 @@
-import { PayloadAction, createSlice } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 
 import { startCheckToken, startEditUser, startLoginUser } from './authThunks';
 
@@ -45,24 +45,6 @@ export const authSlice = createSlice({
   name: 'auth',
   initialState: initialState,
   reducers: {
-    login: (
-      state,
-      action: PayloadAction<{
-        uid: string;
-        displayName: string;
-        email: string;
-        phone: string;
-        address: string;
-      }>,
-    ) => {
-      state.status = 'authenticated';
-      state.uid = action.payload.uid;
-      state.displayName = action.payload.displayName;
-      state.email = action.payload.email;
-      state.address = action.payload.address;
-      state.phone = action.payload.phone;
-      state.errorMessage = null;
-    },
     logout: (state) => {
       state.status = 'not-authenticated';
       state.uid = null;
@@ -92,12 +74,14 @@ export const authSlice = createSlice({
         state.status = 'checking';
       })
       .addCase(startLoginUser.fulfilled, (state, action) => {
-        (state.status = 'authenticated'), (state.uid = action.payload.user.sub);
+        state.status = 'authenticated';
+        state.uid = action.payload.user.sub;
         state.displayName = action.payload.user.nombre;
         state.email = action.payload.user.correo;
         state.phone = action.payload.user.telefono;
         state.address = action.payload.user.direccion;
-        state.roleId = action.payload.user.role_id;
+        console.log(action.payload.user.rol_id);
+        state.roleId = action.payload.user.rol_id;
         state.errorMessage = null;
       })
       .addCase(startLoginUser.rejected, (state, action) => {
@@ -114,7 +98,7 @@ export const authSlice = createSlice({
         state.email = action.payload.user.correo;
         state.phone = action.payload.user.telefono;
         state.address = action.payload.user.direccion;
-        state.roleId = action.payload.user.role_id;
+        state.roleId = action.payload.user.rol_id;
         state.errorMessage = null;
       })
       .addCase(startCheckToken.rejected, (state) => {
@@ -123,6 +107,6 @@ export const authSlice = createSlice({
   },
 });
 
-export const { login, logout } = authSlice.actions;
+export const { logout } = authSlice.actions;
 
 export default authSlice.reducer;
