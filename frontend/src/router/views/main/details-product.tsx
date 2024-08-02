@@ -49,20 +49,17 @@ const ProductDetailPage: React.FC = () => {
 
         {/* Detalles del producto */}
         <div className='flex flex-col'>
-          <h1 className='text-4xl font-bold mb-4'>{producto.nombre_producto}</h1>
-          <p className='text-lg mb-2'>
-            <strong>Categoría: </strong>
+          <h1 className='text-3xl font-bold mb-4'>{producto.nombre_producto}</h1>
+          <p className='text-mb mb-2 -mt-2 pb-3'>
             {getCategoriaName(producto.id_categoría)}
           </p>
-          <p className='text-lg mb-4'>
-            <strong>Descripción: </strong>
+          <p className='text-lg mb-2'>
             {producto.descripcion_producto}
           </p>
-          <p className='text-2xl font-semibold mb-2'>
-            <strong>Precio: </strong>${producto.precio}
+          <p className='font-semibold mb-2'> <span className='text-2xl'>$ {producto.precio}</span> c/u
           </p>
-          <p className='text-lg mb-4'>
-            <strong>Tienda: </strong>
+          <p className='text-xs mb-4 pt-12 pb-8'>
+            <strong>Distribuida por: </strong>
             {getStoreName(producto.id_tienda)}
           </p>
           <Button className='w-full flex items-center justify-center'>
