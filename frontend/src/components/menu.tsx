@@ -27,7 +27,7 @@ export const Menu = () => {
   };
 
   // Simulación de número de ítems en el carrito
-  const cartItemCount = 1; // Reemplaza este valor con la cantidad real de ítems en el carrito
+  const cartItemCount = 2; // Reemplaza este valor con la cantidad real de ítems en el carrito
 
   return (
     <div className='fixed top-0 z-50 flex w-full justify-between gap-2 bg-primary bg-opacity-50 p-2 px-5'>
