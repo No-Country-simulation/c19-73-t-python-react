@@ -1,0 +1,34 @@
+version: '3.8'
+
+services:
+  db:
+    image: mysql:8.0
+    container_name: db_marketplace_artesanias
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD} # Asegúrate de que DB_PASSWORD esté definido en .env
+      MYSQL_DATABASE: ${DB_NAME} # Asegúrate de que DB_NAME esté definido en .env
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./database.sql:/docker-entrypoint-initdb.d/database.sql
+    ports:
+      - "3308:3306" # Cambié el puerto del host a 3308 para evitar conflictos
+
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: api_marketplace_container
+    environment:
+      DATABASE_URL: mysql+pymysql://${DB_USER}:${DB_PASSWORD}@db:3306/${DB_NAME} # Asegúrate de que DB_USER, DB_PASSWORD y DB_NAME estén definidos en .env
+      SECRET_KEY: ${SECRET_KEY} # Asegúrate de que SECRET_KEY esté definido en .env
+      ALGORITHM: ${ALGORITHM} # Asegúrate de que ALGORITHM esté definido en .env
+      ACCESS_TOKEN_EXPIRE_MINUTES: ${ACCESS_TOKEN_EXPIRE_MINUTES} # Asegúrate de que ACCESS_TOKEN_EXPIRE_MINUTES esté definido en .env
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    volumes:
+      - .:/app
+
+volumes:
+  db_data:
