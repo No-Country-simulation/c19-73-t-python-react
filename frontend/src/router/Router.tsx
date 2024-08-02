@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import {
   Navigate,
   RouterProvider,
@@ -5,8 +6,12 @@ import {
 } from 'react-router-dom';
 
 import { ThemesTester } from '../components/ui/themes-tester';
-import { registerUserAction } from './actions/auth';
+import { useAppDispatch } from '../store';
+import { startCheckToken } from '../store/auth/authThunks';
+import { loginUserAction, registerUserAction } from './actions/auth';
 import { editUserAction } from './actions/main';
+import { AdminRoute } from './utils/AdminRoute';
+import { ProtectedRoute } from './utils/ProtectedRoute';
 import { LayoutAuth, LoginPage, RegisterPage } from './views/auth';
 import CategoryManage from './views/dashboard/manage/category-manage';
 import ProductsManage from './views/dashboard/manage/products-manage';
@@ -17,8 +22,16 @@ import Dashboard from './views/main/dashboard-admin';
 import InicioPage from './views/main/inicio';
 import PedidosPage from './views/main/orders/view-orders';
 import PedidoDetallePage from './views/main/orders/view-product-orders';
+import CategoryProductPage from './views/main/products-category';
+import ProductDetailPage from './views/main/details-product';
+import Carrito from './views/main/orders/cart';
 
 export const Router = () => {
+  const dispatch = useAppDispatch();
+  useEffect(() => {
+    dispatch(startCheckToken());
+  }, [dispatch]);
+
   const router = createBrowserRouter([
     {
       path: '/',
@@ -33,7 +46,20 @@ export const Router = () => {
           element: <ThemesTester />,
         },
         {
+          path: 'categoryProduct/:id',
+          element: <CategoryProductPage />,
+        },
+        {
+          path: 'detailProduct/:id',
+          element: <ProductDetailPage />,
+        },
+        {
+          path: 'cart',
+          element: <Carrito />,
+        },
+        {
           path: '/dashboard',
+          element: <AdminRoute />,
           children: [
             {
               index: true,
@@ -59,6 +85,7 @@ export const Router = () => {
         },
         {
           path: 'profile',
+          element: <ProtectedRoute />,
           children: [
             {
               index: true,
@@ -73,6 +100,7 @@ export const Router = () => {
         },
         {
           path: 'orders',
+          element: <ProtectedRoute />,
           children: [
             {
               index: true,
@@ -93,6 +121,7 @@ export const Router = () => {
         {
           index: true,
           element: <LoginPage />,
+          action: loginUserAction(),
         },
         {
           path: 'register',

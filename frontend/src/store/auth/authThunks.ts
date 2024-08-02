@@ -1,7 +1,9 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
+import { jwtDecode } from 'jwt-decode';
 
 import API from '../../api/apiServices';
 import { toast } from '../../components/ui/use-toast';
+import { DecodedToken } from '../../lib/jwt';
 
 /**
  * Thunk de Redux, para ver como funciona ver este enlace:
@@ -12,16 +14,14 @@ import { toast } from '../../components/ui/use-toast';
  */
 
 // Define los tipos de los parámetros de entrada
-interface RegisterUserPayload {
+
+interface EditUserPayload {
+  uid: string;
   email: string;
   password: string;
   displayName: string;
   phone: string;
   address: string;
-}
-
-interface EditUserPayload extends RegisterUserPayload {
-  uid: string;
 }
 
 // Define los tipos del resultado exitoso y del error
@@ -40,55 +40,6 @@ interface RegisterUserResponse {
 interface AsyncThunkConfig {
   rejectValue: unknown;
 }
-
-export const startRegisterUser = createAsyncThunk<
-  RegisterUserResponse,
-  RegisterUserPayload,
-  AsyncThunkConfig
->(
-  'auth/registerUser',
-  async (
-    {
-      email,
-      password,
-      displayName,
-      phone,
-      address,
-    }: {
-      email: string;
-      password: string;
-      displayName: string;
-      phone: string;
-      address: string;
-    },
-    { rejectWithValue },
-  ) => {
-    const result = await API.auth.registerUser({
-      address,
-      displayName,
-      email,
-      password,
-      phone,
-    });
-
-    if (!result.ok) {
-      toast({
-        variant: 'destructive',
-        title: 'Error al registrarse',
-        description: result.error,
-      });
-
-      return rejectWithValue(result.error);
-    }
-
-    toast({
-      title: 'Registro hecho de forma correcta',
-      description: JSON.stringify(result),
-    });
-
-    return { ...result };
-  },
-);
 
 export const startEditUser = createAsyncThunk<
   RegisterUserResponse,
@@ -141,3 +92,62 @@ export const startEditUser = createAsyncThunk<
     return { ...result };
   },
 );
+
+export const startLoginUser = createAsyncThunk<
+  {
+    token: string;
+    user: DecodedToken;
+  },
+  { email: string; password: string },
+  { rejectValue: string }
+>('auth/loginUser', async (credentials, { rejectWithValue }) => {
+  const result = await API.auth.loginUser(credentials);
+
+  if (result.ok) {
+    const { accessToken } = result;
+    const decodedToken = jwtDecode<DecodedToken>(accessToken);
+    localStorage.setItem('access_token', accessToken);
+    toast({
+      title: 'Sesión iniciada',
+      description: `Bienvenido ${decodedToken.nombre}`,
+    });
+    return {
+      token: accessToken,
+      user: decodedToken,
+    };
+  } else {
+    toast({
+      variant: 'destructive',
+      title: 'Ha ocurrido un error al iniciar sesión',
+      description: 'Porfavor, intentar más tarde',
+    });
+    return rejectWithValue(result.error);
+  }
+});
+
+export const startCheckToken = createAsyncThunk<
+  {
+    token: string;
+    user: DecodedToken;
+  },
+  undefined,
+  { rejectValue: string }
+>('auth/checkToken', async (_, { rejectWithValue }) => {
+  const token = localStorage.getItem('access_token');
+
+  if (token) {
+    try {
+      const decodedToken = jwtDecode<DecodedToken>(token);
+      // Opcional: Verificar si el token ha expirado
+      if (decodedToken.exp * 1000 < Date.now()) {
+        throw new Error('Token expired');
+      }
+      return { token, user: decodedToken };
+    } catch (error) {
+      localStorage.removeItem('access_token');
+      return rejectWithValue('Invalid token');
+    }
+  } else {
+    return rejectWithValue('No token found');
+  }
+});

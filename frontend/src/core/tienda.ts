@@ -116,3 +116,5 @@ export async function getTiendas(): Promise<tiendas[]> {
     setTimeout(() => resolve(tiendasData), 100);
   });
 }
+
+
