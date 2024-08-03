@@ -30,7 +30,7 @@ export const MenuMobile = () => {
     <div className='flex w-full justify-between px-2 py-2'>
       <Sheet>
         <SheetTrigger>
-          <Menu className='text-white' />
+          <Menu className='text-black' />
         </SheetTrigger>
         <SheetContent side={'left'}>
           <SheetHeader>

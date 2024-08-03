@@ -2,7 +2,7 @@ import { Link, useNavigate } from 'react-router-dom';
 
 import { ShoppingCart } from 'lucide-react';
 
-import logo from '../assets/images/White.png';
+import logo from '../assets/images/Black.png';
 import { useAppDispatch, useAppSelector } from '../store';
 import { logout } from '../store/auth/authSlice';
 import { Button } from './ui/button';
