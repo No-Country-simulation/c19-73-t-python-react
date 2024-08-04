@@ -13,31 +13,27 @@ export const MyProfilePage = () => {
   }
 
   return (
-    <div className='flex items-center justify-center px-24 py-24'>
-      <div className='flex w-full max-w-7xl flex-col rounded-lg border border-primary bg-accent p-12'>
-        <h1 className='text-center text-3xl'>Mi Perfil</h1>
-        <div className='user-info flex w-full flex-col'>
-          <h3 className='mb-6 mt-3 text-center text-sm'>
+    <div className='flex items-center justify-center p-8'>
+      <div className='flex flex-col w-full max-w-xl p-8 border rounded-lg border-primary bg-accent'>
+        <h1 className='text-3xl text-center'>Mi Perfil</h1>
+        <div className='flex flex-col w-full user-info'>
+          <h3 className='mt-3 mb-6 text-sm text-center'>
             Información personal
           </h3>
-          <hr className='text-black' />
-          <div className='flex w-full flex-row justify-between pt-5'>
-            <div className='flex w-1/4 flex-col space-y-2 text-right font-bold'>
-              <span>Nombre:</span>
-              <span>Telefono:</span>
-              <span>Email:</span>
-              <span>Direccion:</span>
-            </div>
-            <div className='ml-4 flex w-3/4 flex-col space-y-2'>
-              <span>{user.displayName}</span>
-              <span>{user.phone}</span>
-              <span>{user.email}</span>
-              <span>{user.address}</span>
-            </div>
+          <hr />
+          <div className='grid w-full grid-cols-2 pt-5 sm:gap-8'>
+            <p className='font-bold sm:text-right'>Nombre:</p>
+            <p>{user.displayName}</p>
+            <p className='font-bold sm:text-right'>Telefono:</p>
+            <p>{user.phone}</p>
+            <p className='font-bold sm:text-right'>Email:</p>
+            <p className='truncate'>{user.email}</p>
+            <p className='font-bold sm:text-right'>Direccion:</p>
+            <p>{user.address}</p>
           </div>
         </div>
         <Button
-          className='mt-6 h-14 w-full rounded-full text-white md:w-auto'
+          className='w-full mt-6 text-white rounded-full h-14 md:w-auto'
           onClick={() => navigate('/profile/edit')}
           variant={'outline'}
         >
