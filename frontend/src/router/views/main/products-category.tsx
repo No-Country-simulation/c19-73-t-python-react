@@ -4,7 +4,13 @@ import { categorias_productos, getCategorias } from '../../../core/categorias_pr
 import { productos, getProductos } from '../../../core/productos';
 import { tiendas, getTiendas } from '../../../core/tienda';
 import { useParams } from 'react-router-dom';
-import { ShoppingCart } from 'lucide-react'; // Importar el icono de carrito de compras
+import { ShoppingCart } from 'lucide-react';
+import {
+  DropdownMenu,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuItem,
+} from '@radix-ui/react-dropdown-menu';
 
 type Categoria = categorias_productos;
 type Producto = productos;
@@ -21,7 +27,6 @@ const CategoryPage: React.FC = () => {
   const itemsPerPage = 9;
 
   useEffect(() => {
-    // Fetch categories, products, and stores on mount
     getCategorias().then(setCategorias);
     getProductos().then(setProductos);
     getTiendas().then(setTiendas);
@@ -29,25 +34,24 @@ const CategoryPage: React.FC = () => {
 
   const handleCategoryClick = (id: number) => {
     setSelectedCategory(id);
-    setCurrentPage(1); // Reset to first page on category change
+    setCurrentPage(1);
   };
 
   const handleAddToCart = (id: number) => {
-    // Lógica para agregar al carrito
     console.log(`Producto ${id} agregado al carrito`);
   };
 
-  const filteredProductos = productos.filter(producto =>
-    producto.nombre_producto.toLowerCase().includes(searchTerm.toLowerCase()) &&
-    producto.id_categoría === selectedCategory
+  const filteredProductos = productos.filter(
+    (producto) =>
+      producto.nombre_producto.toLowerCase().includes(searchTerm.toLowerCase()) &&
+      producto.id_categoría === selectedCategory,
   );
 
   const getStoreName = (storeId: number) => {
-    const store = tiendas.find(tienda => tienda.id_tienda === storeId);
+    const store = tiendas.find((tienda) => tienda.id_tienda === storeId);
     return store ? store.nombre_tienda : 'Desconocida';
   };
 
-  // Logic for displaying current products
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentProductos = filteredProductos.slice(indexOfFirstItem, indexOfLastItem);
@@ -56,14 +60,12 @@ const CategoryPage: React.FC = () => {
 
   return (
     <div className='p-6 py-12'>
-      {/* Nombre de la categoría */}
       <div className='text-center pb-8'>
-        <label className='text-4xl font-bold mb-4 '>
-          {categorias.find(cat => cat.id_categoría_producto === selectedCategory)?.nombre_categoría_producto}
+        <label className='text-4xl font-bold mb-4'>
+          {categorias.find((cat) => cat.id_categoría_producto === selectedCategory)?.nombre_categoría_producto}
         </label>
       </div>
 
-      {/* Buscador de productos */}
       <div className='mb-8'>
         <input
           type='text'
@@ -74,14 +76,35 @@ const CategoryPage: React.FC = () => {
         />
       </div>
 
-      <div className='flex'>
-        {/* Lista de categorías */}
-        <div className='w-1/4 pr-6'>
-          <ul className='list-none p-0'>
+      <div className='flex flex-col sm:flex-row'>
+        <div className='w-full sm:w-1/4 pr-6'>
+          <div className='sm:hidden md:hidden mb-4'>
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button className='w-full p-3 border rounded-md shadow-md'>
+                  Seleccionar categoría
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent className='bg-white border rounded-md shadow-md'>
+                {categorias.map((categoria) => (
+                  <DropdownMenuItem
+                    key={categoria.id_categoría_producto}
+                    onSelect={() => handleCategoryClick(categoria.id_categoría_producto!)}
+                    className={`p-2 ${selectedCategory === categoria.id_categoría_producto ? 'bg-gray-200' : ''}`}
+                  >
+                    {categoria.nombre_categoría_producto}
+                  </DropdownMenuItem>
+                ))}
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </div>
+          <ul className='list-none p-0 hidden sm:block md:block'>
             {categorias.map((categoria) => (
               <li
                 key={categoria.id_categoría_producto}
-                className={`cursor-pointer p-2 mb-2 rounded-md ${selectedCategory === categoria.id_categoría_producto ? 'bg-gray-200' : ''}`}
+                className={`cursor-pointer p-2 mb-2 rounded-md ${
+                  selectedCategory === categoria.id_categoría_producto ? 'bg-gray-200' : ''
+                }`}
                 onClick={() => handleCategoryClick(categoria.id_categoría_producto!)}
               >
                 {categoria.nombre_categoría_producto}
@@ -90,8 +113,7 @@ const CategoryPage: React.FC = () => {
           </ul>
         </div>
 
-        {/* Lista de productos */}
-        <div className='w-3/4'>
+        <div className='w-full sm:w-3/4'>
           <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6'>
             {currentProductos.map((producto) => (
               <div key={producto.id_producto} className='border rounded-lg shadow-md overflow-hidden flex flex-col'>
@@ -101,8 +123,12 @@ const CategoryPage: React.FC = () => {
                   <p className='text-lg font-bold mb-2'>${producto.precio}</p>
                   <p className='mb-2'>Tienda: {getStoreName(producto.id_tienda)}</p>
                   <div className='flex mt-auto'>
-                    <Button className='w-1/2 mr-2' 
-                    onClick={() => window.location.href = `/detailProduct/${producto.id_producto}`}>Ver producto</Button>
+                    <Button
+                      className='w-1/2 mr-2'
+                      onClick={() => (window.location.href = `/detailProduct/${producto.id_producto}`)}
+                    >
+                      Ver producto
+                    </Button>
                     <Button className='w-1/2 flex items-center justify-center' onClick={() => handleAddToCart(producto.id_producto)}>
                       <ShoppingCart className='mr-1 h-6 w-6' />
                       <span>Agregar al carrito</span>
@@ -112,9 +138,8 @@ const CategoryPage: React.FC = () => {
               </div>
             ))}
           </div>
-          {/* Paginación */}
           <div className='flex justify-center mt-6'>
-            {Array.from({ length: totalPages }, (_, index) => index + 1).map(pageNumber => (
+            {Array.from({ length: totalPages }, (_, index) => index + 1).map((pageNumber) => (
               <button
                 key={pageNumber}
                 onClick={() => setCurrentPage(pageNumber)}

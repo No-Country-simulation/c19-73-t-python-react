@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-
 import { ArrowLeft, ArrowRight } from 'lucide-react';
-
 import banner from '../../../assets/images/banner/banner.jpg';
 import decoracion from '../../../assets/images/categories/Decoracion.jpg';
 import joyeria from '../../../assets/images/categories/Joyeria.jpg';
@@ -132,22 +130,22 @@ const InicioPage = () => {
 
       {/* Buscador de productos */}
       <div className='mb-8 px-6'>
-        <div className='flex'>
+        <div className='flex flex-col md:flex-row'>
           <input
             type='text'
             placeholder='Buscar productos...'
-            className='h-12 flex-1 rounded-l-md border border-gray-300 p-3 shadow-md'
+            className='h-12 flex-1 rounded-t-md border border-gray-300 p-3 shadow-md md:rounded-l-md md:rounded-r-none'
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
-          <Button className='h-12 flex-shrink-0 rounded-r-md border border-gray-300 p-3 shadow-md'>
+          <Button className='h-12 rounded-b-md border border-gray-300 p-3 shadow-md md:rounded-r-md md:rounded-l-none'>
             Buscar
           </Button>
         </div>
       </div>
 
       {/* Productos destacados */}
-      <section className='productos-destacados mb-8 px-24'>
+      <section className='productos-destacados mb-8 px-6 md:px-12 lg:px-24'>
         <p className='text-sm font-semibold text-blue-800'>Productos</p>
         <h2 className='pb-12 text-3xl font-semibold'>
           Encuentra lo mejor en nuestra selección de productos.
@@ -158,7 +156,7 @@ const InicioPage = () => {
               {filteredProductos.map((producto) => (
                 <CarouselItem
                   key={producto.id_producto}
-                  className='flex-shrink-0 p-4 md:basis-1/3 lg:basis-1/4'
+                  className='flex-shrink-0 p-4 md:basis-1/2 lg:basis-1/3'
                 >
                   <div className='flex h-full flex-col overflow-hidden rounded-lg bg-white shadow-md'>
                     <img
@@ -201,7 +199,7 @@ const InicioPage = () => {
       </section>
 
       {/* Categorías */}
-      <section className='categorias px-24'>
+      <section className='categorías px-6 md:px-12 lg:px-24'>
         <p className='text-sm font-semibold text-blue-800'>Categorías</p>
         <h2 className='pb-12 text-3xl font-semibold'>
           Explora nuestras categorías y descubre tu elección perfecta.
@@ -238,31 +236,31 @@ const InicioPage = () => {
       </section>
 
       {/* Tiendas */}
-      <section className='tiendas mb-8 px-24 pt-12'>
+      <section className='tiendas mb-8 px-8 lg:px-24 pt-12'>
         <p className='text-sm font-semibold text-blue-800'>Tiendas</p>
         <h2 className='pb-12 text-3xl font-semibold'>
           Conoce las mejores tiendas de artesanías
         </h2>
-        <div className='relative grid grid-cols-5 items-center gap-6 md:grid-cols-2 lg:grid-cols-5'>
-          <div className='col-span-2 items-center text-xl'>
+        <div className='relative grid items-center gap-6 md:grid-cols-1 grid-cols-1 lg:grid-cols-5'>
+          <div className='lg:col-span-2 items-center text-xl'>
             <p>
               Sumérgete en un mundo de creatividad con nuestras tiendas. Cada
               una ofrece tesoros únicos, reflejo de pasión y maestría en
               artesanía. Explora y encuentra el producto perfecto para ti.
             </p>
             <Button
-              className='my-12 p-5'
+              className='mt-12 p-5'
               onClick={() => (window.location.href = `/stores`)}
             >
               Ver tiendas
             </Button>
           </div>
-          <Carousel className='relative col-span-3'>
+          <Carousel className='relative lg:col-span-3'>
             <CarouselContent>
               {tiendas.map((tienda) => (
                 <CarouselItem
                   key={tienda.id_tienda}
-                  className='flex-shrink-0 p-4 md:basis-1/2 lg:basis-1/3'
+                  className='flex-shrink-0 p-4 sm:basis-1/2 md:basis-1/2 lg:basis-1/3'
                 >
                   <div className='flex h-full flex-col overflow-hidden rounded-lg bg-white shadow-md'>
                     <img

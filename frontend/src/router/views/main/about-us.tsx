@@ -4,13 +4,52 @@ import ourhistory from "../../../assets/images/aboutus/ourhistory.jpg";
 import mision from "../../../assets/images/aboutus/mision.jpg";
 import vision from "../../../assets/images/aboutus/vision.jpg";
 
+const colaboradores = [
+  {
+    nombre: "Colaborador 1",
+    ambito: "Desarrollo",
+    foto: "ruta_a_la_foto_colaborador_1",
+    linkedin: "https://www.linkedin.com/in/colaborador1/"
+  },
+  {
+    nombre: "Colaborador 2",
+    ambito: "Diseño",
+    foto: "ruta_a_la_foto_colaborador_2",
+    linkedin: "https://www.linkedin.com/in/colaborador2/"
+  },
+  {
+    nombre: "Colaborador 3",
+    ambito: "Marketing",
+    foto: "ruta_a_la_foto_colaborador_3",
+    linkedin: "https://www.linkedin.com/in/colaborador3/"
+  },
+  {
+    nombre: "Colaborador 4",
+    ambito: "Ventas",
+    foto: "ruta_a_la_foto_colaborador_4",
+    linkedin: "https://www.linkedin.com/in/colaborador4/"
+  },
+  {
+    nombre: "Colaborador 5",
+    ambito: "Soporte",
+    foto: "ruta_a_la_foto_colaborador_5",
+    linkedin: "https://www.linkedin.com/in/colaborador5/"
+  },
+  {
+    nombre: "Colaborador 6",
+    ambito: "Logística",
+    foto: "ruta_a_la_foto_colaborador_6",
+    linkedin: "https://www.linkedin.com/in/colaborador6/"
+  }
+];
+
 const AboutUsPage: React.FC = () => {
   return (
     <div className=''>
       {/* Banner */}
       <div className='relative mb-8 bg-gray-800'>
         <img
-          src={banner}// Cambia esto a la ruta de tu imagen de banner
+          src={banner}
           alt='Banner'
           className='w-full h-80 object-cover'
         />
@@ -25,7 +64,7 @@ const AboutUsPage: React.FC = () => {
         <div className='flex flex-col md:flex-row items-center'>
           <div className='md:w-1/2 md:pr-6'>
             <img
-              src={ourhistory} // Cambia esto a la ruta de tu imagen de historia
+              src={ourhistory}
               alt='Historia'
               className='w-full h-60 object-cover mb-6 md:mb-0'
             />
@@ -50,7 +89,7 @@ const AboutUsPage: React.FC = () => {
           </div>
           <div className='md:w-1/2'>
             <img
-              src={mision} // Cambia esto a la ruta de tu imagen de misión
+              src={mision}
               alt='Misión'
               className='w-full h-60 object-cover'
             />
@@ -59,7 +98,7 @@ const AboutUsPage: React.FC = () => {
         <div className='flex flex-col md:flex-row items-center mt-12'>
           <div className='md:w-1/2 md:pr-6'>
             <img
-              src={vision} // Cambia esto a la ruta de tu imagen de visión
+              src={vision}
               alt='Visión'
               className='w-full h-60 object-cover'
             />
@@ -74,10 +113,31 @@ const AboutUsPage: React.FC = () => {
       </section>
 
       {/* Sección de Contacto */}
-      <section className='px-24'>
+      <section className='px-24 mb-12'>
         <h2 className='text-3xl font-bold mb-4'>Contáctanos</h2>
         <p className='text-lg mb-4'>
           Si tienes alguna pregunta o deseas saber más sobre nosotros, no dudes en ponerte en contacto con nosotros a través de este correo <strong> storeinspirarte@gmail.com</strong></p>
+      </section>
+
+      {/* Sección de Colaboradores */}
+      <section className='px-24 mb-12'>
+        <h2 className='text-3xl font-bold mb-8'>Nuestro Equipo</h2>
+        <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8'>
+          {colaboradores.map((colaborador, index) => (
+            <div key={index} className='flex flex-col items-center'>
+              <img
+                src={colaborador.foto}
+                alt={colaborador.nombre}
+                className='w-32 h-32 object-cover rounded-full mb-4'
+              />
+              <h3 className='text-xl font-bold mb-2'>{colaborador.nombre}</h3>
+              <p className='text-lg mb-2'>{colaborador.ambito}</p>
+              <a href={colaborador.linkedin} className='text-blue-500 hover:underline'>
+                LinkedIn
+              </a>
+            </div>
+          ))}
+        </div>
       </section>
     </div>
   );

@@ -10,14 +10,14 @@ export const Footer = () => {
           <h3 className="text-xl font-bold mb-4">Acerca de Nosotros</h3>
           <ul>
             <li>
-              <Link to="/aboutUs" className="hover:underline">
+              <a href="/aboutUs" className="hover:underline">
                 Quiénes Somos
-              </Link>
+              </a>
             </li>
             <li>
-              <Link to="/faq" className="hover:underline">
+              <a href="/faqs" className="hover:underline">
                 Preguntas Frecuentes
-              </Link>
+              </a>
             </li>
           </ul>
         </div>
@@ -27,14 +27,14 @@ export const Footer = () => {
           <h3 className="text-xl font-bold mb-4">Política de Cookies</h3>
           <ul>
             <li>
-              <Link to="/privacy" className="hover:underline">
+              <a href="/privacy" className="hover:underline">
                 Privacidad
-              </Link>
+              </a>
             </li>
             <li>
-              <Link to="/terms-and-conditions" className="hover:underline">
+              <a href="/terms-and-conditions" className="hover:underline">
                 Términos y Condiciones
-              </Link>
+              </a>
             </li>
           </ul>
         </div>

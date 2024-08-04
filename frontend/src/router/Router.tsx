@@ -29,6 +29,8 @@ import CategoryProductPage from './views/main/products-category';
 import StoreProductsPage from './views/main/products-store';
 import TiendasPage from './views/main/stores';
 import TermsAndConditions from './views/main/termsandcontiditions';
+import PrivacyPolicy from './views/main/privacidad-policy';
+import FAQs from './views/main/faqs';
 
 export const Router = () => {
   const dispatch = useAppDispatch();
@@ -72,6 +74,14 @@ export const Router = () => {
         {
           path: 'terms-and-conditions',
           element: <TermsAndConditions />,
+        },
+        {
+          path: 'privacy',
+          element: <PrivacyPolicy />,
+        },
+        {
+          path: 'faqs',
+          element: <FAQs />,
         },
         {
           path: 'details-product/:id',

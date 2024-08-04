@@ -40,7 +40,7 @@ const ProductDetailPage: React.FC = () => {
   if (!producto) return <p>Cargando...</p>;
 
   return (
-    <div className='p-6 py-12 px-48'>
+    <div className='p-6 lg:py-12 lg:px-48'>
       <p className='text-2xl font-semibold pb-12 text-center'>Información del producto</p>
       <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
         {/* Imagen del producto */}
@@ -59,7 +59,7 @@ const ProductDetailPage: React.FC = () => {
           </p>
           <p className='font-semibold mb-2'> <span className='text-2xl'>$ {producto.precio}</span> c/u
           </p>
-          <p className='text-xs mb-4 pt-12 pb-8'>
+          <p className='text-xs mb-4 pt-2 lg:pt-12 pb-8'>
             <strong>Distribuida por: </strong>
             {getStoreName(producto.id_tienda)}
           </p>

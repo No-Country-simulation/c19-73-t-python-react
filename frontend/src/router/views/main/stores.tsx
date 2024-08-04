@@ -25,7 +25,7 @@ const TiendasPage: React.FC = () => {
       {/* Banner */}
       <div className='relative mb-8 bg-gray-800'>
         <img
-          src={bannerstore}// Cambia esto a la ruta de tu imagen de banner
+          src={bannerstore}
           alt='Banner'
           className='w-full h-80 object-cover'
         />
