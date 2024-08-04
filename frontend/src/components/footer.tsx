@@ -32,7 +32,7 @@ export const Footer = () => {
               </Link>
             </li>
             <li>
-              <Link to="/terms" className="hover:underline">
+              <Link to="/terms-and-conditions" className="hover:underline">
                 Términos y Condiciones
               </Link>
             </li>
@@ -45,46 +45,62 @@ export const Footer = () => {
           <div className="grid grid-cols-2 gap-4">
             <ul>
               <li>
-                <Link to="/category/jewelry" className="hover:underline">
+              <button
+                onClick={() => (window.location.href = `/categoryproduct/1`)} 
+                className="hover:underline  text-left">
                   Joyería
-                </Link>
+                </button>
               </li>
               <li>
-                <Link to="/category/home-decor" className="hover:underline">
+              <button
+                onClick={() => (window.location.href = `/categoryproduct/2`)} 
+                className="hover:underline  text-left">
                   Decoración para el Hogar
-                </Link>
+                </button>
               </li>
               <li>
-                <Link to="/category/clothing" className="hover:underline">
+              <button
+                onClick={() => (window.location.href = `/categoryproduct/3`)} 
+                className="hover:underline  text-left">
                   Ropa y Accesorios
-                </Link>
+                </button>
               </li>
               <li>
-                <Link to="/category/stationery" className="hover:underline">
+              <button
+                onClick={() => (window.location.href = `/categoryproduct/4`)} 
+                className="hover:underline  text-left">
                   Papelería y Artículos de Oficina
-                </Link>
+                </button>
               </li>
             </ul>
             <ul>
               <li>
-                <Link to="/category/toys" className="hover:underline">
+                <button
+                onClick={() => (window.location.href = `/categoryproduct/5`)} 
+                className="hover:underline  text-left">
                   Juguetes y Juegos
-                </Link>
+                </button>
               </li>
               <li>
-                <Link to="/category/eco-products" className="hover:underline">
+              <button
+                onClick={() => (window.location.href = `/categoryproduct/6`)} 
+                className="hover:underline  text-left">
                   Productos Ecológicos
-                </Link>
+                </button>
               </li>
               <li>
-                <Link to="/category/ceramics" className="hover:underline">
+              <button
+                onClick={() => (window.location.href = `/categoryproduct/7`)} 
+                className="hover:underline  text-left">
                   Cerámica y Vidrio
-                </Link>
+                </button>
               </li>
               <li>
-                <Link to="/category/cosmetics" className="hover:underline">
+              <button
+                onClick={() => (window.location.href = `/categoryproduct/8`)} 
+                className="hover:underline  text-left">
                   Cosmética y Perfumería
-                </Link>
+                </button>
               </li>
             </ul>
           </div>

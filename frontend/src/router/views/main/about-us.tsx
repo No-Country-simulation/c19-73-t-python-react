@@ -1,5 +1,5 @@
 import React from 'react';
-import banner from "../../../assets/images/aboutus/banner-aboutus.jpg";
+import banner from "../../../assets/images/banner/banner-aboutus.jpg";
 import ourhistory from "../../../assets/images/aboutus/ourhistory.jpg";
 import mision from "../../../assets/images/aboutus/mision.jpg";
 import vision from "../../../assets/images/aboutus/vision.jpg";

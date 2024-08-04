@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 
-import banner from '../../../assets/images/banner.jpg';
+import banner from '../../../assets/images/banner/banner.jpg';
 import decoracion from '../../../assets/images/categories/Decoracion.jpg';
 import joyeria from '../../../assets/images/categories/Joyeria.jpg';
 import ceramica from '../../../assets/images/categories/ceramica.jpg';

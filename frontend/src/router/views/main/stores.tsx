@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Button } from '../../../components/ui/button';
 import { tiendas, getTiendas } from '../../../core/tienda';
-import { ArrowRight } from 'lucide-react'; // Importar el icono de flecha para ver detalles
+import { ArrowRight } from 'lucide-react';
+import bannerstore from "../../../assets/images/banner/banner-stores.jpg"
 
 type Tienda = tiendas;
 
@@ -24,7 +25,7 @@ const TiendasPage: React.FC = () => {
       {/* Banner */}
       <div className='relative mb-8 bg-gray-800'>
         <img
-          src='path_to_your_banner_image.jpg' // Cambia esto a la ruta de tu imagen de banner
+          src={bannerstore}// Cambia esto a la ruta de tu imagen de banner
           alt='Banner'
           className='w-full h-80 object-cover'
         />

@@ -28,6 +28,7 @@ import Carrito from './views/main/orders/cart';
 import TiendasPage from './views/main/stores';
 import AboutUsPage from './views/main/about-us';
 import StoreProductsPage from './views/main/products-store';
+import TermsAndConditions from './views/main/termsandcontiditions';
 
 export const Router = () => {
   const dispatch = useAppDispatch();
@@ -67,6 +68,10 @@ export const Router = () => {
         {
           path: 'aboutUs',
           element: <AboutUsPage />,
+        },
+        {
+          path: 'terms-and-conditions',
+          element: <TermsAndConditions />,
         },
         {
           path: 'details-product/:id',
