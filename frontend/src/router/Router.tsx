@@ -25,6 +25,9 @@ import PedidoDetallePage from './views/main/orders/view-product-orders';
 import CategoryProductPage from './views/main/products-category';
 import ProductDetailPage from './views/main/details-product';
 import Carrito from './views/main/orders/cart';
+import TiendasPage from './views/main/stores';
+import AboutUsPage from './views/main/about-us';
+import StoreProductsPage from './views/main/products-store';
 
 export const Router = () => {
   const dispatch = useAppDispatch();
@@ -50,12 +53,24 @@ export const Router = () => {
           element: <CategoryProductPage />,
         },
         {
+          path: 'stores',
+          element: <TiendasPage />,
+        },
+        {
           path: 'detailProduct/:id',
           element: <ProductDetailPage />,
         },
         {
           path: 'cart',
           element: <Carrito />,
+        },
+        {
+          path: 'aboutUs',
+          element: <AboutUsPage />,
+        },
+        {
+          path: 'details-product/:id',
+          element: <StoreProductsPage />,
         },
         {
           path: '/dashboard',

@@ -10,7 +10,7 @@ export const Footer = () => {
           <h3 className="text-xl font-bold mb-4">Acerca de Nosotros</h3>
           <ul>
             <li>
-              <Link to="/about" className="hover:underline">
+              <Link to="/aboutUs" className="hover:underline">
                 Quiénes Somos
               </Link>
             </li>

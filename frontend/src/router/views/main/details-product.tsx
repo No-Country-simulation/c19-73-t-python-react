@@ -40,11 +40,12 @@ const ProductDetailPage: React.FC = () => {
   if (!producto) return <p>Cargando...</p>;
 
   return (
-    <div className='p-6 py-12 pt-24 px-24'>
+    <div className='p-6 py-12 px-48'>
+      <p className='text-2xl font-semibold pb-12 text-center'>Información del producto</p>
       <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
         {/* Imagen del producto */}
-        <div className='flex justify-center items-center'>
-          <img src={producto.foto_principal} alt={producto.nombre_producto} className='w-full max-w-md h-auto object-cover rounded-md shadow-md' />
+        <div className='flex justify-center items-center '>
+          <img src={producto.foto_principal} alt={producto.nombre_producto} className='w-full max-w-xs h-auto object-cover rounded-md shadow-md' />
         </div>
 
         {/* Detalles del producto */}
