@@ -62,18 +62,18 @@ const PedidosPage: React.FC = () => {
       );
     }
 
-    return <div className='mt-4 flex justify-center'>{paginationButtons}</div>;
+    return <div className='flex justify-center mt-4'>{paginationButtons}</div>;
   };
 
   return (
-    <div className='flex min-h-screen flex-col items-center px-6 py-12'>
-      <h1 className='mb-6 text-3xl'>Pedidos</h1>
+    <div className='flex flex-col items-center min-h-screen px-2 py-12'>
+      <h1 className='mb-6 text-3xl font-bold'>Pedidos</h1>
       <Tabs
         value={activeTab}
         onValueChange={handleTabChange}
         className='w-full max-w-4xl'
       >
-        <TabsList className='mb-4 w-full bg-primary text-white'>
+        <TabsList className='w-full mb-4 text-white bg-primary'>
           <TabsTrigger value='pendientes'>Pendientes</TabsTrigger>
           <TabsTrigger value='completados'>Completados</TabsTrigger>
           <TabsTrigger value='cancelados'>Cancelados</TabsTrigger>
@@ -82,47 +82,13 @@ const PedidosPage: React.FC = () => {
           <TabsContent value='pendientes'>
             <div className='mb-4 space-y-4'>
               {paginate(filteredPedidos, currentPage).map((pedido) => (
-                <Card
-                  key={pedido.id_pedido}
-                  className='flex w-full items-center justify-between rounded-lg border p-4 shadow'
-                >
-                  <div>
-                    <div className='mb-2'>
-                      <span>
-                        <strong>ID del Pedido:</strong> {pedido.id_pedido}
-                      </span>
-                    </div>
-                    <div className='mb-2'>
-                      <span>
-                        <strong>Cantidad de Productos:</strong>{' '}
-                        {pedido.cantidad}
-                      </span>
-                    </div>
-                    <div className='mb-2'>
-                      <span>
-                        <strong>Total de Compra:</strong> $
-                        {pedido.Total.toFixed(2)}
-                      </span>
-                    </div>
-                    <div>
-                      <span>
-                        <strong>Fecha del Pedido:</strong>{' '}
-                        {new Date(pedido.Fecha_y_hora).toLocaleDateString(
-                          'es-ES',
-                          { day: '2-digit', month: 'long', year: 'numeric' },
-                        )}
-                      </span>
-                    </div>
-                  </div>
-                  <Link
-                    to={`orders/${pedido.id_pedido}`}
-                    className='text-white no-underline'
-                  >
-                    <Button className='rounded px-4 py-2 text-white transition hover:bg-accent'>
-                      Ver detalle de pedido
-                    </Button>
-                  </Link>
-                </Card>
+                <OrdersCard
+                  key={pedido.id_pedido + pedido.id_usuario}
+                  id={pedido.id_pedido}
+                  date={pedido.Fecha_y_hora}
+                  quantity={pedido.cantidad}
+                  total={pedido.Total}
+                />
               ))}
             </div>
             {filteredPedidos.length > itemsPerPage &&
@@ -131,47 +97,13 @@ const PedidosPage: React.FC = () => {
           <TabsContent value='completados'>
             <div className='mb-4 space-y-4'>
               {paginate(filteredPedidos, currentPage).map((pedido) => (
-                <Card
-                  key={pedido.id_pedido}
-                  className='flex w-full items-center justify-between rounded-lg border p-4 shadow'
-                >
-                  <div>
-                    <div className='mb-2'>
-                      <span>
-                        <strong>ID del Pedido:</strong> {pedido.id_pedido}
-                      </span>
-                    </div>
-                    <div className='mb-2'>
-                      <span>
-                        <strong>Cantidad de Productos:</strong>{' '}
-                        {pedido.cantidad}
-                      </span>
-                    </div>
-                    <div className='mb-2'>
-                      <span>
-                        <strong>Total de Compra:</strong> $
-                        {pedido.Total.toFixed(2)}
-                      </span>
-                    </div>
-                    <div>
-                      <span>
-                        <strong>Fecha del Pedido:</strong>{' '}
-                        {new Date(pedido.Fecha_y_hora).toLocaleDateString(
-                          'es-ES',
-                          { day: '2-digit', month: 'long', year: 'numeric' },
-                        )}
-                      </span>
-                    </div>
-                  </div>
-                  <Link
-                    to={`/pedidos/detalle-pedido/${pedido.id_pedido}`}
-                    className='text-white no-underline'
-                  >
-                    <Button className='rounded px-4 py-2 text-white transition hover:bg-accent'>
-                      Ver detalle de pedido
-                    </Button>
-                  </Link>
-                </Card>
+                <OrdersCard
+                  key={pedido.id_pedido + pedido.id_usuario}
+                  id={pedido.id_pedido}
+                  date={pedido.Fecha_y_hora}
+                  quantity={pedido.cantidad}
+                  total={pedido.Total}
+                />
               ))}
             </div>
             {filteredPedidos.length > itemsPerPage &&
@@ -180,47 +112,13 @@ const PedidosPage: React.FC = () => {
           <TabsContent value='cancelados'>
             <div className='mb-4 space-y-4'>
               {paginate(filteredPedidos, currentPage).map((pedido) => (
-                <Card
-                  key={pedido.id_pedido}
-                  className='flex w-full items-center justify-between rounded-lg border p-4 shadow'
-                >
-                  <div>
-                    <div className='mb-2'>
-                      <span>
-                        <strong>ID del Pedido:</strong> {pedido.id_pedido}
-                      </span>
-                    </div>
-                    <div className='mb-2'>
-                      <span>
-                        <strong>Cantidad de Productos:</strong>{' '}
-                        {pedido.cantidad}
-                      </span>
-                    </div>
-                    <div className='mb-2'>
-                      <span>
-                        <strong>Total de Compra:</strong> $
-                        {pedido.Total.toFixed(2)}
-                      </span>
-                    </div>
-                    <div>
-                      <span>
-                        <strong>Fecha del Pedido:</strong>{' '}
-                        {new Date(pedido.Fecha_y_hora).toLocaleDateString(
-                          'es-ES',
-                          { day: '2-digit', month: 'long', year: 'numeric' },
-                        )}
-                      </span>
-                    </div>
-                  </div>
-                  <Link
-                    to={`/pedidos/detalle-pedido/${pedido.id_pedido}`}
-                    className='text-white no-underline'
-                  >
-                    <Button className='rounded px-4 py-2 text-white transition hover:bg-accent'>
-                      Ver detalle de pedido
-                    </Button>
-                  </Link>
-                </Card>
+                <OrdersCard
+                  key={pedido.id_pedido + pedido.id_usuario}
+                  id={pedido.id_pedido}
+                  date={pedido.Fecha_y_hora}
+                  quantity={pedido.cantidad}
+                  total={pedido.Total}
+                />
               ))}
             </div>
             {filteredPedidos.length > itemsPerPage &&
@@ -233,3 +131,38 @@ const PedidosPage: React.FC = () => {
 };
 
 export default PedidosPage;
+
+interface OrderCardProps {
+  id: number;
+  quantity: number;
+  total: number;
+  date: string;
+}
+
+const OrdersCard = ({ id, date, total, quantity }: OrderCardProps) => {
+  return (
+    <Card
+      key={id}
+      className='grid w-full grid-cols-2 gap-4 p-4 border rounded-lg shadow'
+    >
+      <p className='font-bold'>ID del Pedido:</p>
+      <p className='my-auto'>{id}</p>
+      <p className='font-bold'>Cantidad de Productos:</p>
+      <p className='my-auto'>{quantity}</p>
+      <p className='font-bold'>Total de Compra:</p>
+      <p className='my-auto'>${total.toFixed(2)}</p>
+      <p className='font-bold'>Fecha del Pedido:</p>
+      <p className='my-auto'>
+        {new Date(date).toLocaleDateString('es-ES', {
+          day: '2-digit',
+          month: 'long',
+          year: 'numeric',
+        })}
+      </p>
+
+      <Link to={`/orders/${id}`} className='col-span-full'>
+        <Button className='w-full'>Ver detalle de pedido</Button>
+      </Link>
+    </Card>
+  );
+};

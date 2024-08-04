@@ -18,16 +18,16 @@ import ProductsManage from './views/dashboard/manage/products-manage';
 import StoreManage from './views/dashboard/manage/store-manage';
 import UsersManage from './views/dashboard/manage/users-manage';
 import { EditProfilePage, LayoutMain, MyProfilePage } from './views/main';
+import AboutUsPage from './views/main/about-us';
 import Dashboard from './views/main/dashboard-admin';
+import ProductDetailPage from './views/main/details-product';
 import InicioPage from './views/main/inicio';
+import Carrito from './views/main/orders/cart';
 import PedidosPage from './views/main/orders/view-orders';
 import PedidoDetallePage from './views/main/orders/view-product-orders';
 import CategoryProductPage from './views/main/products-category';
-import ProductDetailPage from './views/main/details-product';
-import Carrito from './views/main/orders/cart';
-import TiendasPage from './views/main/stores';
-import AboutUsPage from './views/main/about-us';
 import StoreProductsPage from './views/main/products-store';
+import TiendasPage from './views/main/stores';
 import TermsAndConditions from './views/main/termsandcontiditions';
 
 export const Router = () => {
@@ -127,7 +127,7 @@ export const Router = () => {
               element: <PedidosPage />,
             },
             {
-              path: 'orders/:id',
+              path: ':id',
               element: <PedidoDetallePage />,
             },
           ],
